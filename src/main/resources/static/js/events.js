@@ -19,7 +19,11 @@ window.addEventListener('message', event => {
         } else {
             document.cookie = `${authCookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
         }
-        window.location.reload()
+
+        if (localStorage.getItem('token') !== accessToken) {
+            localStorage.setItem('token', accessToken);
+            window.location.reload();
+        }
     }
 });
 
