@@ -19,7 +19,8 @@
                 authorizationToken = cookie.getValue();
         }
     }
-    String  selectedForm      = request.getParameter("form");
+    String parameterName = request.getParameter("form");
+    String selectedForm = parameterName != null ? parameterName : "";
 %>
 
 <%
