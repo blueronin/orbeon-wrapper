@@ -3,7 +3,7 @@ body    { padding-top: 50px }
 .navbar { font-size: 13px }
 
 .orbeon .navbar {
-    display: block;
+    display: none;
 }
 
 .orbeon *:not(.fa, .xforms-help) {

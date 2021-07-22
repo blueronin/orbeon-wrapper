@@ -59,6 +59,6 @@
     <script type="text/javascript" src="<spring:url value="/js/events.js" />"></script>
     <script type="text/javascript" src="<spring:url value="/js/main.js" />"></script>
     <link rel="stylesheet" href="<spring:url value="/css/main.css" />" />
-    <script type="text/javascript" src="${orbeonUrl}/xforms-server/baseline.js?updates=fr"></script>
+    <script type="text/javascript" src="/orbeon/xforms-server/baseline.js?updates=fr"></script>
 </head>
 <body>
