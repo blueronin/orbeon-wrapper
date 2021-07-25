@@ -15,12 +15,15 @@
     Cookie[] cookies     = request.getCookies();
     if (cookies != null) {
         for (Cookie cookie : cookies) {
-            if (cookie.getName().toUpperCase().equals(authCookieName))
+            if (cookie.getName().toUpperCase().equals(authCookieName)) {
                 authorizationToken = cookie.getValue();
+                break;
+            }
         }
     }
     String parameterName = request.getParameter("form");
     String selectedForm = parameterName != null ? parameterName : "";
+    String projectId = session.getAttribute("projectId").toString();
 %>
 
 <%
@@ -47,6 +50,7 @@
         const selectedForm = "<%= selectedForm %>";
         const authCookieName = "<%= authCookieName %>";
         const authorizationToken = "<%= authorizationToken %>";
+        const projectId = "<%= projectId %>";
         const headers = {};
         <% for (String header : headers.keySet()) { %>
         headers["<%= header %>"] = "<%= headers.get(header) %>";
