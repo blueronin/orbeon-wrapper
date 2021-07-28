@@ -3,11 +3,14 @@
 <%@ page import="org.orbeon.oxf.fr.embedding.servlet.API" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Enumeration" %>
+<%@ page import="org.springframework.validation.support.BindingAwareModelMap" %>
 
 <%-- Setup global variables/properties from Controller attributes --%>
 <spring:eval expression="@environment.getProperty('app.orbeon-url')" var="orbeonUrl" />
 
 <%
+    BindingAwareModelMap model = (BindingAwareModelMap) request.getAttribute("model");
+
     // Prepare global variables and tokens/cookies
     String authCookieName = "AUTHORIZATION";
     String authorizationToken = "";
@@ -21,9 +24,8 @@
             }
         }
     }
-    String parameterName = request.getParameter("form");
-    String selectedForm = parameterName != null ? parameterName : "";
     String projectId = session.getAttribute("projectId").toString();
+    request.setAttribute("projectId", projectId);
 %>
 
 <%
@@ -37,12 +39,6 @@
     headers.putIfAbsent("Authorization", "OAuth ".concat(authorizationToken));
 %>
 
-<%
-    // set page context params
-    pageContext.setAttribute("projectId", projectId);
-    pageContext.setAttribute("selectedForm", selectedForm);
-%>
-
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -54,10 +50,10 @@
         // Load/Set JS global variables from JSP. can be accessed from any
         // JS file included after this script
         const orbeonUrl = "${orbeonUrl}"
-        const selectedForm = "<%= selectedForm %>";
         const authCookieName = "<%= authCookieName %>";
         const authorizationToken = "<%= authorizationToken %>";
         const projectId = "<%= projectId %>";
+        const model = {};
         const headers = {};
         <% for (String header : headers.keySet()) {
             if (!header.equals("sec-ch-ua")) {
@@ -67,6 +63,9 @@
             }
         }
         %>
+        <% for (String attr : model.keySet()) { %>
+        model["<%= attr %>"] = "<%= model.getAttribute(attr) %>";
+        <% } %>
     </script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">

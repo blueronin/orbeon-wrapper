@@ -26,18 +26,3 @@ window.addEventListener('message', event => {
         }
     }
 });
-
-window.addEventListener('DOMContentLoaded', function() {
-    // On loading the DOMContent (Orbeon API), we can now embed our orbeon form
-    if (window.ORBEON) {
-        ORBEON.fr.API.embedForm(
-            document.getElementById("my-form"),
-            "/orbeon",
-            "orbeon",
-            selectedForm,
-            "new",
-            undefined,
-            "Authorization='OAuth " + authorizationToken + "'"
-        );
-    }
-});

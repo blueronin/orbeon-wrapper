@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpSession
 
+@RequestMapping("/forms")
 @Controller
 class HomeController {
     @Autowired
@@ -19,7 +21,7 @@ class HomeController {
     @Autowired
     private val userService: UserService? = null
 
-    @GetMapping("/")
+    @GetMapping("")
     fun home(@RequestParam project: String?, request: HttpServletRequest, model: Model): String {
         validateSession(request, project)
 
@@ -31,11 +33,11 @@ class HomeController {
         return "index"
     }
 
-    @GetMapping("/{app}/{form}/{action}")
+    @GetMapping(value = ["/{app}/{formName}/{action}", "/form/{app}/{formName}"])
     fun appForm(
         @PathVariable app: String,
-        @PathVariable form: String,
-        @PathVariable(required = false) action: String = "new",
+        @PathVariable formName: String,
+        @PathVariable(required = false) action: String? = "new",
         @RequestParam project: String?,
         request: HttpServletRequest,
         model: Model
@@ -43,9 +45,11 @@ class HomeController {
         validateSession(request, project)
 
         model.addAttribute("app", app)
-        model.addAttribute("form", form)
+        model.addAttribute("form", formName)
         model.addAttribute("action", action)
-        return "index"
+
+        request.setAttribute("model", model)
+        return home(null, request, model)
     }
 
     private fun validateSession(request: HttpServletRequest, project: String?): String {

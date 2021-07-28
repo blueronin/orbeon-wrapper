@@ -16,7 +16,7 @@
                         <ul class="nav nav-pills flex-column">
                             <c:forEach items="${forms.value}" var="form">
                                 <li id="${form.canonicalName}" class="text-capitalize nav-item pr-4 orbeon-form-item">
-                                    <a href="?form=${form.name}#${form.canonicalName}" class="nav-link">
+                                    <a href="/forms/${form.application}/${form.name}/new/#${form.canonicalName}" class="nav-link">
                                         <span class="fa fa-caret-down"></span>
                                         <c:choose>
                                             <c:when test="${form.version != null}">${form.name} - v${form.version}</c:when>
@@ -32,18 +32,21 @@
         </div>
     </div>
 
-    <div id="my-form" class="col-10 pl-0">
+    <div id="form-container" class="col-10 pl-0">
         <%
-            API.embedFormJava(
-                    request,
-                    out,
-                    "orbeon",
-                    selectedForm,
-                    "new",
-                    null,
-                    null,
-                    headers
-            );
+            if (model != null) {
+                API.embedFormJava(
+                        request,
+                        out,
+                        (String) model.getAttribute("app"),
+                        (String) model.getAttribute("form"),
+                        (String) model.getAttribute("action"),
+                        null,
+                        null,
+                        headers
+                );
+            }
+
         %>
     </div>
 </div>
