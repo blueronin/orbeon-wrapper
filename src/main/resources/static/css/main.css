@@ -70,7 +70,6 @@ a {
     margin-left: 0;
 }
 
-.orbeon ul:after {
-    height:0;
-    clear:both;
+.orbeon .input-append > * {
+    height: auto !important;
 }
