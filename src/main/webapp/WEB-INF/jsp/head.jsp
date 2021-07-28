@@ -9,7 +9,10 @@
 <spring:eval expression="@environment.getProperty('app.orbeon-url')" var="orbeonUrl" />
 
 <%
-    BindingAwareModelMap model = (BindingAwareModelMap) request.getAttribute("model");
+    BindingAwareModelMap model = new BindingAwareModelMap();
+    if (request.getAttribute("model") != null) {
+        model = (BindingAwareModelMap) request.getAttribute("model");
+    }
 
     // Prepare global variables and tokens/cookies
     String authCookieName = "AUTHORIZATION";
