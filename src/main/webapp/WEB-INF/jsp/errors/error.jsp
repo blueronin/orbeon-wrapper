@@ -6,7 +6,7 @@
   Time: 23:32
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,5 @@
 <a href="/">Go Home</a>
 
 <h3>Message: ${errorMessage}</h3>
-<b>Trace:</b>
-<p>${trace}</p>
 </body>
 </html>

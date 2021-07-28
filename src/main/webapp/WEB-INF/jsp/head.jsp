@@ -1,5 +1,5 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <%@ page import="org.orbeon.oxf.fr.embedding.servlet.API" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Enumeration" %>
@@ -37,10 +37,17 @@
     headers.putIfAbsent("Authorization", "OAuth ".concat(authorizationToken));
 %>
 
+<%
+    // set page context params
+    pageContext.setAttribute("projectId", projectId);
+    pageContext.setAttribute("selectedForm", selectedForm);
+%>
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
     <title>Basestone Orbeon Embedding</title>
 
     <script type="text/javascript">
@@ -52,17 +59,19 @@
         const authorizationToken = "<%= authorizationToken %>";
         const projectId = "<%= projectId %>";
         const headers = {};
-        <% for (String header : headers.keySet()) { %>
+        <% for (String header : headers.keySet()) {
+            if (!header.equals("sec-ch-ua")) {
+        %>
         headers["<%= header %>"] = "<%= headers.get(header) %>";
-        <% } %>
+        <%
+            }
+        }
+        %>
     </script>
 
-    <link rel="stylesheet" href="//getbootstrap.com/2.3.2/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="//getbootstrap.com/2.3.2/assets/css/bootstrap-responsive.css">
-
-    <script type="text/javascript" src="<spring:url value="/js/events.js" />"></script>
-    <script type="text/javascript" src="<spring:url value="/js/main.js" />"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.css" integrity="sha512-EPpc8hp3vb3PUXYMC+39/OwsEAc50QgthpyVEJMqwoV98YJIvhWi7QJ6tcY7JtshRB5ufQYztle/Mg1AZQw6CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<spring:url value="/css/main.css" />" />
-    <script type="text/javascript" src="/orbeon/xforms-server/baseline.js?updates=fr"></script>
 </head>
-<body>
+<body class="container-fluid py-3 px-0">

@@ -24,7 +24,7 @@ class ServletConfig: ServletContextInitializer {
         )
         orbeonFormRunnerFilter.setInitParameter(
             "form-runner-url",
-            env?.getProperty("app.orbeon-url")
+            env?.getProperty(ValuesConfig.ORBEON_URL_ENV_NAME)
         )
         orbeonFormRunnerFilter.setInitParameter(
             "orbeon-prefix",

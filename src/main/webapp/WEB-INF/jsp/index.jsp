@@ -1,31 +1,39 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="head.jsp" %>
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">Orbeon Forms Embedding Demo</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li><a href="?form=bookshelf&project=${projectId}">Bookshelf</a></li>
-                    <li><a href="?form=dmv-14&project=${projectId}">DMV-14</a></li>
-                    <li><a href="?form=w9&project=${projectId}">W-9</a></li>
-                    <li><a href="?form=controls&project=${projectId}">Controls</a></li>
-                    <li><a href="?form=contact&project=${projectId}">Contact</a></li>
-                    <li><a href="?form=builder&project=${projectId}">Form Builder</a></li>
-                </ul>
-            </div>
+<div class="row">
+    <div class="col-2 pr-0">
+        <h5 class="title-settings capitalize">Project Forms</h5>
+        <div class="panel-group" id="accordion">
+            <c:forEach var="forms" items="${groupedForms}">
+                <div class="panel">
+                    <h5 class="title-settings p-2 text-capitalize">
+                        <a data-toggle="collapse" href="#collapse-${forms.key}" role="button" class="title-settings border-0 p-2" aria-expanded="true" aria-controls="collapse-${forms.key}">
+                            <span class="caret-success">&#x25B8;</span> ${forms.key}
+                        </a>
+                    </h5>
+                    <div id="collapse-${forms.key}" class="collapse multi-collapse pl-3" data-parent="#accordion">
+                        <ul class="nav nav-pills flex-column">
+                            <c:forEach items="${forms.value}" var="form">
+                                <li id="${form.canonicalName}" class="text-capitalize nav-item pr-4 orbeon-form-item">
+                                    <a href="?form=${form.name}#${form.canonicalName}" class="nav-link">
+                                        <span class="fa fa-caret-down"></span>
+                                        <c:choose>
+                                            <c:when test="${form.version != null}">${form.name} - v${form.version}</c:when>
+                                            <c:otherwise>${form.name}</c:otherwise>
+                                        </c:choose>
+                                    </a>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
-</div>
 
-<div id="my-form" class="container">
-    <%
-        if (selectedForm.equals("builder")) {
+    <div id="my-form" class="col-10 pl-0">
+        <%
             API.embedFormJava(
                     request,
                     out,
@@ -36,8 +44,8 @@
                     null,
                     headers
             );
-        }
-    %>
+        %>
+    </div>
 </div>
 
 <%@include file="foot.jsp" %>
