@@ -13,7 +13,7 @@
     if (request.getAttribute("model") != null) {
         model = (BindingAwareModelMap) request.getAttribute("model");
     }
-
+    String contextPath = request.getContextPath().trim();
     // Prepare global variables and tokens/cookies
     String authCookieName = "AUTHORIZATION";
     String authorizationToken = "";

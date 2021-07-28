@@ -19,7 +19,7 @@ class HomeController {
     @Autowired
     private val userService: UserService? = null
 
-    @GetMapping("")
+    @GetMapping
     fun index(request: HttpServletRequest): String {
         val query = request.queryString
         if (query != null) {
@@ -40,7 +40,7 @@ class HomeController {
         return "index"
     }
 
-    @GetMapping(value = ["/forms/{app}/{formName}/{action}", "/form/{app}/{formName}"])
+    @GetMapping(value = ["/forms/{app}/{formName}/{action}", "/forms/{app}/{formName}"])
     fun appForm(
         @PathVariable app: String,
         @PathVariable formName: String,
