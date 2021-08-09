@@ -6,9 +6,13 @@ html, body {
 
 body{
     color: #747F8E;
-    font-size: 13px;
+    font-size: 0.8rem;
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0.2px;
+}
+
+.orbeon h1, .orbeon h2, .orbeon h3, .orbeon h4, .orbeon h5, .orbeon h6 {
+    font-size: revert !important;
 }
 
 a {
@@ -23,7 +27,7 @@ a {
     font-family: 'Open Sans', sans-serif !important;
 }
 
-.orbeon .btn {
+.orbeon .btn, .btn {
     background-image: none !important;
     padding: 5px 10px !important;
     line-height: 1.5 !important;
@@ -36,13 +40,13 @@ a {
     font-weight: 400 !important;
 }
 
-.orbeon .btn-default, .orbeon .btn {
+.orbeon .btn-default, .orbeon .btn, .btn-default {
     color: #333 !important;
     background-color: #fff !important;
     border-color: #ccc !important;
 }
 
-.orbeon .btn-primary {
+.orbeon .btn-primary, .btn-primary {
     background-color: #35C2E1 !important;
     border: solid 1px #35C2E1 !important;
     color: #ffffff !important;
@@ -72,4 +76,8 @@ a {
 
 .orbeon .input-append > * {
     height: auto !important;
+}
+
+div.mask {
+    top: 5vh;
 }

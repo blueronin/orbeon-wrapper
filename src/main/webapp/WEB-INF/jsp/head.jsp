@@ -71,11 +71,10 @@
         <% } %>
     </script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.css" integrity="sha512-EPpc8hp3vb3PUXYMC+39/OwsEAc50QgthpyVEJMqwoV98YJIvhWi7QJ6tcY7JtshRB5ufQYztle/Mg1AZQw6CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<spring:url value="/css/main.css" />" />
 
     <script type="text/javascript" src="/orbeon/xforms-server/baseline.js?updates=fr"></script>
 </head>
-<body class="container-fluid py-3 px-0">
+<body class="w-full p-2">
