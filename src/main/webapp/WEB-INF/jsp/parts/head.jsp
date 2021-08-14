@@ -13,7 +13,7 @@
     if (request.getAttribute("model") != null) {
         model = (BindingAwareModelMap) request.getAttribute("model");
     }
-    String contextPath = request.getContextPath().trim();
+    String contextPath = request.getContextPath().trim().concat("/");
     // Prepare global variables and tokens/cookies
     String authCookieName = "AUTHORIZATION";
     String authorizationToken = "";
@@ -27,7 +27,11 @@
             }
         }
     }
-    String projectId = session.getAttribute("projectId").toString();
+    String projectId = null;
+    Object pId = session.getAttribute("projectId");
+    if (pId != null) {
+        projectId = pId.toString();
+    }
     request.setAttribute("projectId", projectId);
 %>
 
@@ -52,6 +56,7 @@
     <script type="text/javascript">
         // Load/Set JS global variables from JSP. can be accessed from any
         // JS file included after this script
+        const contextPath = "<%= contextPath %>"
         const orbeonUrl = "${orbeonUrl}"
         const authCookieName = "<%= authCookieName %>";
         const authorizationToken = "<%= authorizationToken %>";

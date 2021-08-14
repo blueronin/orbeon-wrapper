@@ -1,4 +1,4 @@
-<%@include file="head.jsp" %>
+<%@include file="parts/head.jsp" %>
 
 <div class="flex flex-col">
     <div class="flex flex-row justify-end pb-4">
@@ -19,4 +19,4 @@
     %>
 </div>
 
-<%@include file="foot.jsp" %>
+<%@include file="parts/foot.jsp" %>
