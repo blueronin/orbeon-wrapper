@@ -41,8 +41,3 @@ window.addEventListener('message', event => {
         }
     }
 });
-
-function getCookie(name) {
-    const match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
-    return match ? match[1] : null;
-}

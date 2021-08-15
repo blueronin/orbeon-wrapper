@@ -76,6 +76,11 @@
         <% for (String attr : model.keySet()) { %>
         model["<%= attr %>"] = "<%= model.getAttribute(attr) %>";
         <% } %>
+
+        function getCookie(name) {
+            const match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+            return match ? match[1] : null;
+        }
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.css" integrity="sha512-EPpc8hp3vb3PUXYMC+39/OwsEAc50QgthpyVEJMqwoV98YJIvhWi7QJ6tcY7JtshRB5ufQYztle/Mg1AZQw6CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
