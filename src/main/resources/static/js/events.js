@@ -1,24 +1,3 @@
-
-window.addEventListener('message', event => {
-    // If we are in an iframe and parent sends a message, check if they sent
-    // an auth token, then store that in cookies to be used with subsequent
-    // requests
-    const { accessToken, setToken } = event.data;
-
-    if (setToken !== undefined && typeof setToken === "boolean") {
-        if (setToken === true) {
-            document.cookie = `${authCookieName}=${accessToken}; path=${contextPath}`
-        } else {
-            document.cookie = `${authCookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${contextPath}`
-        }
-
-        if (localStorage.getItem('token') !== accessToken) {
-            localStorage.setItem('token', accessToken);
-            window.location.href = "/";
-        }
-    }
-});
-
 window.addEventListener('load', function () {
     if (window.parent) {
         // If in an iframe, notify parent that we have loaded, they can send us
@@ -26,3 +5,46 @@ window.addEventListener('load', function () {
         window.parent.postMessage('orbeonFrameLoaded', '*');
     }
 });
+
+window.addEventListener('message', event => {
+    // If we are in an iframe and parent sends a message, check if they sent
+    // an auth token, then store that in cookies to be used with subsequent
+    // requests
+    const {accessToken, setToken} = event.data;
+
+    if (setToken !== undefined && typeof setToken === "boolean" && localStorage.getItem("accessToken") !== accessToken) {
+        if (setToken === true && !!accessToken) {
+            fetch(`${apiUrl}/orbeon-auth/verify`, {
+                headers: {
+                    Authorization: `OAuth ${accessToken}`
+                }
+            })
+                .then(r => r.json())
+                .then(response => {
+                    document.cookie = `${authCookieName}=${accessToken}; path=${contextPath}`
+                    localStorage.setItem('accessToken', accessToken);
+                    localStorage.setItem('basestoneUser', response.user);
+                    location.href = contextPath;
+                })
+                .catch(err => {
+                    if (!location.pathname.includes(`${contextPath}/require-auth-token`)) {
+                        location.href = `${contextPath}/require-auth-token`
+                    }
+                });
+
+        } else {
+            document.cookie = `${authCookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${contextPath}`
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('basestoneUser');
+
+            if (!location.pathname.includes(`${contextPath}/require-auth-token`)) {
+                location.href = `${contextPath}/require-auth-token`;
+            }
+        }
+    }
+});
+
+function getCookie(name) {
+    const match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+    return match ? match[1] : null;
+}
