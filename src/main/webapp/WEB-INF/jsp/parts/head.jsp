@@ -7,13 +7,14 @@
 
 <%-- Setup global variables/properties from Controller attributes --%>
 <spring:eval expression="@environment.getProperty('app.orbeon-url')" var="orbeonUrl" />
+<spring:eval expression="@environment.getProperty('app.api-url')" var="apiUrl" />
 
 <%
     BindingAwareModelMap model = new BindingAwareModelMap();
     if (request.getAttribute("model") != null) {
         model = (BindingAwareModelMap) request.getAttribute("model");
     }
-    String contextPath = request.getContextPath().trim().concat("/");
+    String contextPath = request.getContextPath().trim();
     // Prepare global variables and tokens/cookies
     String authCookieName = "AUTHORIZATION";
     String authorizationToken = "";
@@ -58,6 +59,7 @@
         // JS file included after this script
         const contextPath = "<%= contextPath %>"
         const orbeonUrl = "${orbeonUrl}"
+        const apiUrl = "${apiUrl}"
         const authCookieName = "<%= authCookieName %>";
         const authorizationToken = "<%= authorizationToken %>";
         const projectId = "<%= projectId %>";
