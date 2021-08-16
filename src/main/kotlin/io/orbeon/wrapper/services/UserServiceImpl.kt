@@ -20,18 +20,41 @@ class UserServiceImpl: UserService {
     private val restTemplate: RestTemplate? = null
     @Autowired
     private val env: Environment? = null
+    @Autowired
+    private val session: HttpSession? = null
 
     @Throws(ResponseStatusException::class)
-    override fun validateProjectParam(project: String?, session: HttpSession): String {
+    override fun validateProjectParam(project: String?): String {
         var projectId = project
         if (projectId == null) {
-            projectId = session.getAttribute("projectId") as String?
+            projectId = session!!.getAttribute("projectId") as String?
         }
         if (projectId == null) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "project is missing in the query param")
         }
-        session.setAttribute("projectId", projectId)
+        session!!.setAttribute("projectId", projectId)
         return projectId
+    }
+
+    override fun currentUser(): Map<String, Any>? {
+        if (session!!.getAttribute("user") != null) {
+            @Suppress("UNCHECKED_CAST")
+            return session.getAttribute("user") as Map<String, Any>?
+        }
+        val apiUrl: String = env?.getProperty(ValuesConfig.API_URL_ENV_NAME) as String
+        val userUrl = "$apiUrl/users/self/"
+        val response = restTemplate!!.exchange(
+            URI.create(userUrl),
+            HttpMethod.GET,
+            null,
+            object : ParameterizedTypeReference<Map<String, Any>>() {}
+        )
+        if (response.statusCodeValue == 200 && response.hasBody()) {
+            session.setAttribute("user", response.body)
+            @Suppress("UNCHECKED_CAST")
+            return session.getAttribute("user") as Map<String, Any>
+        }
+        return null
     }
 
     @Throws(ResponseStatusException::class)
@@ -58,6 +81,4 @@ class UserServiceImpl: UserService {
             return true
         }
     }
-
-
 }

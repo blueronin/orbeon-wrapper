@@ -22,7 +22,7 @@ class MainController: BaseController() {
 
     @GetMapping("/require-auth-token")
     fun requireAuthToken(@RequestParam project: String?, request: HttpServletRequest): String {
-        userService!!.validateProjectParam(project, request.getSession(true))
+        userService!!.validateProjectParam(project)
         return "errors/require-auth-token"
     }
 
