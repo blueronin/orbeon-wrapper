@@ -1,5 +1,6 @@
 package io.orbeon.wrapper.interfaces
 
+import io.orbeon.wrapper.models.user.CurrentUser
 import org.springframework.web.server.ResponseStatusException
 
 interface UserService {
@@ -8,5 +9,5 @@ interface UserService {
     @Throws(ResponseStatusException::class)
     fun validateProjectParam(project: String?): String
     @Throws(ResponseStatusException::class)
-    fun currentUser(): Map<String, Any>?
+    fun currentUser(): CurrentUser?
 }

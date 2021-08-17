@@ -23,6 +23,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("com.google.code.gson:gson")
     implementation(files("src/lib/orbeon-embedding.jar"))
     implementation(files("src/lib/slf4j-api-1.7.30.jar"))
     developmentOnly("org.springframework.boot:spring-boot-devtools")

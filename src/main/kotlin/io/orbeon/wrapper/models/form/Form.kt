@@ -1,5 +1,6 @@
 package io.orbeon.wrapper.models.form
 
+import io.orbeon.wrapper.models.BaseCompanion
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.collections.ArrayList
@@ -25,35 +26,32 @@ data class Form(
     val canonicalName: String
         get() = "${this.application}:${this.name}"
 
-    companion object : Base<Form>() {
-        override fun fromJSON(data: Map<String, Any>?): Form {
+    companion object : BaseCompanion<Form>() {
+        override fun fromJSON(data: Map<String, Any>): Form {
             @Suppress("UNCHECKED_CAST")
             return Form(
-                operation = data?.get("@operations") as? String,
-                application = data?.get("application-name") as? String,
-                name = data?.get("form-name") as? String,
-                version = data?.get("form-version") as? String,
+                operation = data["@operations"] as? String,
+                application = data["application-name"] as? String,
+                name = data["form-name"] as? String,
+                version = data["form-version"] as? String,
                 lastModifiedTime = LocalDateTime.parse(
-                    data?.get("last-modified-time") as? String,
+                    data["last-modified-time"] as? String,
                     DateTimeFormatter.ISO_DATE_TIME
                 ),
-                wizardMode = data?.get("wizard-mode") as? String,
-                dataMigration = data?.get("data-migration") as? String,
-                updatedWithVersion = data?.get("updated-with-version") as? ArrayList<String?>,
-                wizard = data?.get("wizard") as? Boolean,
-                title = TranslateText.fromMixedJSON(data?.get("title")),
-                description = TranslateText.fromMixedJSON(data?.get("description")),
-                libraryVersions = data?.get("library-versions") as? LinkedHashMap<String, String>,
-                migration = MigrationText.fromMixedJSON(data?.get("library-versions")),
-                logo = Logo.fromJSON(data?.get("logo") as? LinkedHashMap<String, String>),
-                email = Email.fromMixedJSON(data?.get("email"))
+                wizardMode = data["wizard-mode"] as? String,
+                dataMigration = data["data-migration"] as? String,
+                updatedWithVersion = data["updated-with-version"] as? ArrayList<String?>,
+                wizard = data["wizard"] as? Boolean,
+                title = TranslateText.fromMixedJSON(data["title"]),
+                description = TranslateText.fromMixedJSON(data["description"]),
+                libraryVersions = data["library-versions"] as? LinkedHashMap<String, String>,
+                migration = MigrationText.fromMixedJSON(data["library-versions"]),
+                logo = if (data["logo"] != null) Logo.fromJSON(data["logo"] as LinkedHashMap<String, String>) else null,
+                email = Email.fromMixedJSON(data["email"])
             )
         }
 
-        override fun fromArray(data: ArrayList<LinkedHashMap<String, String>>?): ArrayList<Form> {
-            if (data == null) {
-                return arrayListOf()
-            }
+        override fun fromArray(data: ArrayList<LinkedHashMap<String, String>>): ArrayList<Form> {
             return arrayListOf(*data.map { this.fromJSON(it) }.toTypedArray())
         }
     }

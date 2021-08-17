@@ -2,6 +2,7 @@ package io.orbeon.wrapper.services
 
 import io.orbeon.wrapper.config.ValuesConfig
 import io.orbeon.wrapper.interfaces.UserService
+import io.orbeon.wrapper.models.user.CurrentUser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.core.env.Environment
@@ -36,10 +37,9 @@ class UserServiceImpl: UserService {
         return projectId
     }
 
-    override fun currentUser(): Map<String, Any>? {
+    override fun currentUser(): CurrentUser? {
         if (session!!.getAttribute("user") != null) {
-            @Suppress("UNCHECKED_CAST")
-            return session.getAttribute("user") as Map<String, Any>?
+            return session.getAttribute("user") as CurrentUser
         }
         val apiUrl: String = env?.getProperty(ValuesConfig.API_URL_ENV_NAME) as String
         val userUrl = "$apiUrl/users/self/"
@@ -50,9 +50,9 @@ class UserServiceImpl: UserService {
             object : ParameterizedTypeReference<Map<String, Any>>() {}
         )
         if (response.statusCodeValue == 200 && response.hasBody()) {
-            session.setAttribute("user", response.body)
-            @Suppress("UNCHECKED_CAST")
-            return session.getAttribute("user") as Map<String, Any>
+            val user = CurrentUser.fromJSON(response.body!!)
+            session.setAttribute("user", user)
+            return user
         }
         return null
     }
