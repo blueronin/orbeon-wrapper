@@ -59,6 +59,5 @@ data class CurrentUser(
         override fun fromArray(data: ArrayList<LinkedHashMap<String, String>>): ArrayList<CurrentUser> {
             return arrayListOf(*data.map { this.fromJSON(it) }.toTypedArray())
         }
-
     }
 }

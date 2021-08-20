@@ -59,26 +59,24 @@ class UserServiceImpl: UserService {
 
     @Throws(ResponseStatusException::class)
     override fun hasAccessToProject(project: String): Boolean {
-        // TODO("Not yet implemented: URL used does not exist")
         val apiUrl: String = env?.getProperty(ValuesConfig.API_URL_ENV_NAME) as String
-        val authUrl = "$apiUrl/orbeon/user/auth/$project/"
+        val authUrl = "$apiUrl/projects/$project/"
 
         try {
-            val allowed = restTemplate!!.exchange(
+            val response = restTemplate!!.exchange(
                 URI.create(authUrl),
                 HttpMethod.GET,
                 null,
-                object : ParameterizedTypeReference<Boolean>() {}
+                object : ParameterizedTypeReference<Map<String, Any>>() {}
             )
 
-            if (allowed.body == true) {
+            if (response.statusCodeValue == 200 && response.hasBody()) {
+                session!!.setAttribute("project", response.body)
                 return true
             }
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not allowed access to project")
         } catch (e: HttpClientErrorException) {
-            println(e.message)
-            // TODO("Temporarily return true until endpoint is implemented. Now we run into all errors like 404,")
-            return true
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not allowed access to project: ${e.message}")
         }
     }
 }
