@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest
 class BaseController {
     @Autowired
     val formsService: FormsService? = null
+
     @Autowired
     val userService: UserService? = null
 

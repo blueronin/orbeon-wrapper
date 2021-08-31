@@ -9,7 +9,7 @@ data class FrParam(
     val name: String? = null,
     val controlName: String? = null,
 ) {
-    companion object: BaseCompanion<FrParam>() {
+    companion object : BaseCompanion<FrParam>() {
         override fun fromJSON(data: Map<String, Any>): FrParam {
             return FrParam(
                 fr = data["@xmlns:fr"] as? String,

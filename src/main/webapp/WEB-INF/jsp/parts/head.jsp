@@ -4,10 +4,11 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="org.springframework.validation.support.BindingAwareModelMap" %>
+<%@ page import="io.orbeon.wrapper.models.user.CurrentUser" %>
 
 <%-- Setup global variables/properties from Controller attributes --%>
-<spring:eval expression="@environment.getProperty('app.orbeon-url')" var="orbeonUrl" />
-<spring:eval expression="@environment.getProperty('app.api-url')" var="apiUrl" />
+<spring:eval expression="@environment.getProperty('app.orbeon-url')" var="orbeonUrl"/>
+<spring:eval expression="@environment.getProperty('app.api-url')" var="apiUrl"/>
 
 <%
     BindingAwareModelMap model = new BindingAwareModelMap();
@@ -19,7 +20,7 @@
     String authCookieName = "AUTHORIZATION";
     String authorizationToken = "";
 
-    Cookie[] cookies     = request.getCookies();
+    Cookie[] cookies = request.getCookies();
     if (cookies != null) {
         for (Cookie cookie : cookies) {
             if (cookie.getName().toUpperCase().equals(authCookieName)) {
@@ -45,13 +46,19 @@
         headers.putIfAbsent(name, request.getHeader(name));
     }
     headers.putIfAbsent("Authorization", "OAuth ".concat(authorizationToken));
+    CurrentUser currentUser = (CurrentUser) session.getAttribute("user");
+    if (currentUser != null) {
+        headers.putIfAbsent("orbeon-header", currentUser.toOrbeonHeaderString());
+    }
+    headers.remove("sec-ch-ua"); // this causes issues when passing to JS
 %>
 
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>
     <title>Basestone Orbeon Embedding</title>
 
     <script type="text/javascript">
@@ -65,14 +72,14 @@
         const projectId = "<%= projectId %>";
         const model = {};
         const headers = {};
+        headers["orbeon-header"] = <%= headers.get("orbeon-header") %>;
+
         <% for (String header : headers.keySet()) {
-            if (!header.equals("sec-ch-ua")) {
+            if (header.equals("orbeon-header")) continue;
         %>
         headers["<%= header %>"] = "<%= headers.get(header) %>";
-        <%
-            }
-        }
-        %>
+        <% } %>
+
         <% for (String attr : model.keySet()) { %>
         model["<%= attr %>"] = "<%= model.getAttribute(attr) %>";
         <% } %>
@@ -83,9 +90,13 @@
         }
     </script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.css" integrity="sha512-EPpc8hp3vb3PUXYMC+39/OwsEAc50QgthpyVEJMqwoV98YJIvhWi7QJ6tcY7JtshRB5ufQYztle/Mg1AZQw6CQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="<spring:url value="/css/main.css" />" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.css"
+          integrity="sha512-EPpc8hp3vb3PUXYMC+39/OwsEAc50QgthpyVEJMqwoV98YJIvhWi7QJ6tcY7JtshRB5ufQYztle/Mg1AZQw6CQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="<spring:url value="/css/main.css" />"/>
 
     <script type="text/javascript" src="/orbeon/xforms-server/baseline.js?updates=fr"></script>
 </head>

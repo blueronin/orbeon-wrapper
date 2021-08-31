@@ -1,4 +1,4 @@
-<%@include file="../parts/head.jsp"%>
+<%@include file="../parts/head.jsp" %>
 
 <div class="orbeon">
     <h1>Something went wrong! ${statusCode}</h1>
@@ -8,4 +8,4 @@
     <h3>Message: ${errorMessage}</h3>
 </div>
 
-<%@include file="../parts/foot.jsp"%>
+<%@include file="../parts/foot.jsp" %>

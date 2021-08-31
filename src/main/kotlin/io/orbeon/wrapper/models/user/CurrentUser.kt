@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 import io.orbeon.wrapper.models.BaseCompanion
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeParseException
 
 data class CurrentUser(
     val id: Number? = null,
@@ -40,14 +41,43 @@ data class CurrentUser(
     val thumbnail: String? = null,
     val ticket: String? = null,
     val username: String? = null,
+    val groups: ArrayList<Group> = arrayListOf(),
 ) {
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun toOrbeonHeader(): OrbeonHeader {
+        val user = this
+        val roles = arrayListOf<Map<String, String>>()
+        val groups: ArrayList<String> = user.groups.map {
+            it.permissions.forEach { p ->
+                val role = HashMap<String, String>()
+                role["name"] = p.codename
+                roles.add(role)
+            }
+            it.name.replace("\\s+", "_").lowercase()
+        } as ArrayList<String>
+
+        return OrbeonHeader(username = user.username!!, groups = groups, roles = roles)
+    }
+
+    fun toOrbeonHeaderString(): String {
+        val orbeonHeader = this.toOrbeonHeader()
+        return Gson().toJson(orbeonHeader)
+    }
+
     companion object : BaseCompanion<CurrentUser>() {
-        private fun toLocalDate(value: String): LocalDateTime {
-            val commonFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxxxx"
-            return LocalDateTime.parse(value, DateTimeFormatter.ofPattern(commonFormat))
+        private fun toLocalDate(value: String): LocalDateTime? {
+            return try {
+                val commonFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxxxx"
+                LocalDateTime.parse(value, DateTimeFormatter.ofPattern(commonFormat))
+            } catch (e: DateTimeParseException) {
+                println(e)
+                null
+            }
         }
+
+        @Suppress("UNCHECKED_CAST")
         override fun fromJSON(data: Map<String, Any>): CurrentUser {
-            val hashMap = data.toMutableMap() as HashMap<String, Any>
+            val hashMap = data.toMutableMap() as HashMap<String, Any?>
             hashMap["dateJoined"] = toLocalDate(data["date_joined"] as String)
             hashMap["lastActive"] = toLocalDate(data["last_active"] as String)
             hashMap["lastLogin"] = toLocalDate(data["last_login"] as String)

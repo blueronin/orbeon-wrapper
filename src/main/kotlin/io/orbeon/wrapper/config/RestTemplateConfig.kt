@@ -1,5 +1,6 @@
 package io.orbeon.wrapper.config
 
+import io.orbeon.wrapper.models.user.CurrentUser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.annotation.Bean
@@ -54,6 +55,11 @@ class RestTemplateConfig {
 
             request.headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.type)
             request.headers.add(HttpHeaders.AUTHORIZATION, "OAuth $token")
+
+            val user = session.getAttribute("user") as CurrentUser?
+            if (user !== null) {
+                request.headers.add("orbeon-header", user.toOrbeonHeaderString())
+            }
             return execution.execute(request, body)
         }
     }

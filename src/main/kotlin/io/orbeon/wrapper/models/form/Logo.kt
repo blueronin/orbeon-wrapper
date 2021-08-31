@@ -8,7 +8,7 @@ data class Logo(
     val filename: String? = null,
     val size: String? = null,
 ) {
-    companion object: BaseCompanion<Logo>() {
+    companion object : BaseCompanion<Logo>() {
         override fun fromJSON(data: Map<String, Any>): Logo {
             return Logo(
                 mediaType = data["@mediatype"] as? String,

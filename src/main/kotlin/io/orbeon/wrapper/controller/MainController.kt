@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import javax.servlet.http.HttpServletRequest
 
 @Controller
-class MainController: BaseController() {
+class MainController : BaseController() {
 
     @GetMapping
     fun index(request: HttpServletRequest): String {

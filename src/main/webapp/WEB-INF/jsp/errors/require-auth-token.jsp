@@ -1,4 +1,4 @@
-<%@include file="../parts/head.jsp"%>
+<%@include file="../parts/head.jsp" %>
 
 <div class="orbeon">
     <h1>Waiting for Auth token to be passed and verified.</h1>
@@ -14,4 +14,4 @@
     }, 5000);
 </script>
 
-<%@include file="../parts/foot.jsp"%>
+<%@include file="../parts/foot.jsp" %>

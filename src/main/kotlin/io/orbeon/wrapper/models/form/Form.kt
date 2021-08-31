@@ -3,7 +3,6 @@ package io.orbeon.wrapper.models.form
 import io.orbeon.wrapper.models.BaseCompanion
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import kotlin.collections.ArrayList
 
 
 data class Form(

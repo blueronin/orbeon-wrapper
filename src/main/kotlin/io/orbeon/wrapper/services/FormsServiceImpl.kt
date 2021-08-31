@@ -14,14 +14,15 @@ import org.springframework.web.client.RestTemplate
 import java.net.URI
 
 @Service
-class FormsServiceImpl: FormsService {
+class FormsServiceImpl : FormsService {
     @Autowired
     private val restTemplate: RestTemplate? = null
+
     @Autowired
     private val env: Environment? = null
 
     override fun groupForms(forms: ArrayList<Form>): HashMap<String, ArrayList<Form>> {
-        val groupedForms : HashMap<String, ArrayList<Form>> = HashMap()
+        val groupedForms: HashMap<String, ArrayList<Form>> = HashMap()
         forms.forEach {
             val key: String = it.application as String
             if (!groupedForms.containsKey(key)) {

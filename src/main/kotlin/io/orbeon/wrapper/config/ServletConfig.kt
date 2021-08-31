@@ -11,7 +11,7 @@ import javax.servlet.FilterRegistration
 import javax.servlet.ServletContext
 
 @Configuration
-class ServletConfig: ServletContextInitializer {
+class ServletConfig : ServletContextInitializer {
     @Autowired
     private val env: Environment? = null
 

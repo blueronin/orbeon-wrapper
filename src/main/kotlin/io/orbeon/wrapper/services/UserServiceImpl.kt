@@ -16,11 +16,13 @@ import java.net.URI
 import javax.servlet.http.HttpSession
 
 @Service
-class UserServiceImpl: UserService {
+class UserServiceImpl : UserService {
     @Autowired
     private val restTemplate: RestTemplate? = null
+
     @Autowired
     private val env: Environment? = null
+
     @Autowired
     private val session: HttpSession? = null
 

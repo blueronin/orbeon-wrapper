@@ -9,13 +9,12 @@ import org.springframework.ui.Model
 import org.springframework.util.Assert
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.context.request.WebRequest
-import java.lang.Exception
 import javax.servlet.RequestDispatcher
 import javax.servlet.http.HttpServletRequest
 
 
 @Controller
-class CustomErrorController: ErrorController {
+class CustomErrorController : ErrorController {
     // ErrorAttributes object is used to save all error attributes value.
     private var errorAttributes: ErrorAttributes? = null
 
@@ -37,7 +36,10 @@ class CustomErrorController: ErrorController {
             // Get exception object.
             val exception = request.getAttribute(RequestDispatcher.ERROR_EXCEPTION) as Exception?
             // Get error stack trace map object.
-            val body = errorAttributes!!.getErrorAttributes(webRequest, ErrorAttributeOptions.of(ErrorAttributeOptions.Include.STACK_TRACE))
+            val body = errorAttributes!!.getErrorAttributes(
+                webRequest,
+                ErrorAttributeOptions.of(ErrorAttributeOptions.Include.STACK_TRACE)
+            )
 
             model.addAttribute("errorMessage", message)
             model.addAttribute("statusCode", statusCode)
