@@ -3,7 +3,7 @@ package io.orbeon.wrapper.models.user
 import com.google.gson.annotations.SerializedName
 
 
-data class Group(
+data class MemberRole(
     val id: Int,
     val name: String,
     val permissions: ArrayList<Permission> = arrayListOf(),

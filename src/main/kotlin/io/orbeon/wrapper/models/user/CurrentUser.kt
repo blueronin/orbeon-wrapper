@@ -41,22 +41,26 @@ data class CurrentUser(
     val thumbnail: String? = null,
     val ticket: String? = null,
     val username: String? = null,
-    val groups: ArrayList<Group> = arrayListOf(),
+    @SerializedName("team_membership")
+    val teamMembership: ArrayList<SimpleTeamMember> = arrayListOf(),
 ) {
     @Suppress("MemberVisibilityCanBePrivate")
     fun toOrbeonHeader(): OrbeonHeader {
         val user = this
+
+        val groups = arrayListOf<String>()
         val roles = arrayListOf<Map<String, String>>()
-        val groups: ArrayList<String> = user.groups.map {
-            it.permissions.forEach { p ->
-                val role = HashMap<String, String>()
-                role["name"] = p.codename
-                roles.add(role)
-            }
-            it.name.replace("\\s+", "_").lowercase()
+        val tmpOrganizations: ArrayList<String> = user.teamMembership.map {
+            val role = HashMap<String, String>()
+            role["name"] = it.role.name
+            role["organization"] = it.teamSlug
+            roles.add(role)
+            it.teamSlug
         } as ArrayList<String>
 
-        return OrbeonHeader(username = user.username!!, groups = groups, roles = roles)
+        // orbeon requires an array of arrays
+        val organizations = arrayListOf(tmpOrganizations)
+        return OrbeonHeader(username = user.username!!, groups = groups, roles = roles, organizations = organizations)
     }
 
     fun toOrbeonHeaderString(): String {
