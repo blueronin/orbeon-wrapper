@@ -69,7 +69,10 @@ data class CurrentUser(
     }
 
     companion object : BaseCompanion<CurrentUser>() {
-        private fun toLocalDate(value: String): LocalDateTime? {
+        private fun toLocalDate(value: String?): LocalDateTime? {
+            if (value == null) {
+                return value
+            }
             return try {
                 val commonFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSxxxxx"
                 LocalDateTime.parse(value, DateTimeFormatter.ofPattern(commonFormat))
@@ -82,9 +85,9 @@ data class CurrentUser(
         @Suppress("UNCHECKED_CAST")
         override fun fromJSON(data: Map<String, Any>): CurrentUser {
             val hashMap = data.toMutableMap() as HashMap<String, Any?>
-            hashMap["dateJoined"] = toLocalDate(data["date_joined"] as String)
-            hashMap["lastActive"] = toLocalDate(data["last_active"] as String)
-            hashMap["lastLogin"] = toLocalDate(data["last_login"] as String)
+            hashMap["dateJoined"] = toLocalDate(data["date_joined"] as String?)
+            hashMap["lastActive"] = toLocalDate(data["last_active"] as String?)
+            hashMap["lastLogin"] = toLocalDate(data["last_login"] as String?)
 
             val gson = Gson()
             return gson.fromJson(gson.toJson(hashMap), CurrentUser::class.java)
