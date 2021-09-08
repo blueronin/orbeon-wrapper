@@ -10,7 +10,9 @@ import org.springframework.core.env.Environment
 import org.springframework.http.HttpMethod
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import org.springframework.web.client.HttpClientErrorException
 import org.springframework.web.client.RestTemplate
+import org.springframework.web.server.ResponseStatusException
 import java.net.URI
 
 @Service
@@ -38,11 +40,15 @@ class FormsServiceImpl : FormsService {
         val apiUrl: String = env?.getProperty(ValuesConfig.API_URL_ENV_NAME) as String
         val formsUrl = "$apiUrl/orbeon/fr/service/persistence/form?all-versions=true"
 
-        return restTemplate!!.exchange(
-            URI.create(formsUrl),
-            HttpMethod.GET,
-            null,
-            object : ParameterizedTypeReference<LinkedHashMap<String, LinkedHashMap<String, Any>>>() {}
-        )
+        try {
+            return restTemplate!!.exchange(
+                URI.create(formsUrl),
+                HttpMethod.GET,
+                null,
+                object : ParameterizedTypeReference<LinkedHashMap<String, LinkedHashMap<String, Any>>>() {}
+            )
+        } catch (e: HttpClientErrorException) {
+            throw ResponseStatusException(e.statusCode, e.message)
+        }
     }
 }

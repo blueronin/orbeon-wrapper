@@ -78,9 +78,9 @@ class UserServiceImpl : UserService {
                 session!!.setAttribute("project", prt)
                 return true
             }
-            throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not allowed access to project")
+            throw ResponseStatusException(response.statusCode, response.body.toString())
         } catch (e: HttpClientErrorException) {
-            throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not allowed access to project: ${e.message}")
+            throw ResponseStatusException(e.statusCode, e.message)
         }
     }
 }
