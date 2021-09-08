@@ -50,16 +50,20 @@ data class CurrentUser(
 
         val groups = arrayListOf<String>()
         val roles = arrayListOf<Map<String, String>>()
-        val tmpOrganizations: ArrayList<String> = user.teamMembership.map {
+        val organizations = arrayListOf<ArrayList<String>>()
+
+        user.teamMembership.forEach {
+            // Create role names with their organizations
             val role = HashMap<String, String>()
             role["name"] = it.role.name
             role["organization"] = it.teamSlug
             roles.add(role)
-            it.teamSlug
-        } as ArrayList<String>
 
-        // orbeon requires an array of arrays
-        val organizations = arrayListOf(tmpOrganizations)
+            // Create organization hierarchy
+            val orgHierarchy = arrayListOf(it.teamSlug)
+            organizations.add(orgHierarchy)
+        }
+
         return OrbeonHeader(username = user.username!!, groups = groups, roles = roles, organizations = organizations)
     }
 
