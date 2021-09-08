@@ -5,6 +5,7 @@
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="org.springframework.validation.support.BindingAwareModelMap" %>
 <%@ page import="io.orbeon.wrapper.models.user.CurrentUser" %>
+<%@ page import="io.orbeon.wrapper.models.project.Project" %>
 
 <%-- Setup global variables/properties from Controller attributes --%>
 <spring:eval expression="@environment.getProperty('app.orbeon-url')" var="orbeonUrl"/>
@@ -35,6 +36,12 @@
         projectId = pId.toString();
     }
     request.setAttribute("projectId", projectId);
+
+    Project project = null;
+    Object pjt = session.getAttribute("project");
+    if (pjt != null) {
+        project = (Project) pjt;
+    }
 %>
 
 <%
@@ -46,6 +53,11 @@
         headers.putIfAbsent(name, request.getHeader(name));
     }
     headers.putIfAbsent("Authorization", "OAuth ".concat(authorizationToken));
+    headers.putIfAbsent("ProjectId", projectId);
+    if (project != null && project.getTeam() != null) {
+        headers.put("ProjectId", String.valueOf(project.getId()));
+        headers.putIfAbsent("TeamId", String.valueOf(project.getTeam().getId()));
+    }
     CurrentUser currentUser = (CurrentUser) session.getAttribute("user");
     if (currentUser != null) {
         headers.putIfAbsent("orbeon-header", currentUser.toOrbeonHeaderString());
