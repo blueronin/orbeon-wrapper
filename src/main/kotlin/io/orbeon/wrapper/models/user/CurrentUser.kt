@@ -31,6 +31,8 @@ data class CurrentUser(
     val lastLogin: LocalDateTime? = null,
     @SerializedName("last_name")
     val lastName: String? = null,
+    @SerializedName("phone_number")
+    val phoneNumber: String? = null,
     val photo: String? = null,
     val profile: String? = null,
     @SerializedName("public_email")

@@ -2,6 +2,7 @@ package io.orbeon.wrapper.services
 
 import io.orbeon.wrapper.config.ValuesConfig
 import io.orbeon.wrapper.interfaces.UserService
+import io.orbeon.wrapper.models.project.Project
 import io.orbeon.wrapper.models.user.CurrentUser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.ParameterizedTypeReference
@@ -73,7 +74,8 @@ class UserServiceImpl : UserService {
             )
 
             if (response.statusCodeValue == 200 && response.hasBody()) {
-                session!!.setAttribute("project", response.body)
+                val prt = Project.fromJSON(response.body!!)
+                session!!.setAttribute("project", prt)
                 return true
             }
             throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not allowed access to project")

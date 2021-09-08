@@ -1,5 +1,6 @@
 package io.orbeon.wrapper.config
 
+import io.orbeon.wrapper.models.project.Project
 import io.orbeon.wrapper.models.user.CurrentUser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.web.client.RestTemplateBuilder
@@ -39,7 +40,10 @@ class RestTemplateConfig {
             var token = ""
             val session = httpServletRequest!!.session
             val cookies = httpServletRequest!!.cookies
-            val project = session.getAttribute("projectId") as String?
+
+            val projectId = session.getAttribute("projectId") as String?
+            val project = session.getAttribute("project") as Project?
+            val user = session.getAttribute("user") as CurrentUser?
 
             if (cookies != null) {
                 for (cookie: Cookie in cookies) {
@@ -49,14 +53,15 @@ class RestTemplateConfig {
                     }
                 }
             }
-            if (project != null) {
-                request.headers.add("ProjectId", project)
-            }
-
             request.headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.type)
             request.headers.add(HttpHeaders.AUTHORIZATION, "OAuth $token")
 
-            val user = session.getAttribute("user") as CurrentUser?
+            if (projectId != null) {
+                request.headers.add("ProjectId", projectId)
+            }
+            if (project != null) {
+                request.headers.add("TeamId", project.team?.id.toString())
+            }
             if (user !== null) {
                 request.headers.add("orbeon-header", user.toOrbeonHeaderString())
             }
