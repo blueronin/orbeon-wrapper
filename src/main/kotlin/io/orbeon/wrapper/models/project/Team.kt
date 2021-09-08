@@ -15,7 +15,7 @@ data class Team(
     val filenameParser: String? = null,
     @SerializedName("image_file")
     val imageFile: String? = null,
-    val integrations: ArrayList<String> = arrayListOf(),
+    val integrations: ArrayList<Integration> = arrayListOf(),
     @SerializedName("is_locked")
     val isLocked: Boolean = false,
     val members: ArrayList<Member> = arrayListOf(),
