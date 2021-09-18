@@ -57,7 +57,10 @@ data class CurrentUser(
         user.teamMembership.forEach {
             // Create role names with their organizations
             val role = HashMap<String, String>()
-            role["name"] = it.role.name
+            // Using team/organization names as roles instead, this will enable us restrict the builder to apps only
+            // available to this specific organization
+            role["name"] = it.teamSlug
+            // role["name"] = it.role.name
             role["organization"] = it.teamSlug
             roles.add(role)
 
