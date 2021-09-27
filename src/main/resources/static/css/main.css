@@ -11,45 +11,8 @@ body {
     letter-spacing: 0.2px;
 }
 
-.orbeon h1, .orbeon h2, .orbeon h3, .orbeon h4, .orbeon h5, .orbeon h6 {
-    font-size: revert !important;
-}
-
 a {
     color: #35C2E1;
-}
-
-.orbeon .navbar {
-    display: none;
-}
-
-.orbeon *:not(.fa, .xforms-help) {
-    font-family: 'Open Sans', sans-serif !important;
-}
-
-.orbeon .btn, .btn {
-    background-image: none !important;
-    padding: 5px 10px !important;
-    line-height: 1.5 !important;
-    font-size: 12px !important;
-    border-radius: 3px !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-    border: solid 1px #ccc !important;
-    letter-spacing: 0.3px !important;
-    font-weight: 400 !important;
-}
-
-.orbeon .btn-default, .orbeon .btn, .btn-default {
-    color: #333 !important;
-    background-color: #fff !important;
-    border-color: #ccc !important;
-}
-
-.orbeon .btn-primary, .btn-primary {
-    background-color: #35C2E1 !important;
-    border: solid 1px #35C2E1 !important;
-    color: #ffffff !important;
 }
 
 .title-settings {
@@ -60,24 +23,168 @@ a {
     border-bottom: solid 1px #EAEAEA;
 }
 
-.orbeon .container,
-.orbeon .container .row,
-.orbeon .container .row > .span12 {
-    width: 100% !important;
+/* START Orbeon Specific CSS */
+.orbeon .navbar {
+    display: none;
 }
 
-.orbeon .row {
-    margin: auto 0 !important;
+.orbeon h1,
+.orbeon h2,
+.orbeon h3,
+.orbeon h4,
+.orbeon h5,
+.orbeon h6 {
+    font-size: revert !important;
 }
 
-.orbeon .container .row > .span12 {
+.yui-skin-sam .orbeon *:not(.fa, .xforms-help) {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* START BUTTONS */
+.yui-skin-sam .orbeon .btn,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn,
+.yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool .xforms-trigger button,
+.yui-skin-sam .btn {
+    background-image: none;
+    padding: 5px 10px;
+    line-height: 1.5;
+    font-size: 12px;
+    border-radius: 3px;
+    box-shadow: none;
+    text-shadow: none;
+    border: solid 1px #ccc;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+    color: #333;
+    background-color: #fff;
+}
+
+.yui-skin-sam .orbeon .orbeon-portlet-body .btn-primary,
+.yui-skin-sam .orbeon .orbeon-portlet-body .btn.ladda-button,
+.yui-skin-sam .btn-primary {
+    background-color: #35C2E1;
+    border: solid 1px #35C2E1;
+    color: #ffffff;
+}
+
+.yui-skin-sam .orbeon .btn-danger i.fa,
+.yui-skin-sam .orbeon .btn-warning i.fa,
+.yui-skin-sam .orbeon .btn-primary i.fa,
+.yui-skin-sam .orbeon .btn-inverse i.fa,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-danger i.fa,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-warning i.fa,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary i.fa,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-inverse i.fa {
+    color: #333333;
+}
+
+.yui-skin-sam .orbeon .btn:hover,
+.yui-skin-sam .orbeon .btn:focus,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn:hover,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn:focus,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn:active,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn.active,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn.disabled,
+.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn[disabled] {
+    color: #333;
+    background-color: #e6e6e6;
+}
+
+.yui-skin-sam .btn-primary:hover,
+.yui-skin-sam .orbeon .orbeon-portlet-body .btn-primary:hover,
+.yui-skin-sam .orbeon .orbeon-portlet-body .btn.ladda-button:hover,
+.yui-skin-sam .orbeon .orbeon-portlet-body .btn-primary:focus,
+.yui-skin-sam .orbeon .orbeon-portlet-body .btn.ladda-button:focus,
+.yui-skin-sam .btn-primary:focus {
+    background-color: #1fb3d3;
+}
+
+/* END BUTTONS */
+
+.yui-skin-sam .orbeon .container,
+.yui-skin-sam .orbeon .container .row,
+.yui-skin-sam .orbeon .container .row > .span12 {
+    width: 100%;
+}
+
+.yui-skin-sam .orbeon .row {
+    margin: auto 0;
+}
+
+.yui-skin-sam .orbeon .container .row > .span12 {
     margin-left: 0;
 }
 
-.orbeon .input-append > * {
+.yui-skin-sam .orbeon .input-append > * {
     height: auto !important;
 }
 
 div.mask {
     top: 5vh;
+    height: unset !important;
+    width: unset !important;
 }
+
+.yui-skin-sam .orbeon .xbl-component input,
+.yui-skin-sam .orbeon .xbl-component textarea,
+.yui-skin-sam .orbeon .xbl-component select {
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 2px;
+    border: 1px solid #CED2D6;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.yui-skin-sam .orbeon input:not(input[type=checkbox], input[type=radio]),
+.yui-skin-sam .orbeon select {
+    height: 36px;
+}
+
+.yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool button {
+    margin: 0.3em 0;
+}
+
+.yui-skin-sam .orbeon.orbeon-portlet-div {
+    background-color: #F9F9F9;
+    border: 0;
+}
+
+.yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fr-orbeon-version {
+    color: #747F8E;
+}
+
+.yui-skin-sam .yui-dialog .yui-panel {
+    border-width: 0;
+}
+
+.yui-skin-sam .yui-dialog .yui-panel .hd,
+.yui-skin-sam .yui-dialog .yui-panel .bd,
+.yui-skin-sam .yui-dialog .yui-panel .ft {
+    border-width: 0;
+}
+
+.yui-skin-sam .yui-dialog {
+    border-radius: 2px;
+}
+
+.yui-skin-sam .yui-dialog .yui-panel .hd {
+    background-color: white;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.yui-skin-sam .yui-dialog .yui-panel .bd {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.yui-skin-sam .orbeon div[id$=fb-toolbox-advanced-tab] > .fb-tools > .fb-tool span[id=o0fb-toolbox-tabs≡xf-1410] {
+    /* Hide the permissions button, we wont be using the fr permissions*/
+    display: none;
+}
+/* END Orbeon Specific CSS */
