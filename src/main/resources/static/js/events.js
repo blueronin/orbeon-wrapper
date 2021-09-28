@@ -21,7 +21,11 @@ window.addEventListener('message', event => {
             })
                 .then(r => r.json())
                 .then(response => {
-                    document.cookie = `${authCookieName}=${accessToken}; path=${contextPath}`
+                    if ( location.protocol === 'https:') {
+                        document.cookie = `${authCookieName}=${accessToken}; path=${contextPath}; secure; HttpOnly`
+                    } else {
+                        document.cookie = `${authCookieName}=${accessToken}; path=${contextPath}`
+                    }
                     localStorage.setItem('accessToken', accessToken);
                     localStorage.setItem('basestoneUser', response.user ? JSON.stringify(response.user) : null);
                     location.href = contextPath;
