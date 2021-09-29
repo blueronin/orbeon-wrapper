@@ -48,7 +48,6 @@ class AuthController {
                 val cookie = Cookie(HttpHeaders.AUTHORIZATION.uppercase(), header)
                 cookie.path = "/orbeon-wrapper"
                 cookie.isHttpOnly = true
-                cookie.secure = true
 
                 response.addCookie(cookie)
                 return rsp.body
