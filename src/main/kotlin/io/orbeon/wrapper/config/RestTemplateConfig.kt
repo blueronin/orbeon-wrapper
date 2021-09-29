@@ -54,7 +54,9 @@ class RestTemplateConfig {
                 }
             }
             request.headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.type)
-            request.headers.add(HttpHeaders.AUTHORIZATION, "OAuth $token")
+            if (token != "") {
+                request.headers.add(HttpHeaders.AUTHORIZATION, "OAuth $token")
+            }
 
             if (projectId != null) {
                 request.headers.add("ProjectId", projectId)

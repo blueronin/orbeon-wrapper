@@ -14,18 +14,13 @@ window.addEventListener('message', event => {
 
     if (setToken !== undefined && typeof setToken === "boolean" && localStorage.getItem("accessToken") !== accessToken) {
         if (setToken === true && !!accessToken) {
-            fetch(`${apiUrl}/orbeon-auth/verify`, {
+            fetch(`${contextPath}/api/token/verify`, {
                 headers: {
                     Authorization: `OAuth ${accessToken}`
                 }
             })
                 .then(r => r.json())
                 .then(response => {
-                    if ( location.protocol === 'https:') {
-                        document.cookie = `${authCookieName}=${accessToken}; path=${contextPath}; secure; HttpOnly`
-                    } else {
-                        document.cookie = `${authCookieName}=${accessToken}; path=${contextPath}`
-                    }
                     localStorage.setItem('accessToken', accessToken);
                     localStorage.setItem('basestoneUser', response.user ? JSON.stringify(response.user) : null);
                     location.href = contextPath;
