@@ -49,6 +49,9 @@ class AuthController {
                 cookie.path = "/orbeon-wrapper"
                 cookie.isHttpOnly = true
 
+                val isSecure: String? = env.getProperty("server.servlet.session.cookie.secure")
+                cookie.secure = isSecure.toBoolean()
+
                 response.addCookie(cookie)
                 return rsp.body
             }
