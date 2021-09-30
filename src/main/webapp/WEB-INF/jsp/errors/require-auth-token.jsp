@@ -9,7 +9,7 @@
 <script>
     setInterval(function (token) {
         if (!!token) {
-            location.href = "<%= contextPath %>/?project=<%= projectId %>"
+            location.href = "<%= contextPath %>/forms?project=<%= projectId %>"
         } else {
             location.reload();
         }

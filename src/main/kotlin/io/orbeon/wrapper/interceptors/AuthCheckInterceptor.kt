@@ -13,7 +13,7 @@ class AuthCheckInterceptor : HandlerInterceptor {
         if (cookies != null) {
             for (cookie: Cookie in cookies) {
                 if (cookie.name.uppercase() == HttpHeaders.AUTHORIZATION.uppercase() && cookie.value != null) {
-                    if (cookie.value != null && cookie.value.isNotEmpty()) {
+                    if (cookie.value.isNotEmpty()) {
                         return true
                     }
                 }
