@@ -53,19 +53,19 @@ class RestTemplateConfig {
                     }
                 }
             }
-            request.headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.type)
+            request.headers.addIfAbsent(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON.type)
             if (token != "") {
-                request.headers.add(HttpHeaders.AUTHORIZATION, "OAuth $token")
+                request.headers.addIfAbsent(HttpHeaders.AUTHORIZATION, "OAuth $token")
             }
 
             if (projectId != null) {
-                request.headers.add("ProjectId", projectId)
+                request.headers.addIfAbsent("ProjectId", projectId)
             }
             if (project != null) {
-                request.headers.add("TeamId", project.team?.id.toString())
+                request.headers.addIfAbsent("TeamId", project.team?.id.toString())
             }
             if (user !== null) {
-                request.headers.add("orbeon-header", user.toOrbeonHeaderString())
+                request.headers.addIfAbsent("orbeon-header", user.toOrbeonHeaderString())
             }
             return execution.execute(request, body)
         }

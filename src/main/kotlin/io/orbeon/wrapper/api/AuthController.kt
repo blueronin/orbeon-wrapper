@@ -33,7 +33,6 @@ class AuthController {
 
         try {
             val headers = HttpHeaders()
-            headers.contentType = MediaType.APPLICATION_JSON
             headers.add(HttpHeaders.AUTHORIZATION, authHeader)
             val requestEntity: HttpEntity<String> = HttpEntity<String>("parameters", headers)
 
