@@ -1,5 +1,5 @@
 window.addEventListener('load', function () {
-    if (window.parent && getCookie(authCookieName) === null) {
+    if (window.parent) {
         // If in an iframe, notify parent that we have loaded, they can send us
         // any auth/cookie data they need to send
         window.parent.postMessage('orbeonFrameLoaded', '*');
@@ -12,7 +12,7 @@ window.addEventListener('message', event => {
     // requests
     const {accessToken, setToken} = event.data;
 
-    if (setToken !== undefined && typeof setToken === "boolean" && getCookie(authCookieName) !== accessToken) {
+    if (setToken !== undefined && typeof setToken === "boolean" && authorizationToken !== accessToken) {
         if (setToken === true && !!accessToken) {
             fetch(`${contextPath}/api/token/verify`, {
                 headers: {

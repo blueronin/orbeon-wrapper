@@ -96,11 +96,6 @@
         <% for (String attr : model.keySet()) { %>
         model["<%= attr %>"] = "<%= model.getAttribute(attr) %>";
         <% } %>
-
-        function getCookie(name) {
-            const match = document.cookie.match(RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
-            return match ? match[1] : null;
-        }
     </script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.css"

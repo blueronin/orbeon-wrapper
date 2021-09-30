@@ -8,7 +8,7 @@
 
 <script>
     setInterval(function () {
-        if (getCookie(authCookieName) !== null) {
+        if (!!authorizationToken?.trim()) {
             location.href = "<%= contextPath %>/?project=<%= projectId %>"
         }
     }, 5000);
