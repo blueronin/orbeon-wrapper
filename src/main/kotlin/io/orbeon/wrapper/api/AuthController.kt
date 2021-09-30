@@ -44,11 +44,11 @@ class AuthController {
             )
             if (rsp.statusCode == HttpStatus.OK && rsp.hasBody()) {
                 val header = authHeader.split(" ")[1]
+                val isSecure: String? = env.getProperty("server.servlet.session.cookie.secure")
+
                 val cookie = Cookie(HttpHeaders.AUTHORIZATION.uppercase(), header)
                 cookie.path = "/orbeon-wrapper"
                 cookie.isHttpOnly = true
-
-                val isSecure: String? = env.getProperty("server.servlet.session.cookie.secure")
                 cookie.secure = isSecure.toBoolean()
 
                 response.addCookie(cookie)
@@ -58,5 +58,21 @@ class AuthController {
         } catch (e: HttpClientErrorException) {
             throw ResponseStatusException(e.statusCode, e.message)
         }
+    }
+
+    @GetMapping("/api/token/clear")
+    fun clearSession (request: HttpServletRequest, response: HttpServletResponse): String? {
+        request.getSession(false).invalidate()
+
+        val isSecure: String? = env?.getProperty("server.servlet.session.cookie.secure")
+
+        val cookie = Cookie(HttpHeaders.AUTHORIZATION.uppercase(), null)
+        cookie.path = "/orbeon-wrapper"
+        cookie.isHttpOnly = true
+        cookie.secure = isSecure.toBoolean()
+        cookie.maxAge = 0
+
+        response.addCookie(cookie)
+        return HttpStatus.OK.name
     }
 }

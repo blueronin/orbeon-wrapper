@@ -1,7 +1,7 @@
 window.addEventListener('load', function () {
-    if (window.parent) {
+    if (window.parent && getCookie(authCookieName) === null) {
         // If in an iframe, notify parent that we have loaded, they can send us
-        // any data they need to send
+        // any auth/cookie data they need to send
         window.parent.postMessage('orbeonFrameLoaded', '*');
     }
 });
@@ -29,11 +29,12 @@ window.addEventListener('message', event => {
                     }
                 });
         } else {
-            document.cookie = `${authCookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${contextPath}`
-
-            if (!location.pathname.includes(`${contextPath}/require-auth-token`)) {
-                location.href = `${contextPath}/require-auth-token`;
-            }
+            fetch(`${contextPath}/api/token/clear`)
+                .finally(() => {
+                    if (!location.pathname.includes(`${contextPath}/require-auth-token`)) {
+                        location.href = `${contextPath}/require-auth-token`;
+                    }
+                });
         }
     }
 });

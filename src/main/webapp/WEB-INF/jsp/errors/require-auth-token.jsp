@@ -2,16 +2,16 @@
 
 <div class="orbeon">
     <h1>Waiting for Auth token to be passed and verified.</h1>
-    <h3>Refresh the page if this does not happen automatically in 30 seconds</h3>
-    <a class="text-blue-500" href="<%= contextPath %>/">Go Home</a>
+    <h3>Refresh the page if this does not happen automatically in 20 seconds</h3>
+    <a class="text-blue-500" href="<%= contextPath %>/?project=<%= projectId %>">Go Home</a>
 </div>
 
 <script>
-    setTimeout(function () {
+    setInterval(function () {
         if (getCookie(authCookieName) !== null) {
-            location.href = "<%= contextPath %>/"
+            location.href = "<%= contextPath %>/?project=<%= projectId %>"
         }
-    }, 30000);
+    }, 5000);
 </script>
 
 <%@include file="../parts/foot.jsp" %>
