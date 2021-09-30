@@ -12,7 +12,7 @@ window.addEventListener('message', event => {
     // requests
     const {accessToken, setToken} = event.data;
 
-    if (setToken !== undefined && typeof setToken === "boolean" && localStorage.getItem("accessToken") !== accessToken) {
+    if (setToken !== undefined && typeof setToken === "boolean" && getCookie(authCookieName) !== accessToken) {
         if (setToken === true && !!accessToken) {
             fetch(`${contextPath}/api/token/verify`, {
                 headers: {
@@ -21,8 +21,6 @@ window.addEventListener('message', event => {
             })
                 .then(r => r.json())
                 .then(response => {
-                    localStorage.setItem('accessToken', accessToken);
-                    localStorage.setItem('basestoneUser', response.user ? JSON.stringify(response.user) : null);
                     location.href = contextPath;
                 })
                 .catch(err => {
@@ -32,7 +30,6 @@ window.addEventListener('message', event => {
                 });
         } else {
             document.cookie = `${authCookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${contextPath}`
-            localStorage.clear()
 
             if (!location.pathname.includes(`${contextPath}/require-auth-token`)) {
                 location.href = `${contextPath}/require-auth-token`;
