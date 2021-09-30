@@ -10,6 +10,8 @@
     setInterval(function () {
         if (!!authorizationToken?.trim()) {
             location.href = "<%= contextPath %>/?project=<%= projectId %>"
+        } else {
+            location.reload();
         }
     }, 5000);
 </script>

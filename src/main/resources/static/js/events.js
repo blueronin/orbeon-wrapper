@@ -21,18 +21,18 @@ window.addEventListener('message', event => {
             })
                 .then(r => r.json())
                 .then(response => {
-                    location.href = contextPath;
+                    location.href = `${contextPath}?project=${projectId}`;
                 })
                 .catch(err => {
                     if (!location.pathname.includes(`${contextPath}/require-auth-token`)) {
-                        location.href = `${contextPath}/require-auth-token`
+                        location.href = `${contextPath}/require-auth-token?project=${projectId}`
                     }
                 });
         } else {
             fetch(`${contextPath}/api/token/clear`)
                 .finally(() => {
                     if (!location.pathname.includes(`${contextPath}/require-auth-token`)) {
-                        location.href = `${contextPath}/require-auth-token`;
+                        location.href = `${contextPath}/require-auth-token?project=${projectId}`;
                     }
                 });
         }

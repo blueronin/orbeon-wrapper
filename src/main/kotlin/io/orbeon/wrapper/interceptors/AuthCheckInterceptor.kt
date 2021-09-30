@@ -19,7 +19,7 @@ class AuthCheckInterceptor : HandlerInterceptor {
                 }
             }
         }
-        response.sendRedirect("require-auth-token?${request.queryString ?: ""}")
+        response.sendRedirect("${request.contextPath}/require-auth-token?${request.queryString ?: ""}")
         return false
     }
 }

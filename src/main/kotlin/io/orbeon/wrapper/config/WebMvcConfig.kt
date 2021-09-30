@@ -14,7 +14,7 @@ class WebMvcConfig : WebMvcConfigurer {
                 "/require-auth-token",
                 "/js/**",
                 "/css/**",
-                "/api/token/verify"
+                "/api/**"
             )
     }
 }

@@ -62,7 +62,7 @@ class AuthController {
 
     @GetMapping("/api/token/clear")
     fun clearSession (request: HttpServletRequest, response: HttpServletResponse): String? {
-        request.getSession(false).invalidate()
+        request.getSession(false)?.invalidate()
 
         val isSecure: String? = env?.getProperty("server.servlet.session.cookie.secure")
 
