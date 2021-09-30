@@ -7,13 +7,13 @@
 </div>
 
 <script>
-    setInterval(function () {
-        if (!!authorizationToken?.trim()) {
+    setInterval(function (token) {
+        if (!!token) {
             location.href = "<%= contextPath %>/?project=<%= projectId %>"
         } else {
             location.reload();
         }
-    }, 5000);
+    }, 5000, authorizationToken?.trim());
 </script>
 
 <%@include file="../parts/foot.jsp" %>
