@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -28,9 +29,10 @@ class TokenController : BaseController() {
     @GetMapping("/verify")
     fun verifyToken(
         @RequestParam token: String,
-        @RequestParam project: String?,
+        @RequestParam project: String,
         request: HttpServletRequest,
-        response: HttpServletResponse
+        response: HttpServletResponse,
+        model: Model
     ): String? {
         val apiUrl: String = env?.getProperty(ValuesConfig.API_URL_ENV_NAME) as String
         val verifyUserUrl = "$apiUrl/orbeon-auth/verify"
@@ -56,6 +58,7 @@ class TokenController : BaseController() {
                 cookie.secure = isSecure.toBoolean()
 
                 response.addCookie(cookie)
+                model.addAttribute("projectId", project)
                 return "errors/redirect-home"
             }
             throw ResponseStatusException(rsp.statusCode, "Unable to verify User")
