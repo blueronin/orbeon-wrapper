@@ -80,6 +80,9 @@ class UserServiceImpl : UserService {
             }
             throw ResponseStatusException(response.statusCode, response.body.toString())
         } catch (e: HttpClientErrorException) {
+            if (e.statusCode == HttpStatus.NOT_FOUND) {
+                throw ResponseStatusException(e.statusCode, "Project `$project` not found")
+            }
             throw ResponseStatusException(e.statusCode, e.message)
         }
     }

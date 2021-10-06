@@ -22,7 +22,10 @@ import javax.servlet.http.HttpServletResponse
 @RequestMapping("/token")
 class TokenController : BaseController() {
     @GetMapping("/required")
-    fun requireAuthToken(@RequestParam project: String?, request: HttpServletRequest): String {
+    fun requireAuthToken(@RequestParam project: String?, request: HttpServletRequest, model: Model): String {
+        if (project != null && project != "null") {
+            model.addAttribute("projectParam", project)
+        }
         return "errors/token-required"
     }
 
