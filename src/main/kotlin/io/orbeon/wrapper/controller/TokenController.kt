@@ -58,7 +58,7 @@ class TokenController : BaseController() {
                 cookie.secure = isSecure.toBoolean()
 
                 response.addCookie(cookie)
-                model.addAttribute("projectId", project)
+                model.addAttribute("projectParam", project)
                 return "errors/redirect-home"
             }
             throw ResponseStatusException(rsp.statusCode, "Unable to verify User")
