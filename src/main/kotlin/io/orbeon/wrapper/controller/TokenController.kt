@@ -48,17 +48,20 @@ class TokenController : BaseController() {
             )
             if (rsp.statusCode == HttpStatus.OK && rsp.hasBody()) {
                 val isSecure: String? = env!!.getProperty("server.servlet.session.cookie.secure")
+                val contextPath: String? = env!!.getProperty("server.servlet.context-path")
 
                 val cookie = Cookie(HttpHeaders.AUTHORIZATION.uppercase(), token)
-                cookie.path = request.contextPath
+                cookie.path = contextPath
                 cookie.isHttpOnly = true
                 cookie.secure = isSecure.toBoolean()
 
                 response.addCookie(cookie)
                 if (project != null) {
-                    return "redirect:/forms?project=${project}"
+                    response.sendRedirect("${request.contextPath}/forms?project=${project}")
+                } else {
+                    response.sendRedirect("${request.contextPath}/forms")
                 }
-                return "redirect:/forms"
+                return "errors/redirect-home"
             }
             throw ResponseStatusException(rsp.statusCode, "Unable to verify User")
         } catch (e: HttpClientErrorException) {
@@ -69,6 +72,6 @@ class TokenController : BaseController() {
     @GetMapping("/clear")
     fun clearSession(request: HttpServletRequest, response: HttpServletResponse): String? {
         request.getSession(false)?.invalidate()
-        return "redirect:/token/required"
+        return "errors/token-required"
     }
 }
