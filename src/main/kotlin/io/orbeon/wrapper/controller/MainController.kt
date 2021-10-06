@@ -20,12 +20,6 @@ class MainController : BaseController() {
         return "redirect:/forms"
     }
 
-    @GetMapping("/require-auth-token")
-    fun requireAuthToken(@RequestParam project: String?, request: HttpServletRequest): String {
-        userService!!.validateProjectParam(project)
-        return "errors/require-auth-token"
-    }
-
     @GetMapping("/forms")
     fun home(@RequestParam project: String?, request: HttpServletRequest, model: Model): String {
         validateSession(request, project)

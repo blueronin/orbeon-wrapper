@@ -11,10 +11,9 @@ class WebMvcConfig : WebMvcConfigurer {
         registry.addInterceptor(AuthCheckInterceptor())
             .excludePathPatterns(
                 "/error",
-                "/require-auth-token",
+                "/token/**",
                 "/js/**",
-                "/css/**",
-                "/api/**"
+                "/css/**"
             )
     }
 }
