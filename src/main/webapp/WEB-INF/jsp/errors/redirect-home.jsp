@@ -14,9 +14,7 @@
 </div>
 
 <script>
-    setTimeout(function () {
-        location.href = "<%= contextPath %>/forms?project=${projectParam}"
-    }, 2000);
+    location.href = "<%= contextPath %>/forms?project=${projectParam}"
 </script>
 
 <%@include file="../parts/foot.jsp" %>
