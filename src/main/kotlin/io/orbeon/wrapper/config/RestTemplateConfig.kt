@@ -65,7 +65,7 @@ class RestTemplateConfig {
                 request.headers.addIfAbsent("TeamId", project.team?.id.toString())
             }
             if (user !== null) {
-                request.headers.addIfAbsent("orbeon-header", user.toOrbeonHeaderString())
+                request.headers.addIfAbsent("orbeon-header", user.toOrbeonHeaderString(project?.team?.slug.toString()))
             }
             return execution.execute(request, body)
         }

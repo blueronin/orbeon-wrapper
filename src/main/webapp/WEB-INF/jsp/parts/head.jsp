@@ -57,10 +57,12 @@
     if (project != null && project.getTeam() != null) {
         headers.put("ProjectId", String.valueOf(project.getId()));
         headers.putIfAbsent("TeamId", String.valueOf(project.getTeam().getId()));
+        headers.putIfAbsent("TeamSlug", String.valueOf(project.getTeam().getSlug()));
     }
     CurrentUser currentUser = (CurrentUser) session.getAttribute("user");
     if (currentUser != null) {
-        headers.putIfAbsent("orbeon-header", currentUser.toOrbeonHeaderString());
+        String teamSlug = headers.get("TeamSlug");
+        headers.putIfAbsent("orbeon-header", currentUser.toOrbeonHeaderString(teamSlug));
     }
     headers.remove("sec-ch-ua"); // this causes issues when passing to JS
     headers.remove("sec-ch-ua-platform"); // this causes issues when passing to JS

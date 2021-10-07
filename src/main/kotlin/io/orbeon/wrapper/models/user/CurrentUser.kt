@@ -47,7 +47,7 @@ data class CurrentUser(
     val teamMembership: ArrayList<SimpleTeamMember> = arrayListOf(),
 ) {
     @Suppress("MemberVisibilityCanBePrivate")
-    fun toOrbeonHeader(): OrbeonHeader {
+    fun toOrbeonHeader(teamSlug: String?): OrbeonHeader {
         val user = this
 
         val groups = arrayListOf<String>()
@@ -56,24 +56,27 @@ data class CurrentUser(
 
         user.teamMembership.forEach {
             // Create role names with their organizations
-            val role = HashMap<String, String>()
-            // Using team/organization names as roles instead, this will enable us restrict the builder to apps only
-            // available to this specific organization
-            role["name"] = it.teamSlug
-            // role["name"] = it.role.name
-            role["organization"] = it.teamSlug
-            roles.add(role)
+            if (it.teamSlug == teamSlug) {
+                // Only add role for the current project team
+                val role = HashMap<String, String>()
+                // Using team/organization names as roles instead, this will enable us restrict the builder to apps only
+                // available to this specific organization
+                role["name"] = it.teamSlug
+                // role["name"] = it.role.name
+                role["organization"] = it.teamSlug
+                roles.add(role)
 
-            // Create organization hierarchy
-            val orgHierarchy = arrayListOf(it.teamSlug)
-            organizations.add(orgHierarchy)
+                // Create organization hierarchy
+                val orgHierarchy = arrayListOf(it.teamSlug)
+                organizations.add(orgHierarchy)
+            }
         }
 
         return OrbeonHeader(username = user.username!!, groups = groups, roles = roles, organizations = organizations)
     }
 
-    fun toOrbeonHeaderString(): String {
-        val orbeonHeader = this.toOrbeonHeader()
+    fun toOrbeonHeaderString(teamSlug: String?): String {
+        val orbeonHeader = this.toOrbeonHeader(teamSlug)
         return Gson().toJson(orbeonHeader)
     }
 
