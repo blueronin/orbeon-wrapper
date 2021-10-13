@@ -182,9 +182,4 @@ div.mask {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
-
-.yui-skin-sam .orbeon div[id$=fb-toolbox-advanced-tab] > .fb-tools > .fb-tool span[id=o0fb-toolbox-tabs≡xf-1410] {
-    /* Hide the permissions button, we wont be using the fr permissions*/
-    display: none;
-}
 /* END Orbeon Specific CSS */
