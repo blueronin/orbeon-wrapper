@@ -5,11 +5,8 @@
 <%@include file="../parts/head.jsp" %>
 
 <div class="orbeon">
-    <h1>User has been authenticated successfully</h1>
-    <h3>
-        Redirecting you to the main page shortly.
-        Refresh the page If this does not happen automatically in 10 seconds
-    </h3>
+    <h1>Loading forms, please wait...</h1>
+    <h3>Refresh the page If this does not happen automatically in 10 seconds</h3>
     <a class="text-blue-500" href="<%= contextPath %>/forms?project=${projectParam}">Go Home</a>
 </div>
 
