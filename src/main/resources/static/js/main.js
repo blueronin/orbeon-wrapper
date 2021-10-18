@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // noinspection JSUnresolvedFunction
     $("#accordion").accordion({
         collapsible: true,
         heightStyle: "content"
@@ -9,6 +10,7 @@ $(document).ready(function () {
     let interval;
 
     const observeDOM = (function(){
+        // noinspection JSUnresolvedVariable
         const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
         return function( obj, callback ){
@@ -35,10 +37,26 @@ $(document).ready(function () {
             return;
         }
         // A hack to get around orbeon properties file where we are supposed to override the URLs not working,
-        $(`${orbeonSummaryTableSelector} tr[class^=fr-summary-row] td span a[href^=\\/fr\\/]`).each(function () {
-            let href = $(this).attr('href');
-            href = href.replace('/fr/', `${contextPath}/forms/`);
-            $(this).attr('href', href);
+        $(`${orbeonSummaryTableSelector} tr[class^=fr-summary-row]`).each(function () {
+            let documentId = null;
+
+            $(this).find("td span a[href^=\\/fr\\/]").each(function () {
+                let href = $(this).attr('href');
+                href = href.replace('/fr/', `${contextPath}/forms/`);
+                $(this).attr('href', href);
+
+                const segments = href.split('/');
+                const tmp = segments.pop() || segments.pop(); // Handle potential trailing slash
+                if (tmp.length >= 40) {
+                    // Only way to confirm its the ID.. for now
+                    documentId = tmp;
+                }
+            });
+
+            if (documentId && model['app'] !== "orbeon" && model.form !== "builder") {
+                // Dont add this to the builder summary, only edit is available for that.
+                $(this).append(`<td><a href="${contextPath}/forms/${model['app']}/${model.form}/view/${documentId}">Review</a></td>`)
+            }
         });
 
         $(orbeonSummaryTableSelector).each(function () {
@@ -59,13 +77,10 @@ $(document).ready(function () {
 
     const orbeonSummaryNewBtn = $(orbeonSummaryNewBtnSelector);
     if (orbeonSummaryNewBtn) {
-        orbeonSummaryNewBtn.each(function () {
-            $(this).on('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-                location.href = `${contextPath}/forms/${model.app}/${model.form}/new`
-            })
-        });
+        orbeonSummaryNewBtn.on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            location.href = `${contextPath}/forms/${model['app']}/${model.form}/new`
+        })
     }
-
 });
