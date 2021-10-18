@@ -5,6 +5,7 @@ $(document).ready(function () {
     });
 
     const orbeonSummaryTableSelector = ".orbeon div.fr-mode-summary div.fr-summary-table-div table tbody";
+    const orbeonSummaryNewBtnSelector = ".orbeon form .fr-view span.fr-new-button button";
     let interval;
 
     const observeDOM = (function(){
@@ -47,7 +48,6 @@ $(document).ready(function () {
     }
 
     const tableBodyElements = $(orbeonSummaryTableSelector);
-
     if (tableBodyElements && tableBodyElements[0]) {
         rewriteOrbeonSummaryPageUrls(tableBodyElements[0]);
         // 1 second might be too small and can cause browser freezing,
@@ -56,4 +56,16 @@ $(document).ready(function () {
         // even though the fr summary page was working
         interval = setInterval(rewriteOrbeonSummaryPageUrls, 1000, tableBodyElements[0])
     }
+
+    const orbeonSummaryNewBtn = $(orbeonSummaryNewBtnSelector);
+    if (orbeonSummaryNewBtn) {
+        orbeonSummaryNewBtn.each(function () {
+            $(this).on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                location.href = `${contextPath}/forms/${model.app}/${model.form}/new`
+            })
+        });
+    }
+
 });
