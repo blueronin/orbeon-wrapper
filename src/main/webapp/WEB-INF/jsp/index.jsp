@@ -3,7 +3,7 @@
 
 <div class="flex flex-col">
     <div class="flex flex-row justify-end pb-4">
-        <a class="btn btn-primary" href="<%=contextPath%>/forms/builder">Create new form Set</a>
+        <a class="btn btn-primary" href="<%=contextPath%>/forms/orbeon/builder">Create new form Set</a>
     </div>
 
     <div class="flex flex-row">
@@ -18,7 +18,7 @@
                         <ul class="flex flex-col">
                             <c:forEach items="${forms.value}" var="form">
                                 <li id="${form.canonicalName}" class="text-capitalize py-1 pr-1">
-                                    <a href="<%=contextPath%>/forms/${form.application}/${form.name}/new/?form=${form.canonicalName}">
+                                    <a href="<%=contextPath%>/forms/${form.application}/${form.name}/new">
                                         <span class="fa fa-caret-down"></span>
                                         <c:choose>
                                             <c:when test="${form.version != null}">${form.name} - v${form.version}</c:when>
@@ -42,7 +42,7 @@
                             (String) model.getAttribute("app"),
                             (String) model.getAttribute("form"),
                             (String) model.getAttribute("action"),
-                            null,
+                            (String) model.getAttribute("id"),
                             null,
                             headers
                     );

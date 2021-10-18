@@ -9,10 +9,10 @@
         API.embedFormJava(
                 request,
                 out,
-                "orbeon",
-                "builder",
-                "new",
-                null,
+                (String) model.getAttribute("app"),
+                (String) model.getAttribute("form"),
+                (String) model.getAttribute("action"),
+                (String) model.getAttribute("id"),
                 null,
                 headers
         );

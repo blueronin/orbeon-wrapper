@@ -29,23 +29,38 @@ class MainController : BaseController() {
         val formsList = Form.fromMixedJSON(response["forms"]?.get("form"))
         val groupedForms = formsService?.groupForms(formsList)
         model.addAttribute("groupedForms", groupedForms)
+
+        if (model.getAttribute("app") == "orbeon" && model.getAttribute("form") == "builder") {
+            return "builder"
+        }
         return "index"
     }
 
-    @GetMapping(value = ["/forms/{app}/{formName}/{action}", "/forms/{app}/{formName}"])
+    @GetMapping(
+        value = [
+            "/forms/{app}/{formName}",
+            "/forms/{app}/{formName}/{action}",
+            "/forms/{app}/{formName}/{action}/{id}",
+
+        ]
+    )
     fun appForm(
         @PathVariable app: String,
         @PathVariable formName: String,
-        @PathVariable(required = false) action: String? = "new",
+        @PathVariable(required = false) action: String?,
+        @PathVariable(required = false) id: String?,
         @RequestParam project: String?,
         request: HttpServletRequest,
         model: Model
     ): String {
         validateSession(request, project)
+        var formAction = action
+        if (formAction == null) formAction = "new"
 
         model.addAttribute("app", app)
         model.addAttribute("form", formName)
-        model.addAttribute("action", action)
+        model.addAttribute("action", formAction)
+        model.addAttribute("id", id)
 
         request.setAttribute("model", model)
         return home(null, request, model)
