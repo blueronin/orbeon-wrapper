@@ -28,15 +28,12 @@ $(document).ready(function () {
         }
     })()
 
-    function rewriteOrbeonSummaryPageUrls (element) {
+    const rewriteOrbeonSummaryPageUrls = (element) => {
         if (!$(element)) {
             clearInterval(interval);
             return;
         }
         // A hack to get around orbeon properties file where we are supposed to override the URLs not working,
-        const clonedElement = element.cloneNode(true);
-        $(element).replaceWith(clonedElement);
-
         $(`${orbeonSummaryTableSelector} tr[class^=fr-summary-row] td span a[href^=\\/fr\\/]`).each(function () {
             let href = $(this).attr('href');
             href = href.replace('/fr/', `${contextPath}/forms/`);
@@ -46,7 +43,7 @@ $(document).ready(function () {
         $(orbeonSummaryTableSelector).each(function () {
             // Observe a specific DOM element:
             observeDOM(this, (m) => rewriteOrbeonSummaryPageUrls(this));
-        })
+        });
     }
 
     const tableBodyElements = $(orbeonSummaryTableSelector);
