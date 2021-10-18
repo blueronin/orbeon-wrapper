@@ -55,7 +55,7 @@ class MainController : BaseController() {
     ): String {
         validateSession(request, project)
         var formAction = action
-        if (formAction == null) formAction = "new"
+        if (formAction == null) formAction = "summary"
 
         model.addAttribute("app", app)
         model.addAttribute("form", formName)

@@ -55,7 +55,19 @@ $(document).ready(function () {
 
             if (documentId && model['app'] !== "orbeon" && model.form !== "builder") {
                 // Dont add this to the builder summary, only edit is available for that.
-                $(this).append(`<td><a href="${contextPath}/forms/${model['app']}/${model.form}/view/${documentId}">Review</a></td>`)
+                const draftText = $(this).find("td:nth-child(2) #o0xf-671≡≡c⊙1").text();
+
+                if (draftText.toLowerCase() === "draft") {
+                    $(this).append(`<td class="summary-review-text w-32"></td>`)
+                } else {
+                    $(this).append(
+                        `<td class="summary-review-text w-32">
+                            <a href="${contextPath}/forms/${model['app']}/${model.form}/view/${documentId}">
+                                <i class="fa fa-eye"></i> Review
+                            </a>
+                        </td>`
+                    )
+                }
             }
         });
 
