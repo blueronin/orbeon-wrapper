@@ -3,7 +3,7 @@
 
 <div class="flex flex-col">
     <div class="flex flex-row justify-end pb-4">
-        <a class="btn btn-primary" href="<%=contextPath%>/forms/orbeon/builder">Create new form Set</a>
+        <a class="btn btn-primary" href="<%=contextPath%>/forms/orbeon/builder">Form Builder</a>
     </div>
 
     <div class="flex flex-row">

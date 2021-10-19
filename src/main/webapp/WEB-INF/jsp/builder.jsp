@@ -2,7 +2,12 @@
 
 <div class="flex flex-col">
     <div class="flex flex-row justify-end pb-4">
-        <a class="btn btn-primary" href="<%=contextPath%>/forms">Navigate Form sets</a>
+        <% if (model.getAttribute("action") != "summary") { %>
+        <a class="btn btn-secondary mr-2" href="<%=contextPath%>/forms/orbeon/builder/summary">Forms Summary</a>
+        <a class="btn btn-primary mr-2" href="<%=contextPath%>/forms/orbeon/builder/new">Create new</a>
+        <% } %>
+
+        <a class="btn btn-primary" href="<%=contextPath%>/forms">Show Submitted Forms</a>
     </div>
 
     <%
