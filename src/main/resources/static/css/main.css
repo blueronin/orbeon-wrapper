@@ -116,6 +116,11 @@ a {
     margin-left: 0;
 }
 
+.yui-skin-sam .orbeon .container {
+    max-width: 100%;
+    width: 100%;
+}
+
 .yui-skin-sam .orbeon .input-append > * {
     height: auto !important;
 }
