@@ -1,8 +1,9 @@
+<%@ page import="java.util.Objects" %>
 <%@include file="parts/head.jsp" %>
 
 <div class="flex flex-col">
     <div class="flex flex-row justify-end pb-4">
-        <% if (model.getAttribute("action") != "summary") { %>
+        <% if (!Objects.equals(model.getAttribute("action"), "summary")) { %>
         <a class="btn btn-secondary mr-2" href="<%=contextPath%>/forms/orbeon/builder/summary">Forms Summary</a>
         <a class="btn btn-primary mr-2" href="<%=contextPath%>/forms/orbeon/builder/new">Create new</a>
         <% } %>
