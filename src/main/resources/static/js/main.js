@@ -31,6 +31,16 @@ $(document).ready(function () {
         }
     })()
 
+    const hideFormTitleCol = function () {
+        const titleCol = $("div.fr-summary-table-div table thead tr");
+        if (titleCol && titleCol[0]) {
+            const position = $(titleCol[0]).find("th:contains(Form Title)").index();
+            if (position !== -1) {
+                $(`div.fr-summary-table-div table tr th:nth-child(${position + 1}), div.fr-summary-table-div table tr td:nth-child(${position + 1})`).hide();
+            }
+        }
+    }
+
     const rewriteOrbeonSummaryPageUrls = (element) => {
         if (!$(element)) {
             clearInterval(interval);
@@ -69,6 +79,7 @@ $(document).ready(function () {
                     )
                 }
             }
+            hideFormTitleCol();
         });
 
         $(orbeonSummaryTableSelector).each(function () {
@@ -93,6 +104,17 @@ $(document).ready(function () {
             e.preventDefault();
             e.stopPropagation();
             location.href = `${contextPath}/forms/${model['app']}/${model.form}/new`
+        })
+    }
+
+    // Auto fill the FormTitle with the Form name value so we dont have `Untitled Form` as the value
+    const formName = $("#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1839 input")
+    if (formName && formName[0]) {
+        const formTitle = $("#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1845 input")
+        $(formName[0]).on('keyup', function (e) {
+            if (formTitle && formTitle[0]) {
+                $(formTitle[0]).val(e.target.value)
+            }
         })
     }
 });

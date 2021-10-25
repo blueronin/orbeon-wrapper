@@ -47,14 +47,13 @@ a {
 .yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool .xforms-trigger button,
 .yui-skin-sam .btn {
     background-image: none;
-    padding: 5px 10px;
+    padding: 5px;
     line-height: 1.5;
     font-size: 12px;
     border-radius: 3px;
     box-shadow: none;
     text-shadow: none;
     border: solid 1px #ccc;
-    letter-spacing: 0.3px;
     font-weight: 400;
     color: #333;
     background-color: #fff;
@@ -150,7 +149,7 @@ div.mask {
 }
 
 .yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool button {
-    margin: 0.3em 0;
+    margin: 0.3em auto;
 }
 
 .yui-skin-sam .orbeon.orbeon-portlet-div {
@@ -187,4 +186,18 @@ div.mask {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+
+#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1827 {
+    /* Hide td Organization/Application/team name from the builder dialog */
+    display: none;
+}
+#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1845 {
+    /* Hide td Form title from the builder dialog */
+    display: none;
+}
+#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1839 {
+    /* Stretch td Form Name in the builder dialog */
+    width: 100%;
+}
+
 /* END Orbeon Specific CSS */
