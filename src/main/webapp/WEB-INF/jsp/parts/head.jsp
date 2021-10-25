@@ -1,6 +1,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <%@ page import="org.orbeon.oxf.fr.embedding.servlet.API" %>
+<%@ page import="java.util.Objects" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Enumeration" %>
 <%@ page import="org.springframework.validation.support.BindingAwareModelMap" %>
