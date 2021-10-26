@@ -6,6 +6,7 @@ html, body {
 
 body {
     color: #747F8E;
+    background-color: #F9F9F9;
     font-size: 0.8rem;
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 0.2px;
@@ -203,3 +204,123 @@ div.mask {
 }
 
 /* END Orbeon Specific CSS */
+
+.list-group-item-thumbnail {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding: 4px;
+    background-color: white;
+    background-size: cover;
+    background-position: center center;
+    display: block;
+    border: solid 1px #F4F4F4;
+}
+
+@media (min-width: 768px) {
+    .list-group-item-thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+.dropdown {
+    color: white;
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown .more-list {
+    border: solid 1px transparent;
+    background-color: transparent;
+    font-size: 15px;
+    padding: 11px 12px 10px 12px;
+}
+
+.dropdown .more-list i {
+    color: #949EAC !important;
+}
+
+.dropdown .more-list:hover,
+.dropdown .more-list:active {
+    border: solid 1px #CED2D6;
+}
+
+.dropdown.open .more-list {
+    border: solid 1px #CED2D6;
+}
+
+.dropdown.open > .dropdown-toggle.btn-default {
+    border: solid 1px #CED2D6;
+    background-color: #F4F4F4;
+}
+
+.dropdown.open .dropdown-toggle.btn-default:active,
+.dropdown.open .dropdown-toggle.btn-default:hover {
+    border: solid 1px #CED2D6;
+    background-color: #F4F4F4;
+}
+
+.action-section > .dropdown .dropdown-menu > li > a.text-default {
+    color: #747F8E;
+}
+
+.action-section > .dropdown .dropdown-menu > li > a.text-default.active,
+.action-section > .dropdown .dropdown-menu > li > a.text-default.focus,
+.action-section > .dropdown .dropdown-menu > li > a.text-default.hover {
+    color: #1f2733;
+}
+
+.action-section > .dropdown .dropdown-menu > li > a.text-danger {
+    color: #F34542;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 10px 0 2px 0;
+    font-size: 13px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: none;
+    border-radius: 4px;
+    -webkit-box-shadow: 1px 1px 8px rgba(116, 127, 142, 0.4);
+    box-shadow: 1px 1px 8px rgba(116, 127, 142, 0.4);
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 6px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    white-space: nowrap;
+}
+
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover {
+    color: #262626 !important;
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
+
+.dropdown-menu .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+}

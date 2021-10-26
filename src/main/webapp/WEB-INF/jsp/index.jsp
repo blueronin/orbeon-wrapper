@@ -3,24 +3,6 @@
 
 <div class="flex flex-col">
     <div class="flex flex-row pb-4 items-center">
-        <h3 class="text-base font-bold">
-            <%
-                String form = String.valueOf(model.getAttribute("form"));
-
-                if (Objects.equals(model.getAttribute("action"), "summary")) {
-                    out.println("Viewing ".concat(form).concat(" summary"));
-                } else if (Objects.equals(model.getAttribute("action"), "new")) {
-                    out.println("Complete new ".concat(form));
-                } else if (Objects.equals(model.getAttribute("action"), "edit")) {
-                    String id = String.valueOf(model.getAttribute("id"));
-                    out.println("Editing ".concat(form).concat(", submission ") .concat(id.substring(0, 10)).concat("..."));
-                } else if (Objects.equals(model.getAttribute("action"), "view")) {
-                    String id = String.valueOf(model.getAttribute("id"));
-                    out.println("Viewing ".concat(form).concat(", submission ") .concat(id.substring(0, 10)).concat("..."));
-                }
-            %>
-        </h3>
-
         <div class="flex flex-grow"></div>
 
         <a class="btn btn-primary" href="<%=contextPath%>/forms/orbeon/builder">
@@ -28,61 +10,108 @@
         </a>
     </div>
 
-    <div class="flex flex-row">
-        <div class="w-1/5 pr-1">
-            <h5 class="title-settings capitalize">Project Forms</h5>
-            <div id="accordion">
-                <c:forEach var="forms" items="${groupedForms}">
-                    <h5 class="title-settings text-capitalize cursor-pointer">
-                        <span class="caret-success">&#x25B8;</span> &nbsp; ${forms.key}
-                    </h5>
-                    <div id="collapse-${forms.key}" class="pl-6">
-                        <ul class="flex flex-col">
-                            <c:forEach items="${forms.value}" var="form">
-                                <li id="${form.canonicalName}" class="text-capitalize py-1 pr-1">
-                                    <a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary">
-                                        <span class="fa fa-caret-down"></span>
-                                        <c:choose>
-                                            <c:when test="${form.version != null}">${form.name} - v${form.version}</c:when>
-                                            <c:otherwise>${form.name}</c:otherwise>
-                                        </c:choose>
+    <div data-role="flex flex-col">
+        <c:forEach items="${forms}" var="form">
+            <div class="flex flex-row bg-white rounded-lg py-2 my-3">
+                <!-- INFO AND LABELS -->
+                <div class="w-1/2">
+                    <div class="flex flex-row">
+                        <div class="p-4 items-center check-box-list-item">
+                            <label>
+                                <input type="checkbox" value="${form.canonicalName}" class="hover-show"
+                                       data-action="select"/>
+                            </label>
+                        </div>
+
+                        <div data-role="thumbnail-holder" class="pr-2">
+                            <a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary"
+                               class="list-group-item-thumbnail"
+                               style="background-image: url('<spring:url value="/img/form.png"/>');"
+                               title="">
+                            </a>
+                        </div>
+
+                        <div class="flex flex-col">
+                            <div class="flex flex-row">
+                                <p style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 85%;"
+                                   class="left">
+                                    <a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary"
+                                       class="rev-file-link"
+                                       title="${form.canonicalName}">${form.name}, ${form.application}
                                     </a>
-                                </li>
-                            </c:forEach>
+                                </p>
+                                <span>&nbsp;&nbsp;&nbsp;${form.versionCount} version(s)</span>
+                            </div>
+
+                            <div class="flex flex-row">
+                                <p style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <small>
+                                        <span>#${form.version}</span>
+                                        <span>&nbsp;&nbsp;&nbsp;${form.title[0].text}</span>
+                                    </small>
+                                </p>
+                            </div>
+                            <div class="flex flex-row">
+                                <p style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    <small>
+                                        <span>${form.description[0].text}</span>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="w-1/6 text-center">
+                    <small>
+                        <span data-role="uploaded-time"
+                              class="text-muted">Modified ${form.timePassed(form.lastModifiedTime)}</span>
+                    </small>
+                </div>
+
+                <div class="w-2/6 text-right action-section">
+                    <span class="action-buttons float-left">
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" target="_blank"
+                           data-original-title="Print"
+                           class="mr-2" data-action="print">
+                            <i class="fa fa-print fa-2x"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" download=""
+                           data-original-title="Download" class="mr-2" target="_blank" data-action="download">
+                            <i class="fa fa-download fa-2x"></i>
+                        </a>
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" target="_blank"
+                           data-original-title="Share"
+                           data-action="share">
+                            <i class="fa fa-share fa-2x"></i>
+                        </a>
+                    </span>
+
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle more-list" type="button"
+                                id="list-item-dropdown-${form.canonicalName}" data-role="${form.canonicalName}"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" data-role="${form.canonicalName}"
+                            aria-labelledby="list-item-dropdown-${form.canonicalName}">
+                            <li><a href="#" target="_blank" class="text-primary" data-action="download"
+                                   data-source="dropdown">Download</a></li>
+                            <li><a href="#" target="_blank" class="text-primary" data-action="print"
+                                   data-source="dropdown">Print</a></li>
+                            <li><a href="#" target="_blank" class="rev-send-link text-primary" data-action="share"
+                                   data-source="dropdown">Share</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary"
+                                   data-action="edit" class="text-default">Summary</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" class="text-danger" data-action="delete">Delete</a></li>
                         </ul>
                     </div>
-                </c:forEach>
+                </div>
             </div>
-        </div>
-
-        <div id="form-container" class="w-4/5 pl-1">
-            <%
-                if (model.getAttribute("form") != null) {
-                    API.embedFormJava(
-                            request,
-                            out,
-                            (String) model.getAttribute("app"),
-                            (String) model.getAttribute("form"),
-                            (String) model.getAttribute("action"),
-                            (String) model.getAttribute("id"),
-                            null,
-                            headers
-                    );
-                } else {
-            %>
-
-            <div class="orbeon">
-                <h1>Orbeon Forms - No Form Selected</h1>
-                <c:choose>
-                    <c:when test="${groupedForms.size() > 0}">
-                        <p>Select a from from the list available on the left</p>
-                    </c:when>
-                    <c:otherwise><p>You do not have any forms available.</p></c:otherwise>
-                </c:choose>
-            </div>
-
-            <% } %>
-        </div>
+        </c:forEach>
     </div>
 </div>
 

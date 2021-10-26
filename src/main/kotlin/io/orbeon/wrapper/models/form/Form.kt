@@ -3,6 +3,7 @@ package io.orbeon.wrapper.models.form
 import io.orbeon.wrapper.models.BaseCompanion
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 
 
 data class Form(
@@ -24,6 +25,30 @@ data class Form(
 ) {
     val canonicalName: String
         get() = "${this.application}:${this.name}"
+
+    private var _versionCount = 1
+    var versionCount: Int
+        get() = _versionCount
+        set(value) {
+            _versionCount = value
+        }
+
+    fun timePassed(timestamp: LocalDateTime): String {
+        val now = LocalDateTime.now()
+
+        val days = ChronoUnit.DAYS.between(timestamp.toLocalDate(), now.toLocalDate())
+        if (days > 31) {
+            val months = ChronoUnit.MONTHS.between(timestamp.toLocalDate(), now.toLocalDate())
+            return "$months month(s) ago"
+        }
+        if (days == 0L) {
+            return "less than 24 hours ago"
+        }
+        if (days == 1L) {
+            return "Yesterday"
+        }
+        return "$days day(s) ago"
+    }
 
     companion object : BaseCompanion<Form>() {
         override fun fromJSON(data: Map<String, Any>): Form {

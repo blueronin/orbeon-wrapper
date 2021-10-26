@@ -23,7 +23,7 @@ class FormsServiceImpl : FormsService {
     @Autowired
     private val env: Environment? = null
 
-    override fun groupForms(forms: ArrayList<Form>): HashMap<String, ArrayList<Form>> {
+    override fun groupFormsOnApplication(forms: ArrayList<Form>): HashMap<String, ArrayList<Form>> {
         val groupedForms: HashMap<String, ArrayList<Form>> = HashMap()
         forms.forEach {
             val key: String = it.application as String
@@ -33,6 +33,27 @@ class FormsServiceImpl : FormsService {
             groupedForms[key]!!.add(it)
         }
         return groupedForms
+    }
+
+    override fun combineFormsOnUniqueCanonicalName(forms: ArrayList<Form>): ArrayList<Form> {
+        val tmpForms: HashMap<String, Form> = HashMap()
+
+        forms.forEach {
+            if (tmpForms.containsKey(it.canonicalName) && tmpForms[it.canonicalName] != null) {
+                // We have multiple versions of the same form
+                val tmp = tmpForms[it.canonicalName] as Form
+                if (tmp.version != null && it.version != null && tmp.version.toInt() < it.version.toInt()) {
+                    // Replace the current one with the latest version
+                    it.versionCount = tmp.versionCount + 1
+                    tmpForms[it.canonicalName] = it
+                } else {
+                    tmpForms[it.canonicalName]!!.versionCount += 1
+                }
+            } else {
+                tmpForms[it.canonicalName] = it
+            }
+        }
+        return ArrayList(tmpForms.values)
     }
 
     @CachePut(ValuesConfig.ORBEON_CACHE_NAME)

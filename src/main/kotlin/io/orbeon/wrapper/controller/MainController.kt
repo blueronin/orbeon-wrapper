@@ -27,12 +27,8 @@ class MainController : BaseController() {
         val responseEntity = formsService?.fetchAll()
         val response = responseEntity?.body!!
         val formsList = Form.fromMixedJSON(response["forms"]?.get("form"))
-        val groupedForms = formsService?.groupForms(formsList)
-        model.addAttribute("groupedForms", groupedForms)
-
-        if (model.getAttribute("app") == "orbeon" && model.getAttribute("form") == "builder") {
-            return "builder"
-        }
+        val forms = formsService?.combineFormsOnUniqueCanonicalName(formsList)
+        model.addAttribute("forms", forms)
         return "index"
     }
 
@@ -63,6 +59,9 @@ class MainController : BaseController() {
         model.addAttribute("id", id)
 
         request.setAttribute("model", model)
-        return home(null, request, model)
+        if (model.getAttribute("app") == "orbeon" && model.getAttribute("form") == "builder") {
+            return "builder"
+        }
+        return "runner"
     }
 }

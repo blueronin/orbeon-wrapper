@@ -117,4 +117,28 @@ $(document).ready(function () {
             }
         })
     }
+
+    const dropdown = $(".dropdown > .dropdown-menu");
+    if (dropdown) {
+        dropdown.menu()
+        $(".dropdown > .dropdown-toggle").on('click', function (e) {
+            // First hide and clear all open menus
+            $(".dropdown > .dropdown-menu").hide();
+            $(".dropdown").removeClass("open")
+
+            // Then open the selected menu
+            const activeDataRole = $(e.target).closest("button").attr("data-role")
+            $(`.dropdown > .dropdown-menu[data-role="${activeDataRole}"]`).toggle(200, function () {
+                $(this).parent().addClass("open")
+            })
+        });
+
+        $(document).on('click', function(event) {
+            // Hide dropdown when clicked outside
+            if(!$(event.target).closest('.dropdown').length && !event.target.classList.contains('dropdown')) {
+                $(".dropdown > .dropdown-menu").hide();
+                $(".dropdown").removeClass("open")
+            }
+        });
+    }
 });
