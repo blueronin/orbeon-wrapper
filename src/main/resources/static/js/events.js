@@ -11,3 +11,9 @@ window.addEventListener('message', event => {
     // an auth token, then store that in cookies to be used with subsequent
     // requests, can be any data
 });
+
+const messageParent = function (message) {
+    if (window.parent) {
+        window.parent.postMessage(message, "*")
+    }
+}

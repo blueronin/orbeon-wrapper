@@ -174,7 +174,12 @@ $(document).ready(function () {
             } else {
                 href = `${href}?${queryString}`
             }
-            window.open(href, '_blank').focus();
+            if (window.parent) {
+                // Its in an iframe, let parent handle this action. Iframe is always blocked
+                messageParent({ openLink: true, href })
+            } else {
+                window.open(href, '_blank', "").focus();
+            }
         })
     }
 });
