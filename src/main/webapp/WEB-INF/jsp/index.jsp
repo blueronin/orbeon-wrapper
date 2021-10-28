@@ -72,18 +72,12 @@
 
                 <div class="w-2/6 text-right action-section">
                     <span class="action-buttons float-left">
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" target="_blank"
-                           data-original-title="Print"
-                           class="mr-2" data-action="print">
-                            <i class="fa fa-print fa-2x"></i>
+                        <a href="<%=contextPath%>/forms/${form.application}/${form.name}/new" data-toggle="tooltip"
+                           data-placement="bottom" data-original-title="Print" class="mr-2 text-primary" data-action="new">
+                            <i class="fa fa-plus-circle fa-2x"></i>
                         </a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="" download=""
-                           data-original-title="Download" class="mr-2" target="_blank" data-action="download">
-                            <i class="fa fa-download fa-2x"></i>
-                        </a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" target="_blank"
-                           data-original-title="Share"
-                           data-action="share">
+                        <a href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="Share"
+                           class="text-muted" data-action="share">
                             <i class="fa fa-share fa-2x"></i>
                         </a>
                     </span>
@@ -96,12 +90,10 @@
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" data-role="${form.canonicalName}"
                             aria-labelledby="list-item-dropdown-${form.canonicalName}">
-                            <li><a href="#" target="_blank" class="text-primary" data-action="download"
-                                   data-source="dropdown">Download</a></li>
-                            <li><a href="#" target="_blank" class="text-primary" data-action="print"
-                                   data-source="dropdown">Print</a></li>
-                            <li><a href="#" target="_blank" class="rev-send-link text-primary" data-action="share"
-                                   data-source="dropdown">Share</a></li>
+                            <li><a href="<%=contextPath%>/forms/${form.application}/${form.name}/new"
+                                   class="text-primary" data-action="new">New</a></li>
+                            <li><a href="#"
+                                   class="text-primary" data-action="share" data-source="dropdown">Share</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary"
                                    data-action="edit" class="text-default">Summary</a></li>
