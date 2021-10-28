@@ -7,6 +7,7 @@ $(document).ready(function () {
 
     const orbeonSummaryTableSelector = ".orbeon div.fr-mode-summary div.fr-summary-table-div table tbody";
     const orbeonSummaryNewBtnSelector = ".orbeon form .fr-view span.fr-new-button button";
+    const orbeonPdfBtnSelector = ".fr-pdf-button button#o0xf-776≡xf-1059≡≡c⊙1";
     let interval;
 
     const observeDOM = (function(){
@@ -113,7 +114,9 @@ $(document).ready(function () {
         const formTitle = $("#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1845 input")
         $(formName[0]).on('keyup', function (e) {
             if (formTitle && formTitle[0]) {
-                $(formTitle[0]).val(e.target.value)
+                if (ORBEON && ORBEON.xforms && ORBEON.fr) {
+                    ORBEON.xforms.Document.setValue(formTitle[0], e.target.value)
+                }
             }
         })
     }
@@ -140,5 +143,38 @@ $(document).ready(function () {
                 $(".dropdown").removeClass("open")
             }
         });
+    }
+
+    let pdfBtn = $(orbeonPdfBtnSelector)
+    if (pdfBtn && pdfBtn[0]) {
+        // First remove all handlers/listeners so we attach custom listener to link to custom href
+        $(orbeonPdfBtnSelector).replaceWith(pdfBtn[0].cloneNode(true))
+
+        $(orbeonPdfBtnSelector).on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation()
+
+            // Find anchor tag abd get href
+            const a = $(".fr-pdf-button a#o0xf-776≡xf-1057⊙1")
+
+            // Replace with orbeon URl to prevent/bypass nginx/spring not passing query params to orbeon
+            let href = a.attr("href")
+            href = href.split("/orbeon-wrapper/orbeon/o/", 2)[1]
+            href = `${orbeonUrl}/${href}`
+
+            const queryParams = {
+                authorization: headers['Authorization'],
+                project_id: headers['ProjectId'],
+                team_id: headers['TeamId']
+            }
+            const queryString = new URLSearchParams(queryParams).toString()
+
+            if (href.includes("?")) {
+                href = `${href}&${queryString}`
+            } else {
+                href = `${href}?${queryString}`
+            }
+            window.open(href, '_blank').focus();
+        })
     }
 });
