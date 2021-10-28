@@ -17,13 +17,6 @@
                     <!-- INFO AND LABELS -->
                     <div class="w-1/2">
                         <div class="flex flex-row">
-                            <div class="p-4 items-center check-box-list-item">
-                                <label>
-                                    <input type="checkbox" value="${form.canonicalName}" class="hover-show"
-                                           data-action="select"/>
-                                </label>
-                            </div>
-
                             <div data-role="thumbnail-holder" class="pr-2">
                                 <a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary"
                                    class="list-group-item-thumbnail"
@@ -98,8 +91,6 @@
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary"
                                        data-action="edit" class="text-default">Summary</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#" class="text-danger" data-action="delete">Delete</a></li>
                             </ul>
                         </div>
                     </div>
