@@ -16,6 +16,10 @@ a, .text-primary {
     color: #35C2E1;
 }
 
+.border-primary {
+    border-color: #1f2733;
+}
+
 .text-muted, .text-default {
     color: #949EAC;
 }
