@@ -209,4 +209,18 @@ $(document).ready(function () {
         })
     }
 
+    $("a[data-action=copy]").on("click", function (event) {
+        event.preventDefault();
+        const href = event.currentTarget.href;
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(href);
+        } else {
+            alert(`Cannot copy the link: ${href} to clipboard in an insecure context.`)
+        }
+    });
+
+    if (isShared) {
+        // Hide Summary and close buttons on shared forms
+        $("span#o0xf-437⊙1, span#o0xf-437⊙4").css({ display: "none" })
+    }
 });

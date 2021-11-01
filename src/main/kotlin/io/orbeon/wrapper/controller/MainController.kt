@@ -37,7 +37,8 @@ class MainController : BaseController() {
             "/forms/{app}/{formName}",
             "/forms/{app}/{formName}/{action}",
             "/forms/{app}/{formName}/{action}/{id}",
-
+            "/forms/share/{app}/{formName}/{action}",
+            "/forms/share/{app}/{formName}/{action}/{id}",
         ]
     )
     fun appForm(
@@ -49,7 +50,11 @@ class MainController : BaseController() {
         request: HttpServletRequest,
         model: Model
     ): String {
-        validateSession(request, project)
+        val isShared = request.requestURI.startsWith("${request.contextPath}/forms/share")
+        if (!isShared) {
+            // Only validate/authenticate if it's not a shared link. Users without accounts can access this
+            validateSession(request, project)
+        }
         var formAction = action
         if (formAction == null) formAction = "summary"
 
@@ -57,11 +62,19 @@ class MainController : BaseController() {
         model.addAttribute("form", formName)
         model.addAttribute("action", formAction)
         model.addAttribute("id", id)
+        model.addAttribute("isShared", isShared)
+        model.addAttribute("query", request.queryString)
 
         request.setAttribute("model", model)
-        if (model.getAttribute("app") == "orbeon" && model.getAttribute("form") == "builder") {
-            return "builder"
+
+        return when {
+            isShared -> {
+                "share"
+            }
+            model.getAttribute("app") == "orbeon" && model.getAttribute("form") == "builder" -> {
+                "builder"
+            }
+            else -> "runner"
         }
-        return "runner"
     }
 }

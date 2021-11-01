@@ -12,6 +12,7 @@ class WebMvcConfig : WebMvcConfigurer {
             .excludePathPatterns(
                 "/error",
                 "/token/**",
+                "/forms/share/**",
                 "/js/**",
                 "/css/**"
             )

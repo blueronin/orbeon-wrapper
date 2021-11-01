@@ -88,6 +88,7 @@
         const projectId = "<%= projectId %>";
         const model = {};
         const headers = {};
+        const isShared = <%= model.getAttribute("isShared") %>;
         headers["orbeon-header"] = <%= headers.get("orbeon-header") %>;
 
         <% for (String header : headers.keySet()) {
@@ -113,11 +114,14 @@
 </head>
 <body class="w-full p-2">
 
-<div class="tabs mb-2 border-b">
-    <ul class="nav list-none w-full p-0 m-0">
-        <li><a href="#form-runner"><i class="fa fa-list"></i> Forms</a></li>
-        <li><a href="#form-builder"><i class="fa fa-building"></i> Builder</a></li>
-    </ul>
-    <div id="form-runner"></div>
-    <div id="form-builder"></div>
-</div>
+<c:set var="isShared" value='<%= model.getAttribute("isShared") %>' />
+<c:if test="${isShared == null || !isShared}">
+    <div class="tabs mb-2 border-b">
+        <ul class="nav list-none w-full p-0 m-0">
+            <li><a href="#form-runner"><i class="fa fa-list"></i> Forms</a></li>
+            <li><a href="#form-builder"><i class="fa fa-building"></i> Builder</a></li>
+        </ul>
+        <div id="form-runner"></div>
+        <div id="form-builder"></div>
+    </div>
+</c:if>

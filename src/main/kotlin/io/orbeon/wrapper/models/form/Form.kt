@@ -51,6 +51,11 @@ data class Form(
         return "$days day(s) ago"
     }
 
+    fun sharablePath(): String {
+        // TODO: add auth token query param to send with request to verify link source
+        return "/forms/share/${this.application}/${this.name}/new?token=ENCODED_TOKEN"
+    }
+
     companion object : BaseCompanion<Form>() {
         override fun fromJSON(data: Map<String, Any>): Form {
             @Suppress("UNCHECKED_CAST")
