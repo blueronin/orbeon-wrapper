@@ -2,7 +2,7 @@
 <%@include file="parts/head.jsp" %>
 
 <div class="flex flex-col">
-    <div class="flex flex-row pb-4 items-center">
+    <div class="flex flex-row pb-2 items-center">
         <h3 class="text-base font-bold">
             <%
                 String form = String.valueOf(model.getAttribute("form"));
@@ -23,12 +23,6 @@
 
         <a class="btn btn-default text-primary font-medium ml-4" href="<%=contextPath%>/forms">
             <i class="fa fa-long-arrow-left"></i> Home
-        </a>
-
-        <div class="flex flex-grow"></div>
-
-        <a class="btn btn-primary" href="<%=contextPath%>/forms/orbeon/builder">
-            <i class="fa fa-list text-black"></i> Form Builder Summary
         </a>
     </div>
 

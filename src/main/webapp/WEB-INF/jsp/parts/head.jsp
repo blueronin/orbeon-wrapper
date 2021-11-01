@@ -112,3 +112,12 @@
     <script type="text/javascript" src="/orbeon/xforms-server/baseline.js?updates=fr"></script>
 </head>
 <body class="w-full p-2">
+
+<div class="tabs mb-2">
+    <ul class="nav list-none w-full p-0 m-0">
+        <li><a href="#form-runner"><i class="fa fa-list"></i> Forms</a></li>
+        <li><a href="#form-builder"><i class="fa fa-building"></i> Builder</a></li>
+    </ul>
+    <div id="form-runner"></div>
+    <div id="form-builder"></div>
+</div>

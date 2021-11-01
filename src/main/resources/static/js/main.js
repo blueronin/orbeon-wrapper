@@ -174,7 +174,8 @@ $(document).ready(function () {
             } else {
                 href = `${href}?${queryString}`
             }
-            if (window.parent) {
+
+            if (window !== window.parent) {
                 // Its in an iframe, let parent handle this action. Iframe is always blocked
                 messageParent({ openLink: true, href })
             } else {
@@ -182,4 +183,25 @@ $(document).ready(function () {
             }
         })
     }
+
+    let hash = localStorage.getItem("hash")
+    $(".tabs").tabs({
+        active: hash === "#form-builder" ? 1 : 0,
+        collapsible: false,
+        beforeActivate: function(event, ui) {
+            hash = event.currentTarget.hash;
+            localStorage.setItem("hash", hash)
+
+            switch (hash) {
+                case '#form-runner':
+                    window.location.href = `${contextPath}/forms/`
+                    break;
+                case '#form-builder':
+                    window.location.href = `${contextPath}/forms/orbeon/builder`
+                    break;
+                default:
+                    break;
+            }
+        }
+    })
 });
