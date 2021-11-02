@@ -51,9 +51,18 @@ data class Form(
         return "$days day(s) ago"
     }
 
-    fun sharablePath(): String {
-        // TODO: add auth token query param to send with request to verify link source
-        return "/forms/share/${this.application}/${this.name}/new?token=ENCODED_TOKEN"
+    @JvmOverloads
+    fun sharablePath(projectId: Number? = null, teamId: Number? = null): String {
+        val params = arrayListOf("shared=1")
+
+        if (projectId != null) {
+            params.add("project_id=$projectId")
+        }
+        if (teamId != null) {
+            params.add("team_id=$projectId")
+        }
+        val query = params.joinToString(separator = "&", prefix = "?")
+        return "/forms/share/${this.application}/${this.name}/new$query"
     }
 
     companion object : BaseCompanion<Form>() {
