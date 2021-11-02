@@ -50,7 +50,7 @@ class MainController : BaseController() {
         request: HttpServletRequest,
         model: Model
     ): String {
-        val isShared = request.requestURI.startsWith("${request.contextPath}/forms/share")
+        val isShared = request.requestURI.contains("${request.contextPath}/forms/share")
         if (!isShared) {
             // Only validate/authenticate if it's not a shared link. Users without accounts can access this
             validateSession(request, project)
