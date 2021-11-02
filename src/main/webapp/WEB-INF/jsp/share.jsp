@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="parts/head.jsp" %>
 
-<div class="flex flex-col">
+<div class="flex flex-col px-2 sm:px-8 md:px-24">
     <div class="flex flex-row pb-2 items-center">
         <h3 class="text-base font-bold">
             Completing new <%= model.getAttribute("form") %>

@@ -15,6 +15,9 @@ body {
 a, .text-primary {
     color: #35C2E1;
 }
+.text-primary-dark {
+    color: #1f2733;
+}
 
 .border-primary {
     border-color: #1f2733;
