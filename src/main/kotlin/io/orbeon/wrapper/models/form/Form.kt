@@ -59,7 +59,7 @@ data class Form(
             params.add("project_id=$projectId")
         }
         if (teamId != null) {
-            params.add("team_id=$projectId")
+            params.add("team_id=$teamId")
         }
         val query = params.joinToString(separator = "&", prefix = "?")
         return "/forms/share/${this.application}/${this.name}/new$query"
