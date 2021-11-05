@@ -9,4 +9,11 @@ data class MemberRole(
     val permissions: ArrayList<Permission> = arrayListOf(),
     @SerializedName("resource_uri")
     val resourceUri: String? = null
-)
+) {
+    companion object {
+        const val ADMIN = "admin"
+        const val PROJECT_MANAGER = "project_manager"
+        const val USER = "user"
+        const val GUEST = "guest"
+    }
+}

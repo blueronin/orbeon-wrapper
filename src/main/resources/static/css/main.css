@@ -383,11 +383,11 @@ div.mask {
 }
 
 .tabs > ul.nav > li.ui-state-active {
-    background-color: #1f2733;
+    background-color: #EAEAEA;
 }
 
 .tabs > ul.nav > li.ui-state-active > a {
-    color: #fff;
+    color: black;
     background-color: transparent;
     border-bottom: solid 3px #11ddFF;
     padding-bottom: 3px;
