@@ -1,10 +1,4 @@
 $(document).ready(function () {
-    // noinspection JSUnresolvedFunction
-    $("#accordion").accordion({
-        collapsible: true,
-        heightStyle: "content"
-    });
-
     const orbeonSummaryTableSelector = ".orbeon div.fr-mode-summary div.fr-summary-table-div table tbody";
     const orbeonSummaryNewBtnSelector = ".orbeon form .fr-view span.fr-new-button button";
     const orbeonPdfBtnSelector = ".fr-pdf-button button#o0xf-776≡xf-1059≡≡c⊙1";
