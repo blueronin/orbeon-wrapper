@@ -35,43 +35,7 @@ a, .text-primary {
     border-bottom: solid 1px #EAEAEA;
 }
 
-/* START Orbeon Specific CSS */
-.orbeon .navbar {
-    display: none;
-}
-
-.orbeon h1,
-.orbeon h2,
-.orbeon h3,
-.orbeon h4,
-.orbeon h5,
-.orbeon h6 {
-    font-size: revert !important;
-}
-
-.yui-skin-sam .orbeon *:not(.fa, .xforms-help) {
-    font-family: 'Open Sans', sans-serif;
-}
-
-.yui-skin-sam .orbeon *:not(.btn *), .yui-skin-sam .orbeon .fr-summary-table-div tbody a {
-    color: #747F8E;
-}
-
-.yui-skin-sam .orbeon .fr-summary-table-div tbody tr:hover * {
-    color: #1f2733;
-    background-color: #EAEAEA;
-}
-
-.yui-skin-sam .orbeon .table-bordered {
-    border: 1px solid #EAEAEA;
-}
-
-/* START BUTTONS */
-button,
-.yui-skin-sam .orbeon .btn,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn,
-.yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool .xforms-trigger button,
-.yui-skin-sam .btn {
+button, .btn {
     background-image: none;
     padding: 5px;
     line-height: 1.5;
@@ -86,211 +50,18 @@ button,
     height: fit-content;
 }
 
-.yui-skin-sam .orbeon .orbeon-portlet-body .btn-primary,
-.yui-skin-sam .orbeon .orbeon-portlet-body .btn.ladda-button,
-.yui-skin-sam .btn-primary {
+.btn-primary {
     background-color: #35C2E1;
     border: solid 1px #35C2E1;
     color: #ffffff;
 }
 
-.yui-skin-sam .orbeon .btn-danger i.fa,
-.yui-skin-sam .orbeon .btn-warning i.fa,
-.yui-skin-sam .orbeon .btn-primary i.fa,
-.yui-skin-sam .orbeon .btn-inverse i.fa,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-danger i.fa,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-warning i.fa,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary i.fa,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-inverse i.fa {
-    color: #333333;
-}
-
-.yui-skin-sam .orbeon .btn:hover,
-.yui-skin-sam .orbeon .btn:focus,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn:hover,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn:focus,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn:active,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn.active,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn.disabled,
-.yui-skin-sam .orbeon .xforms-trigger-appearance-xxforms-primary .btn[disabled] {
-    color: #333;
-    background-color: #e6e6e6;
-}
-
-.yui-skin-sam .btn-primary:hover,
-.yui-skin-sam .orbeon .orbeon-portlet-body .btn-primary:hover,
-.yui-skin-sam .orbeon .orbeon-portlet-body .btn.ladda-button:hover,
-.yui-skin-sam .orbeon .orbeon-portlet-body .btn-primary:focus,
-.yui-skin-sam .orbeon .orbeon-portlet-body .btn.ladda-button:focus,
-.yui-skin-sam .btn-primary:focus {
+.btn-primary:hover,
+.btn-primary:focus {
     background-color: #1fb3d3;
 }
 
-/* END BUTTONS */
-
-.yui-skin-sam .orbeon .container,
-.yui-skin-sam .orbeon .container .row,
-.yui-skin-sam .orbeon .container .row > .span12 {
-    width: 100%;
-}
-
-.yui-skin-sam .orbeon .row {
-    margin: auto 0;
-}
-
-.yui-skin-sam .orbeon .container .row > .span12 {
-    margin-left: 0;
-}
-
-.yui-skin-sam .orbeon .container {
-    max-width: 100%;
-    width: 100%;
-}
-
-div.mask {
-    top: 5vh;
-    height: unset !important;
-    width: unset !important;
-}
-
-.yui-skin-sam .orbeon .xforms-field,
-.yui-skin-sam .orbeon .xforms-output.xforms-output-appearance-minimal output[role=textbox],
-.yui-skin-sam .orbeon .xforms-output.xforms-static output,
-.yui-skin-sam .orbeon .xforms-input input,
-.yui-skin-sam .orbeon .fr-summary-search .fr-summary-search-free-input input,
-.yui-skin-sam .orbeon .xbl-component input,
-.yui-skin-sam .orbeon .xbl-component textarea,
-.yui-skin-sam .orbeon .xbl-component select {
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border-radius: 2px;
-    border: 1px solid #CED2D6;
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-}
-
-.yui-skin-sam .orbeon .uneditable-input:focus,
-.yui-skin-sam .orbeon .xforms-input input:focus,
-.yui-skin-sam .orbeon .fr-summary-search .fr-summary-search-free-input input:focus,
-.yui-skin-sam .orbeon .xbl-component input:focus,
-.yui-skin-sam .orbeon .xbl-component textarea:focus,
-.yui-skin-sam .orbeon .xbl-component select:focus {
-    border-color: #1fb3d3;
-    box-shadow: none;
-}
-
-.yui-skin-sam .orbeon .xforms-field,
-.yui-skin-sam .orbeon .xforms-output.xforms-output-appearance-minimal output[role=textbox],
-.yui-skin-sam .orbeon .xforms-output.xforms-static output,
-.yui-skin-sam .orbeon .fr-summary-table-div tr,
-.yui-skin-sam .orbeon input:not(input[type=checkbox], input[type=radio]),
-.yui-skin-sam .orbeon select {
-    height: 36px;
-}
-
-.yui-skin-sam .orbeon .fr-summary-table-div tr th > * {
-    font-weight: bold;
-}
-
-.yui-skin-sam .orbeon .fr-summary-table-div tr td > * {
-    vertical-align: sub;
-}
-
-.yui-skin-sam .orbeon .input-prepend .add-on:first-child,
-.yui-skin-sam .orbeon .input-prepend .btn:first-child {
-    -webkit-border-radius: 2px 0 0 2px;
-    -moz-border-radius: 2px 0 0 2px;
-    border-radius: 2px 0 0 2px;
-}
-
-.yui-skin-sam .orbeon .input-prepend .add-on,
-.yui-skin-sam .orbeon .input-append .add-on {
-    height: inherit;
-    background-color: transparent;
-}
-
-.yui-skin-sam .orbeon .input-prepend .add-on > span,
-.yui-skin-sam .orbeon .input-append .add-on > span {
-    vertical-align: sub;
-}
-
-.yui-skin-sam .orbeon .xbl-fr-section .fr-section-title {
-    background-color: #EAEAEA7A;
-    background-image: none;
-    color: #555555;
-}
-
-.yui-skin-sam .orbeon .alert {
-    background-color: transparent;
-    border: 1px solid transparent;
-}
-
-.yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool button {
-    margin: 0.3em auto;
-}
-
-.yui-skin-sam .orbeon.orbeon-portlet-div {
-    background-color: #F9F9F9;
-    border: 0;
-}
-
-.yui-skin-sam .orbeon form {
-    margin: 0;
-}
-
-.yui-skin-sam .orbeon #o0fr-view {
-    margin-bottom: 0;
-}
-
-.yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fr-orbeon-version {
-    color: #747F8E;
-}
-
-.yui-skin-sam .yui-dialog .yui-panel {
-    border-width: 0;
-}
-
-.yui-skin-sam .yui-dialog .yui-panel .hd,
-.yui-skin-sam .yui-dialog .yui-panel .bd,
-.yui-skin-sam .yui-dialog .yui-panel .ft {
-    border-width: 0;
-}
-
-.yui-skin-sam .yui-dialog {
-    border-radius: 2px;
-}
-
-.yui-skin-sam .yui-dialog .yui-panel .hd {
-    background-color: #EAEAEA;
-    padding: 10px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-}
-
-.yui-skin-sam .yui-dialog .yui-panel .hd.xxforms-dialog-head {
-    background-color: #EAEAEA;
-    background-image: none;
-}
-
-.yui-skin-sam .yui-dialog .yui-panel .bd {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-}
-
-#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1827 {
-    /* Hide td Organization/Application/team name from the builder dialog */
-    display: none;
-}
-#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1845 {
-    /* Hide td Form title from the builder dialog */
-    display: none;
-}
-#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1839 {
-    /* Stretch td Form Name in the builder dialog */
-    width: 100%;
-}
+/* START Orbeon Specific CSS */
 
 /* END Orbeon Specific CSS */
 
