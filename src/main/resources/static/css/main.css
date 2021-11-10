@@ -1,3 +1,4 @@
+@import "orbeon.css";
 
 html, body {
     box-sizing: border-box;
@@ -60,10 +61,6 @@ button, .btn {
 .btn-primary:focus {
     background-color: #1fb3d3;
 }
-
-/* START Orbeon Specific CSS */
-
-/* END Orbeon Specific CSS */
 
 .list-group-item-thumbnail {
     width: 40px;
