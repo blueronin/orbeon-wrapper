@@ -53,6 +53,19 @@ a, .text-primary {
     font-family: 'Open Sans', sans-serif;
 }
 
+.yui-skin-sam .orbeon *:not(.btn *), .yui-skin-sam .orbeon .fr-summary-table-div tbody a {
+    color: #747F8E;
+}
+
+.yui-skin-sam .orbeon .fr-summary-table-div tbody tr:hover * {
+    color: #1f2733;
+    background-color: #EAEAEA;
+}
+
+.yui-skin-sam .orbeon .table-bordered {
+    border: 1px solid #EAEAEA;
+}
+
 /* START BUTTONS */
 button,
 .yui-skin-sam .orbeon .btn,
@@ -134,16 +147,17 @@ button,
     width: 100%;
 }
 
-.yui-skin-sam .orbeon .input-append > * {
-    height: auto !important;
-}
-
 div.mask {
     top: 5vh;
     height: unset !important;
     width: unset !important;
 }
 
+.yui-skin-sam .orbeon .xforms-field,
+.yui-skin-sam .orbeon .xforms-output.xforms-output-appearance-minimal output[role=textbox],
+.yui-skin-sam .orbeon .xforms-output.xforms-static output,
+.yui-skin-sam .orbeon .xforms-input input,
+.yui-skin-sam .orbeon .fr-summary-search .fr-summary-search-free-input input,
 .yui-skin-sam .orbeon .xbl-component input,
 .yui-skin-sam .orbeon .xbl-component textarea,
 .yui-skin-sam .orbeon .xbl-component select {
@@ -157,9 +171,60 @@ div.mask {
     line-height: 1.5;
 }
 
+.yui-skin-sam .orbeon .uneditable-input:focus,
+.yui-skin-sam .orbeon .xforms-input input:focus,
+.yui-skin-sam .orbeon .fr-summary-search .fr-summary-search-free-input input:focus,
+.yui-skin-sam .orbeon .xbl-component input:focus,
+.yui-skin-sam .orbeon .xbl-component textarea:focus,
+.yui-skin-sam .orbeon .xbl-component select:focus {
+    border-color: #1fb3d3;
+    box-shadow: none;
+}
+
+.yui-skin-sam .orbeon .xforms-field,
+.yui-skin-sam .orbeon .xforms-output.xforms-output-appearance-minimal output[role=textbox],
+.yui-skin-sam .orbeon .xforms-output.xforms-static output,
+.yui-skin-sam .orbeon .fr-summary-table-div tr,
 .yui-skin-sam .orbeon input:not(input[type=checkbox], input[type=radio]),
 .yui-skin-sam .orbeon select {
     height: 36px;
+}
+
+.yui-skin-sam .orbeon .fr-summary-table-div tr th > * {
+    font-weight: bold;
+}
+
+.yui-skin-sam .orbeon .fr-summary-table-div tr td > * {
+    vertical-align: sub;
+}
+
+.yui-skin-sam .orbeon .input-prepend .add-on:first-child,
+.yui-skin-sam .orbeon .input-prepend .btn:first-child {
+    -webkit-border-radius: 2px 0 0 2px;
+    -moz-border-radius: 2px 0 0 2px;
+    border-radius: 2px 0 0 2px;
+}
+
+.yui-skin-sam .orbeon .input-prepend .add-on,
+.yui-skin-sam .orbeon .input-append .add-on {
+    height: inherit;
+    background-color: transparent;
+}
+
+.yui-skin-sam .orbeon .input-prepend .add-on > span,
+.yui-skin-sam .orbeon .input-append .add-on > span {
+    vertical-align: sub;
+}
+
+.yui-skin-sam .orbeon .xbl-fr-section .fr-section-title {
+    background-color: #EAEAEA7A;
+    background-image: none;
+    color: #555555;
+}
+
+.yui-skin-sam .orbeon .alert {
+    background-color: transparent;
+    border: 1px solid transparent;
 }
 
 .yui-skin-sam .orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool button {
@@ -198,10 +263,15 @@ div.mask {
 }
 
 .yui-skin-sam .yui-dialog .yui-panel .hd {
-    background-color: white;
+    background-color: #EAEAEA;
     padding: 10px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+}
+
+.yui-skin-sam .yui-dialog .yui-panel .hd.xxforms-dialog-head {
+    background-color: #EAEAEA;
+    background-image: none;
 }
 
 .yui-skin-sam .yui-dialog .yui-panel .bd {
