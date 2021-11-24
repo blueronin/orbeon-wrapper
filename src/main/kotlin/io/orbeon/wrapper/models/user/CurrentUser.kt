@@ -80,6 +80,19 @@ data class CurrentUser(
         return Gson().toJson(orbeonHeader)
     }
 
+    fun memberRole(teamSlug: String?): String? {
+        val team: SimpleTeamMember? = this.teamMembership.firstOrNull { it.teamSlug == teamSlug  }
+        return team?.role?.name
+    }
+
+    fun isAdmin(teamSlug: String?): Boolean {
+        return this.memberRole(teamSlug) == MemberRole.ADMIN
+    }
+
+    fun isProjectManager(teamSlug: String?): Boolean {
+        return this.memberRole(teamSlug) == MemberRole.PROJECT_MANAGER
+    }
+
     companion object : BaseCompanion<CurrentUser>() {
         private fun toLocalDate(value: String?): LocalDateTime? {
             if (value == null) {

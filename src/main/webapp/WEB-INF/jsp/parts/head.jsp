@@ -61,8 +61,8 @@
         headers.putIfAbsent("TeamSlug", String.valueOf(project.getTeam().getSlug()));
     }
     CurrentUser currentUser = (CurrentUser) session.getAttribute("user");
+    String teamSlug = headers.getOrDefault("TeamSlug", null);
     if (currentUser != null) {
-        String teamSlug = headers.get("TeamSlug");
         headers.putIfAbsent("orbeon-header", currentUser.toOrbeonHeaderString(teamSlug));
     }
     headers.remove("sec-ch-ua"); // this causes issues when passing to JS
@@ -116,12 +116,14 @@
 
 <c:set var="isShared" value='<%= model.getAttribute("isShared") %>' />
 <c:if test="${isShared == null || !isShared}">
-    <div class="tabs mb-2 border-b">
-        <ul class="nav list-none w-full p-0 m-0">
-            <li><a href="#form-runner"><i class="fa fa-list"></i> Forms</a></li>
-            <li><a href="#form-builder"><i class="fa fa-building"></i> Builder</a></li>
-        </ul>
-        <div id="form-runner"></div>
-        <div id="form-builder"></div>
-    </div>
+    <c:if test="<%= currentUser != null && (currentUser.isAdmin(teamSlug) || currentUser.isProjectManager(teamSlug)) %>">
+        <div class="tabs mb-2 border-b">
+            <ul class="nav list-none w-full p-0 m-0">
+                <li><a href="#form-runner"><i class="fa fa-list"></i> Forms</a></li>
+                <li><a href="#form-builder"><i class="fa fa-building"></i> Builder</a></li>
+            </ul>
+            <div id="form-runner"></div>
+            <div id="form-builder"></div>
+        </div>
+    </c:if>
 </c:if>

@@ -22,7 +22,8 @@ class MainController : BaseController() {
 
     @GetMapping("/forms")
     fun home(@RequestParam project: String?, request: HttpServletRequest, model: Model): String {
-        validateSession(request, project)
+        val projectParam = validateSession(request, project)
+        model.addAttribute("projectParam", projectParam)
 
         val responseEntity = formsService?.fetchAll()
         val response = responseEntity?.body!!
@@ -53,7 +54,8 @@ class MainController : BaseController() {
         val isShared = request.requestURI.contains("${request.contextPath}/forms/share")
         if (!isShared) {
             // Only validate/authenticate if it's not a shared link. Users without accounts can access this
-            validateSession(request, project)
+            val projectParam = validateSession(request, project)
+            model.addAttribute("projectParam", projectParam)
         }
         var formAction = action
         if (formAction == null) formAction = "summary"
