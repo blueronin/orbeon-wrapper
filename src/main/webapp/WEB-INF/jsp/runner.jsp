@@ -24,6 +24,10 @@
         <a class="btn btn-default text-primary font-medium ml-4" href="<%=contextPath%>/forms">
             <i class="fa fa-long-arrow-left"></i> Home
         </a>
+
+        <div class="flex flex-grow"></div>
+
+        <a href="javascript:window.location.reload(true)" class="btn btn-primary w-12 text-center"><i class="fa fa-refresh"></i></a>
     </div>
 
     <div class="w-full">

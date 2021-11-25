@@ -19,6 +19,8 @@
 
                 <div class="flex flex-grow"></div>
 
+                <a href="javascript:window.location.reload(true)" class="btn btn-primary w-12 text-center mx-2"><i class="fa fa-refresh"></i></a>
+
                 <% if (!Objects.equals(model.getAttribute("action"), "summary")) { %>
                 <a class="btn btn-secondary mr-2" href="<%=contextPath%>/forms/orbeon/builder/summary"><i class="fa fa-list text-black"></i> Builder Summary</a>
                 <a class="btn btn-primary mr-2" href="<%=contextPath%>/forms/orbeon/builder/new"><i class="fa fa-plus text-black"></i> Create new form</a>
