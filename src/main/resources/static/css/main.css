@@ -243,3 +243,7 @@ button, .btn {
     border: 1px solid #11ddFF;
     background-color: #f8f8f8;
 }
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
