@@ -230,3 +230,16 @@ button, .btn {
     border-bottom: solid 3px #11ddFF;
     padding-bottom: 3px;
 }
+
+.ui-tooltip {
+    z-index: 1000;
+    width: max-content;
+    width: -moz-max-content;
+}
+
+.ui-tooltip-content {
+    padding: 4px 5px;
+    border-radius: 2px;
+    border: 1px solid #11ddFF;
+    background-color: #f8f8f8;
+}

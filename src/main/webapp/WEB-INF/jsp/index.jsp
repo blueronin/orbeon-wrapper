@@ -62,11 +62,11 @@
                             <i class="fa fa-plus-circle fa-2x"></i>
                         </a>
                         <a data-toggle="tooltip" data-placement="bottom" data-original-title="Copy"
-                           href="<%=contextPath%>${form.sharablePath(sessionScope.project.id, sessionScope.project.team.id)}"
-                           class="mr-2 text-muted" data-action="copy">
+                           href="#" class="mr-2 text-muted" data-action="copy">
                             <i class="fa fa-copy fa-2x"></i>
                         </a>
-                        <a href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="Share"
+                        <a data-toggle="tooltip" data-placement="bottom" data-original-title="Share"
+                           href="<%=contextPath%>${form.sharablePath(sessionScope.project.id, sessionScope.project.team.id)}"
                            class="text-muted" data-action="share">
                             <i class="fa fa-share fa-2x"></i>
                         </a>
@@ -82,9 +82,8 @@
                             aria-labelledby="list-item-dropdown-${form.canonicalName}">
                             <li><a href="<%=contextPath%>/forms/${form.application}/${form.name}/new"
                                    class="text-primary" data-action="new">New</a></li>
+                            <li><a href="#" class="text-primary" data-action="copy">Duplicate Form</a></li>
                             <li><a href="<%=contextPath%>${form.sharablePath(sessionScope.project.id, sessionScope.project.team.id)}"
-                                   class="text-primary" data-action="copy">Copy Link</a></li>
-                            <li><a href="#"
                                    class="text-primary" data-action="share" data-source="dropdown">Share</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="<%=contextPath%>/forms/${form.application}/${form.name}/summary"

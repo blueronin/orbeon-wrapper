@@ -4,22 +4,22 @@ $(document).ready(function () {
     const orbeonPdfBtnSelector = ".fr-pdf-button button#o0xf-776≡xf-1059≡≡c⊙1";
     let interval;
 
-    const observeDOM = (function(){
+    const observeDOM = (function () {
         // noinspection JSUnresolvedVariable
         const MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-        return function( obj, callback ){
-            if( !obj || obj.nodeType !== 1 ) return;
+        return function (obj, callback) {
+            if (!obj || obj.nodeType !== 1) return;
 
-            if(MutationObserver){
+            if (MutationObserver) {
                 // define a new observer
                 const mutationObserver = new MutationObserver(callback)
                 // have the observer observe foo for changes in children
-                mutationObserver.observe(obj, { childList:true, subtree:true })
+                mutationObserver.observe(obj, {childList: true, subtree: true})
                 return mutationObserver
             }
             // browser support fallback
-            else if(window.addEventListener){
+            else if (window.addEventListener) {
                 obj.addEventListener('DOMNodeInserted', callback, false)
                 obj.addEventListener('DOMNodeRemoved', callback, false)
             }
@@ -130,9 +130,9 @@ $(document).ready(function () {
             })
         });
 
-        $(document).on('click', function(event) {
+        $(document).on('click', function (event) {
             // Hide dropdown when clicked outside
-            if(!$(event.target).closest('.dropdown').length && !event.target.classList.contains('dropdown')) {
+            if (!$(event.target).closest('.dropdown').length && !event.target.classList.contains('dropdown')) {
                 $(".dropdown > .dropdown-menu").hide();
                 $(".dropdown").removeClass("open")
             }
@@ -171,7 +171,7 @@ $(document).ready(function () {
 
             if (window !== window.parent) {
                 // Its in an iframe, let parent handle this action. Iframe is always blocked
-                messageParent({ openLink: true, href })
+                messageParent({openLink: true, href})
             } else {
                 window.open(href, '_blank', "").focus();
             }
@@ -185,7 +185,7 @@ $(document).ready(function () {
         $(".tabs").tabs({
             active: hash === "#form-builder" ? 1 : 0,
             collapsible: false,
-            beforeActivate: function(event, ui) {
+            beforeActivate: function (event, ui) {
                 hash = event.currentTarget.hash;
                 localStorage.setItem("hash", hash)
 
@@ -203,18 +203,41 @@ $(document).ready(function () {
         })
     }
 
-    $("a[data-action=copy]").on("click", function (event) {
-        event.preventDefault();
-        const href = event.currentTarget.href;
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(href);
-        } else {
-            alert(`Cannot copy the link: ${href} to clipboard in an insecure context.`)
-        }
+    $("a[data-action=share]").on({
+        "click": function (event) {
+            event.preventDefault();
+            const elem = event.currentTarget;
+            const href = elem.href;
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(href);
+
+                $(elem).addClass("on");
+                $(elem).tooltip({
+                    hide: { delay: 500 },
+                    items: "a[data-action=share].on",
+                    content: "Link copied to clipboard",
+                    position: {
+                        my: "right top",
+                        at: "right bottom+5",
+                        of: $(elem),
+                        collision: "flipfit"
+                    }
+                });
+                $(elem).tooltip("open");
+            } else {
+                alert(`Cannot copy the link: ${href} to clipboard in an insecure context.`)
+            }
+        },
+        "mouseout": function () {
+            if ($(this).hasClass("on")) {
+                $(this).removeClass("on");
+                $(this).tooltip("close");
+            }
+        },
     });
 
     if (isShared) {
         // Hide Summary and close buttons on shared forms
-        $("span#o0xf-437⊙1, span#o0xf-437⊙4").css({ display: "none" })
+        $("span#o0xf-437⊙1, span#o0xf-437⊙4").css({display: "none"})
     }
 });
