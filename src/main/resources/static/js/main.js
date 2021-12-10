@@ -103,14 +103,13 @@ $(document).ready(function () {
     }
 
     // Auto fill the FormTitle with the Form name value so we dont have `Untitled Form` as the value
-    const formName = $("#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1839 input")
+    const formName = $("input[id^='o0dialog-form-settings'][id*='fb-form-name-input≡xforms-input']")
     if (formName && formName[0]) {
-        const formTitle = $("#o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1845 input")
+        const formTitle = $("input[id^='o0dialog-form-settings'][id*='fb-title-input≡xforms-input']")
         $(formName[0]).on('keyup', function (e) {
             if (formTitle && formTitle[0]) {
-                if (ORBEON && ORBEON.xforms && ORBEON.fr) {
-                    ORBEON.xforms.Document.setValue(formTitle[0], e.target.value)
-                }
+                $(formTitle[0]).val(e.target.value)
+                formTitle[0].dispatchEvent(new KeyboardEvent('keypress', { keyCode: 32, bubbles: true }));
             }
         })
     }
@@ -240,4 +239,45 @@ $(document).ready(function () {
         // Hide Summary and close buttons on shared forms
         $("span#o0xf-437⊙1, span#o0xf-437⊙4").css({display: "none"})
     }
+
+    if (model['app'] !== "orbeon" && model.form !== "builder") {
+        // Only prefill these if its not the form builder
+        const bdy = $(".orbeon .orbeon-portlet-body");
+        bdy.on("mouseenter", "input, button, textarea", function () {
+            if (user) {
+                const changeTriggerEvt = new KeyboardEvent('keypress', { keyCode: 32, bubbles: true });
+
+                const organizationTarget = $(".orbeon .orbeon-portlet-body input[id*='id-bs-organization']");
+                if (organizationTarget[0]) {
+                    const tx = $(organizationTarget[0])
+                    for (const team of user.team_membership) {
+                        if (team.team_slug === headers['TeamSlug']) {
+                            tx.focus()
+                            tx.val(team.team_name)
+
+                            // Ensuring that the parent handles the changes in the input, we dispatch a notifying event
+                            organizationTarget[0].dispatchEvent(changeTriggerEvt);
+                            tx.prop("disabled", true);
+                            break;
+                        }
+                    }
+                }
+                const nameTarget = $(".orbeon .orbeon-portlet-body input[id*='id-bs-full-name']");
+                if (nameTarget[0]) {
+                    const tn = $(nameTarget[0])
+                    const fullName = user["full_name"];
+                    tn.val(fullName)
+
+                    nameTarget[0].dispatchEvent(changeTriggerEvt);
+                    tn.prop("disabled", true);
+                }
+
+                if (organizationTarget[0] && nameTarget[0]) {
+                    // Detach the event after all these fields have been filled
+                    bdy.off('mouseenter', "input, button, textarea");
+                }
+            }
+        });
+    }
+
 });

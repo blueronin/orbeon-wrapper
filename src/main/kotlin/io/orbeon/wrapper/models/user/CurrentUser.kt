@@ -80,6 +80,10 @@ data class CurrentUser(
         return Gson().toJson(orbeonHeader)
     }
 
+    fun toJson(): String {
+        return Gson().toJson(this)
+    }
+
     fun memberRole(teamSlug: String?): String? {
         val team: SimpleTeamMember? = this.teamMembership.firstOrNull { it.teamSlug == teamSlug  }
         return team?.role?.name

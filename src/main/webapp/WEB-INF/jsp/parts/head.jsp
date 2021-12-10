@@ -88,6 +88,12 @@
         const projectId = "<%= projectId %>";
         const model = {};
         const headers = {};
+
+        let user;
+        <%  if (currentUser != null) { %>
+        user = JSON.parse('<%= currentUser.toJson() %>');
+        <% } %>
+
         const isShared = <%= model.getAttribute("isShared") %>;
         headers["orbeon-header"] = <%= headers.get("orbeon-header") %>;
 
