@@ -245,7 +245,7 @@ $(document).ready(function () {
         const bdy = $(".orbeon .orbeon-portlet-body");
         bdy.on("mouseenter", "input, button, textarea", function () {
             if (user) {
-                const changeTriggerEvt = new KeyboardEvent('keypress', { keyCode: 32, bubbles: true });
+                const changeTriggerEvt = new KeyboardEvent('keypress', { keyCode: 13, bubbles: true });
 
                 const organizationTarget = $(".orbeon .orbeon-portlet-body input[id*='id-bs-organization']");
                 if (organizationTarget[0]) {
