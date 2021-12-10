@@ -1,15 +1,21 @@
 /* For some reason these only work here*/
-.orbeon #o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1827 {
+.orbeon #o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1827,
+    /* this is a new id updated by orbeon*/
+.orbeon #o0dialog-form-settings≡xf-1590≡xf-1802≡xf-1829 {
     /* Hide td Organization/Application/team name from the builder dialog */
     display: none;
 }
 
-.orbeon #o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1845 {
+.orbeon #o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1845,
+    /* this is a new id updated by orbeon*/
+.orbeon #o0dialog-form-settings≡xf-1590≡xf-1802≡xf-1847 {
     /* Hide td Form title from the builder dialog */
     display: none;
 }
 
-.orbeon #o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1839 {
+.orbeon #o0dialog-form-settings≡xf-1588≡xf-1800≡xf-1839,
+    /* this is a new id updated by orbeon*/
+.orbeon #o0dialog-form-settings≡xf-1590≡xf-1802≡xf-1841 {
     /* Stretch td Form Name in the builder dialog */
     width: 100%;
 }
