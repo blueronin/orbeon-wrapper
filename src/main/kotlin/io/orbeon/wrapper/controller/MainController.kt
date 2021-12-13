@@ -136,7 +136,7 @@ class MainController : BaseController() {
         val session: HttpSession = request.getSession(true)
         session.setAttribute("user", user)
 
-        response.sendRedirect("${request.requestURL}?${request.queryString}")
+        response.setHeader("Location", "${request.requestURL}?${request.queryString}")
         response.status = HttpStatus.FOUND.value()
 
         return null
