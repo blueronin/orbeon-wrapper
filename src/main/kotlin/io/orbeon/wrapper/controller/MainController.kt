@@ -4,10 +4,12 @@ import io.orbeon.wrapper.models.form.Form
 import io.orbeon.wrapper.models.user.CurrentUser
 import io.orbeon.wrapper.models.user.MemberRole
 import io.orbeon.wrapper.models.user.SimpleTeamMember
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpSession
 
 @Controller
@@ -113,8 +115,9 @@ class MainController : BaseController() {
         @PathVariable formName: String,
         @PathVariable(required = false) action: String?,
         @PathVariable(required = false) id: String?,
-        request: HttpServletRequest
-    ): String {
+        request: HttpServletRequest,
+        response: HttpServletResponse
+    ): String? {
         val user = CurrentUser(
             fullName = request.getParameter("full-name"),
             username = "",
@@ -133,7 +136,9 @@ class MainController : BaseController() {
         val session: HttpSession = request.getSession(true)
         session.setAttribute("user", user)
 
-        @Suppress("SpringMVCViewInspection")
-        return "redirect:${request.requestURL}?${request.queryString}"
+        response.sendRedirect("${request.requestURL}?${request.queryString}")
+        response.status = HttpStatus.FOUND.value()
+
+        return null
     }
 }
