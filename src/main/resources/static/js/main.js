@@ -238,10 +238,31 @@ $(document).ready(function () {
     if (isShared) {
         // Hide Summary and close buttons on shared forms
         $("span#o0xf-437⊙1, span#o0xf-437⊙4").css({display: "none"})
+
+        /**
+         * Collect user information for shared forms, for users who have no accounts with basestone
+         * @type {*|jQuery|HTMLElement}
+         */
+        const org = $("form#user-info input#organization")
+        const name = $("form#user-info input#full-name")
+
+        if (org && org.val()?.trim().length && name && name.val()?.trim().length) {
+            $("form#user-info button[type='submit']").prop("disabled", false)
+        }
+        $("form#user-info").on("keyup", "input", function () {
+            if (org && org.val().trim().length && name && name.val().trim().length) {
+                $("form#user-info button[type='submit']").prop("disabled", false)
+            } else {
+                $("form#user-info button[type='submit']").prop("disabled", true)
+            }
+        });
     }
 
     if (model['app'] !== "orbeon" && model.form !== "builder") {
-        // Only prefill these if its not the form builder
+        /**
+         * Only prefill these if its not the form builder
+         * @type {*|jQuery|HTMLElement}
+         */
         const bdy = $(".orbeon .orbeon-portlet-body");
         bdy.on("mouseenter", "input, button, textarea", function () {
             if (user) {
@@ -249,16 +270,32 @@ $(document).ready(function () {
 
                 const organizationTarget = $(".orbeon .orbeon-portlet-body input[id*='id-bs-organization']");
                 if (organizationTarget[0]) {
-                    const tx = $(organizationTarget[0])
+                    const tx = $(organizationTarget[0]);
                     for (const team of user.team_membership) {
-                        if (team.team_slug === headers['TeamSlug']) {
+                        if (isShared) {
                             tx.focus()
-                            tx.val(team.team_name)
+                            // We make sure to maintain the details submitted by others
+                            if (!tx.val() || !tx.val().trim()) {
+                                tx.val(team.team_name)
+                            }
 
                             // Ensuring that the parent handles the changes in the input, we dispatch a notifying event
                             organizationTarget[0].dispatchEvent(changeTriggerEvt);
                             tx.prop("disabled", true);
                             break;
+                        } else {
+                            if (team.team_slug === headers['TeamSlug']) {
+                                tx.focus()
+                                // We make sure to maintain the details submitted by others
+                                if (!tx.val() || !tx.val().trim()) {
+                                    tx.val(team.team_name)
+                                }
+
+                                // Ensuring that the parent handles the changes in the input, we dispatch a notifying event
+                                organizationTarget[0].dispatchEvent(changeTriggerEvt);
+                                tx.prop("disabled", true);
+                                break;
+                            }
                         }
                     }
                 }
@@ -266,7 +303,10 @@ $(document).ready(function () {
                 if (nameTarget[0]) {
                     const tn = $(nameTarget[0])
                     const fullName = user["full_name"];
-                    tn.val(fullName)
+                    // We make sure to maintain the details submitted by others
+                    if (!tn.val() || !tn.val().trim()) {
+                        tn.val(fullName)
+                    }
 
                     nameTarget[0].dispatchEvent(changeTriggerEvt);
                     tn.prop("disabled", true);

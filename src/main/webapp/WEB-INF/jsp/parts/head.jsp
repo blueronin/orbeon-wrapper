@@ -61,9 +61,15 @@
         headers.putIfAbsent("TeamSlug", String.valueOf(project.getTeam().getSlug()));
     }
     CurrentUser currentUser = (CurrentUser) session.getAttribute("user");
+    if (currentUser == null) {
+        // Try getting from model (this is true for shared form links)
+        currentUser = (CurrentUser) model.getAttribute("user");
+    }
     String teamSlug = headers.getOrDefault("TeamSlug", null);
     if (currentUser != null) {
-        headers.putIfAbsent("orbeon-header", currentUser.toOrbeonHeaderString(teamSlug));
+        if (!(Boolean) model.getOrDefault("isShared", false)) {
+            headers.putIfAbsent("orbeon-header", currentUser.toOrbeonHeaderString(teamSlug));
+        }
     }
     headers.remove("sec-ch-ua"); // this causes issues when passing to JS
     headers.remove("sec-ch-ua-platform"); // this causes issues when passing to JS

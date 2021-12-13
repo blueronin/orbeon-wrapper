@@ -51,14 +51,14 @@ button, .btn {
     height: fit-content;
 }
 
-.btn-primary {
+.btn-primary:not(button[disabled]) {
     background-color: #35C2E1;
     border: solid 1px #35C2E1;
     color: #ffffff;
 }
 
-.btn-primary:hover,
-.btn-primary:focus {
+.btn-primary:hover:not(button[disabled]),
+.btn-primary:focus:not(button[disabled]) {
     background-color: #1fb3d3;
 }
 
@@ -246,4 +246,38 @@ button, .btn {
 
 .ui-helper-hidden-accessible {
     display: none;
+}
+
+input,
+select,
+textarea {
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 2px;
+    border: 1px solid #CED2D6;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #1fb3d3;
+    box-shadow: none;
+    outline: none;
+}
+
+input:not(input[type=checkbox], input[type=radio]),
+select {
+    height: 36px;
+}
+
+button[disabled],
+button[disabled]:hover,
+button[disabled]:focus {
+    background-color: lightgray;
+    cursor: not-allowed;
+    color: black;
 }
