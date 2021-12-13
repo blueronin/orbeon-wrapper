@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
+import java.net.URI
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import javax.servlet.http.HttpSession
@@ -136,7 +137,9 @@ class MainController : BaseController() {
         val session: HttpSession = request.getSession(true)
         session.setAttribute("user", user)
 
-        response.setHeader("Location", "${request.requestURL}?${request.queryString}")
+        val uri = URI(request.requestURL.toString())
+
+        response.sendRedirect("${uri.normalize()}?${request.queryString}")
         response.status = HttpStatus.FOUND.value()
 
         return null
