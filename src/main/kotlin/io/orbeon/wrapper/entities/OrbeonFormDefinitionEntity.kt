@@ -1,10 +1,16 @@
 package io.orbeon.wrapper.entities
 
+import io.orbeon.wrapper.annotations.Open
 import javax.persistence.*
 
+@Open
 @Entity
-@Table(name = "orbeon_form_definition", schema = "orbeon", catalog = "")
+@Table(name = "orbeon_form_definition", schema = "orbeon")
 open class OrbeonFormDefinitionEntity {
+    @get:Id
+    @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
+    var id: Int? = null
+
     @get:Basic
     @get:Column(name = "created", nullable = false)
     var created: java.sql.Timestamp? = null

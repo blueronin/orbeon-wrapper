@@ -1,10 +1,16 @@
 package io.orbeon.wrapper.entities
 
+import io.orbeon.wrapper.annotations.Open
 import javax.persistence.*
 
+@Open
 @Entity
-@Table(name = "orbeon_form_definition_attach", schema = "orbeon", catalog = "")
+@Table(name = "orbeon_form_definition_attach", schema = "orbeon")
 open class OrbeonFormDefinitionAttachEntity {
+    @get:Id
+    @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
+    var id: Int? = null
+
     @get:Basic
     @get:Column(name = "created", nullable = false)
     var created: java.sql.Timestamp? = null
@@ -71,7 +77,7 @@ open class OrbeonFormDefinitionAttachEntity {
         if (formVersion != other.formVersion) return false
         if (deleted != other.deleted) return false
         if (fileName != other.fileName) return false
-        if (fileContent != other.fileContent) return false
+        if (!fileContent.contentEquals(other.fileContent)) return false
 
         return true
     }

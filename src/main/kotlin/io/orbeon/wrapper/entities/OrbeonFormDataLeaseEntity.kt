@@ -1,9 +1,11 @@
 package io.orbeon.wrapper.entities
 
+import io.orbeon.wrapper.annotations.Open
 import javax.persistence.*
 
+@Open
 @Entity
-@Table(name = "orbeon_form_data_lease", schema = "orbeon", catalog = "")
+@Table(name = "orbeon_form_data_lease", schema = "orbeon")
 open class OrbeonFormDataLeaseEntity {
     @get:Id
     @get:Column(name = "document_id", nullable = false)

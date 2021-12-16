@@ -1,9 +1,11 @@
 package io.orbeon.wrapper.entities
 
+import io.orbeon.wrapper.annotations.Open
 import javax.persistence.*
 
+@Open
 @Entity
-@Table(name = "orbeon_seq", schema = "orbeon", catalog = "")
+@Table(name = "orbeon_seq", schema = "orbeon")
 open class OrbeonSeqEntity {
     @get:Id
     @get:Column(name = "val", nullable = false)
