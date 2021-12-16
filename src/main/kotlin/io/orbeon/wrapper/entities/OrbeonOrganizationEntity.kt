@@ -1,27 +1,29 @@
 package io.orbeon.wrapper.entities
 
 import io.orbeon.wrapper.annotations.Open
+import io.orbeon.wrapper.entities.listeners.PreventAnyUpdate
 import javax.persistence.*
 
 @Open
+@EntityListeners(PreventAnyUpdate::class)
 @Entity
 @Table(name = "orbeon_organization", schema = "orbeon")
-open class OrbeonOrganizationEntity {
-    @get:Id
-    @get:Basic
-    @get:Column(name = "id", nullable = false)
+class OrbeonOrganizationEntity {
+    @Id
+    @Basic
+    @Column(name = "id", nullable = false)
     var id: Int? = null
 
-    @get:Basic
-    @get:Column(name = "depth", nullable = false)
+    @Basic
+    @Column(name = "depth", nullable = false)
     var depth: Int? = null
 
-    @get:Basic
-    @get:Column(name = "pos", nullable = false)
+    @Basic
+    @Column(name = "pos", nullable = false)
     var pos: Int? = null
 
-    @get:Basic
-    @get:Column(name = "name", nullable = false)
+    @Basic
+    @Column(name = "name", nullable = false)
     var name: String? = null
 
 

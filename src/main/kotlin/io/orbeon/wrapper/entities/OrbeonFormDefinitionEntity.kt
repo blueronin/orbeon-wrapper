@@ -1,50 +1,52 @@
 package io.orbeon.wrapper.entities
 
 import io.orbeon.wrapper.annotations.Open
+import io.orbeon.wrapper.entities.keys.OrbeonFormDefinitionEntityId
+import io.orbeon.wrapper.entities.listeners.PreventAnyUpdate
 import javax.persistence.*
 
 @Open
+@EntityListeners(PreventAnyUpdate::class)
+@IdClass(OrbeonFormDefinitionEntityId::class)
 @Entity
 @Table(name = "orbeon_form_definition", schema = "orbeon")
-open class OrbeonFormDefinitionEntity {
-    @get:Id
-    @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
-    var id: Int? = null
-
-    @get:Basic
-    @get:Column(name = "created", nullable = false)
+class OrbeonFormDefinitionEntity {
+    @Id
+    @Basic
+    @Column(name = "created", nullable = false)
     var created: java.sql.Timestamp? = null
 
-    @get:Basic
-    @get:Column(name = "last_modified_time", nullable = false)
+    @Basic
+    @Column(name = "last_modified_time", nullable = false)
     var lastModifiedTime: java.sql.Timestamp? = null
 
-    @get:Basic
-    @get:Column(name = "last_modified_by", nullable = true)
+    @Basic
+    @Column(name = "last_modified_by", nullable = true)
     var lastModifiedBy: String? = null
 
-    @get:Basic
-    @get:Column(name = "app", nullable = true)
+    @Basic
+    @Column(name = "app", nullable = true)
     var app: String? = null
 
-    @get:Basic
-    @get:Column(name = "form", nullable = true)
+    @Basic
+    @Column(name = "form", nullable = true)
     var form: String? = null
 
-    @get:Basic
-    @get:Column(name = "form_version", nullable = false)
+    @Basic
+    @Column(name = "form_version", nullable = false)
     var formVersion: Int? = null
 
-    @get:Basic
-    @get:Column(name = "form_metadata", nullable = true)
+    @Id
+    @Basic
+    @Column(name = "form_metadata", nullable = true)
     var formMetadata: String? = null
 
-    @get:Basic
-    @get:Column(name = "deleted", nullable = false)
+    @Basic
+    @Column(name = "deleted", nullable = false)
     var deleted: String? = null
 
-    @get:Basic
-    @get:Column(name = "xml", nullable = true)
+    @Basic
+    @Column(name = "xml", nullable = true)
     var xml: String? = null
 
 

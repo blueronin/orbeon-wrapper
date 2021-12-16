@@ -1,70 +1,73 @@
 package io.orbeon.wrapper.entities
 
 import io.orbeon.wrapper.annotations.Open
+import io.orbeon.wrapper.entities.keys.OrbeonICurrentEntityId
+import io.orbeon.wrapper.entities.listeners.PreventAnyUpdate
 import javax.persistence.*
 
 @Open
+@EntityListeners(PreventAnyUpdate::class)
+@IdClass(OrbeonICurrentEntityId::class)
 @Entity
 @Table(name = "orbeon_i_current", schema = "orbeon")
-open class OrbeonICurrentEntity {
-    @get:Id
-    @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
-    var id: Int? = null
-
-    @get:Basic
-    @get:Column(name = "data_id", nullable = false, insertable = false, updatable = false)
+class OrbeonICurrentEntity {
+    @Id
+    @Basic
+    @Column(name = "data_id", nullable = false, insertable = false, updatable = false)
     var dataId: Int? = null
 
-    @get:Basic
-    @get:Column(name = "created", nullable = false)
+    @Id
+    @Basic
+    @Column(name = "created", nullable = false)
     var created: java.sql.Timestamp? = null
 
-    @get:Basic
-    @get:Column(name = "last_modified_time", nullable = false)
+    @Basic
+    @Column(name = "last_modified_time", nullable = false)
     var lastModifiedTime: java.sql.Timestamp? = null
 
-    @get:Basic
-    @get:Column(name = "last_modified_by", nullable = true)
+    @Basic
+    @Column(name = "last_modified_by", nullable = true)
     var lastModifiedBy: String? = null
 
-    @get:Basic
-    @get:Column(name = "username", nullable = true)
+    @Basic
+    @Column(name = "username", nullable = true)
     var username: String? = null
 
-    @get:Basic
-    @get:Column(name = "groupname", nullable = true)
+    @Basic
+    @Column(name = "groupname", nullable = true)
     var groupname: String? = null
 
-    @get:Basic
-    @get:Column(name = "organization_id", nullable = true)
+    @Basic
+    @Column(name = "organization_id", nullable = true)
     var organizationId: Int? = null
 
-    @get:Basic
-    @get:Column(name = "app", nullable = false)
+    @Basic
+    @Column(name = "app", nullable = false)
     var app: String? = null
 
-    @get:Basic
-    @get:Column(name = "form", nullable = false)
+    @Basic
+    @Column(name = "form", nullable = false)
     var form: String? = null
 
-    @get:Basic
-    @get:Column(name = "form_version", nullable = false)
+    @Basic
+    @Column(name = "form_version", nullable = false)
     var formVersion: Int? = null
 
-    @get:Basic
-    @get:Column(name = "stage", nullable = true)
+    @Basic
+    @Column(name = "stage", nullable = true)
     var stage: String? = null
 
-    @get:Basic
-    @get:Column(name = "document_id", nullable = false)
+    @Id
+    @Basic
+    @Column(name = "document_id", nullable = false)
     var documentId: String? = null
 
-    @get:Basic
-    @get:Column(name = "draft", nullable = false)
+    @Basic
+    @Column(name = "draft", nullable = false)
     var draft: String? = null
 
-    @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "data_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "data_id", referencedColumnName = "id")
     var refOrbeonFormDataEntity: OrbeonFormDataEntity? = null
 
     override fun toString(): String =

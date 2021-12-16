@@ -1,26 +1,28 @@
 package io.orbeon.wrapper.entities
 
 import io.orbeon.wrapper.annotations.Open
+import io.orbeon.wrapper.entities.listeners.PreventAnyUpdate
 import javax.persistence.*
 
 @Open
+@EntityListeners(PreventAnyUpdate::class)
 @Entity
 @Table(name = "orbeon_form_data_lease", schema = "orbeon")
-open class OrbeonFormDataLeaseEntity {
-    @get:Id
-    @get:Column(name = "document_id", nullable = false)
+class OrbeonFormDataLeaseEntity {
+    @Id
+    @Column(name = "document_id", nullable = false)
     var documentId: String? = null
 
-    @get:Basic
-    @get:Column(name = "username", nullable = false)
+    @Basic
+    @Column(name = "username", nullable = false)
     var username: String? = null
 
-    @get:Basic
-    @get:Column(name = "groupname", nullable = true)
+    @Basic
+    @Column(name = "groupname", nullable = true)
     var groupname: String? = null
 
-    @get:Basic
-    @get:Column(name = "expiration", nullable = false)
+    @Basic
+    @Column(name = "expiration", nullable = false)
     var expiration: java.sql.Timestamp? = null
 
 

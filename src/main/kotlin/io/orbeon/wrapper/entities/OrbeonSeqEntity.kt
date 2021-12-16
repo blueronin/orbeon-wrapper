@@ -6,9 +6,9 @@ import javax.persistence.*
 @Open
 @Entity
 @Table(name = "orbeon_seq", schema = "orbeon")
-open class OrbeonSeqEntity {
-    @get:Id
-    @get:Column(name = "val", nullable = false)
+class OrbeonSeqEntity {
+    @Id
+    @Column(name = "val", nullable = false)
     var value : Int? = null
 
 

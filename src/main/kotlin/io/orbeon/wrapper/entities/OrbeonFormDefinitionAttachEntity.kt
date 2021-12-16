@@ -1,50 +1,52 @@
 package io.orbeon.wrapper.entities
 
 import io.orbeon.wrapper.annotations.Open
+import io.orbeon.wrapper.entities.keys.OrbeonFormDefinitionAttachEntityId
+import io.orbeon.wrapper.entities.listeners.PreventAnyUpdate
 import javax.persistence.*
 
 @Open
+@EntityListeners(PreventAnyUpdate::class)
+@IdClass(OrbeonFormDefinitionAttachEntityId::class)
 @Entity
 @Table(name = "orbeon_form_definition_attach", schema = "orbeon")
-open class OrbeonFormDefinitionAttachEntity {
-    @get:Id
-    @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
-    var id: Int? = null
-
-    @get:Basic
-    @get:Column(name = "created", nullable = false)
+class OrbeonFormDefinitionAttachEntity {
+    @Id
+    @Basic
+    @Column(name = "created", nullable = false)
     var created: java.sql.Timestamp? = null
 
-    @get:Basic
-    @get:Column(name = "last_modified_time", nullable = false)
+    @Basic
+    @Column(name = "last_modified_time", nullable = false)
     var lastModifiedTime: java.sql.Timestamp? = null
 
-    @get:Basic
-    @get:Column(name = "last_modified_by", nullable = true)
+    @Basic
+    @Column(name = "last_modified_by", nullable = true)
     var lastModifiedBy: String? = null
 
-    @get:Basic
-    @get:Column(name = "app", nullable = true)
+    @Basic
+    @Column(name = "app", nullable = true)
     var app: String? = null
 
-    @get:Basic
-    @get:Column(name = "form", nullable = true)
+    @Basic
+    @Column(name = "form", nullable = true)
     var form: String? = null
 
-    @get:Basic
-    @get:Column(name = "form_version", nullable = false)
+    @Basic
+    @Column(name = "form_version", nullable = false)
     var formVersion: Int? = null
 
-    @get:Basic
-    @get:Column(name = "deleted", nullable = false)
+    @Basic
+    @Column(name = "deleted", nullable = false)
     var deleted: String? = null
 
-    @get:Basic
-    @get:Column(name = "file_name", nullable = true)
+    @Id
+    @Basic
+    @Column(name = "file_name", nullable = true)
     var fileName: String? = null
 
-    @get:Basic
-    @get:Column(name = "file_content", nullable = true)
+    @Basic
+    @Column(name = "file_content", nullable = true)
     var fileContent: ByteArray? = null
 
 

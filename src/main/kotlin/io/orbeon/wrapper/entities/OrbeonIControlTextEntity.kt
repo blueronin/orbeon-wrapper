@@ -1,34 +1,37 @@
 package io.orbeon.wrapper.entities
 
 import io.orbeon.wrapper.annotations.Open
+import io.orbeon.wrapper.entities.keys.OrbeonIControlTextEntityId
+import io.orbeon.wrapper.entities.listeners.PreventAnyUpdate
 import javax.persistence.*
 
 @Open
+@EntityListeners(PreventAnyUpdate::class)
+@IdClass(OrbeonIControlTextEntityId::class)
 @Entity
 @Table(name = "orbeon_i_control_text", schema = "orbeon")
-open class OrbeonIControlTextEntity {
-    @get:Id
-    @get:Column(name = "id", nullable = false, insertable = false, updatable = false)
-    var id: Int? = null
-
-    @get:Basic
-    @get:Column(name = "data_id", nullable = false, insertable = false, updatable = false)
+class OrbeonIControlTextEntity {
+    @Id
+    @Basic
+    @Column(name = "data_id", nullable = false, insertable = false, updatable = false)
     var dataId: Int? = null
 
-    @get:Basic
-    @get:Column(name = "pos", nullable = false)
+    @Basic
+    @Column(name = "pos", nullable = false)
     var pos: Int? = null
 
-    @get:Basic
-    @get:Column(name = "control", nullable = false)
+    @Id
+    @Basic
+    @Column(name = "control", nullable = false)
     var control: String? = null
 
-    @get:Basic
-    @get:Column(name = "val", nullable = false)
+    @Id
+    @Basic
+    @Column(name = "val", nullable = false)
     var value : String? = null
 
-    @get:ManyToOne(fetch = FetchType.LAZY)
-    @get:JoinColumn(name = "data_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "data_id", referencedColumnName = "id")
     var refOrbeonFormDataEntity: OrbeonFormDataEntity? = null
 
     override fun toString(): String =

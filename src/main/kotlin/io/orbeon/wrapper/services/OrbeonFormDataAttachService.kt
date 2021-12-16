@@ -17,11 +17,6 @@ class OrbeonFormDataAttachService {
      */
     @Override
     fun getAll(): List<OrbeonFormDataAttachEntity> {
-        val customers = ArrayList<OrbeonFormDataAttachEntity>();
-        customers.addAll(repository!!.findAll())
-
-        println("-----------------")
-        println(customers)
-        return customers;
+        return repository!!.findAll()
     }
 }
