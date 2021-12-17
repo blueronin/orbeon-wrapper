@@ -14,7 +14,8 @@ class WebMvcConfig : WebMvcConfigurer {
                 "/token/**",
                 "/forms/share/**",
                 "/js/**",
-                "/css/**"
+                "/css/**",
+                "/api/**"
             )
     }
 }

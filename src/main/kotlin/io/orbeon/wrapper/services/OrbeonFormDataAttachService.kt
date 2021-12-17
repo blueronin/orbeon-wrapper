@@ -12,11 +12,12 @@ class OrbeonFormDataAttachService {
     private val repository: OrbeonFormDataAttachRepository? = null
 
     /**
-     * Method to return the list of all the attachments in the system. Need to use pagination
+     * Method to return the list of all active(not drafts and not deleted) attachments in the system.
+     * Need to use pagination
      * @return list of attachments
      */
     @Override
-    fun getAll(): List<OrbeonFormDataAttachEntity> {
-        return repository!!.findAll()
+    fun getAllActive(app: String?): List<OrbeonFormDataAttachEntity> {
+        return repository!!.findAllByDraftIsAndDeletedIsAndAppIsIgnoreCase("N", "N", app)
     }
 }

@@ -1,5 +1,6 @@
 package io.orbeon.wrapper.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import io.orbeon.wrapper.annotations.Open
 import io.orbeon.wrapper.entities.keys.OrbeonFormDataAttachEntityId
 import io.orbeon.wrapper.entities.listeners.PreventAnyUpdate
@@ -66,6 +67,7 @@ class OrbeonFormDataAttachEntity {
     @Column(name = "file_name", nullable = true)
     var fileName: String? = null
 
+    @JsonIgnore
     @Basic
     @Column(name = "file_content", nullable = true)
     var fileContent: ByteArray? = null
