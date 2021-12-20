@@ -39,3 +39,4 @@ out/
 .env
 *.log
 *.log.*
+.jpb
