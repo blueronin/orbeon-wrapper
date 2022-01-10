@@ -1,17 +1,5 @@
 window.addEventListener('load', function () {
-    messageParent({
-        childLocation: {
-            hash: location.hash,
-            host: location.host,
-            hostname: location.hostname,
-            href: location.href,
-            origin: location.origin,
-            pathname: location.pathname,
-            port: location.port,
-            protocol: location.protocol,
-            search: location.search || "?project=" + projectId,
-        }
-    })
+    messageParent({ loaded: true })
 });
 
 window.addEventListener('message', event => {
@@ -22,6 +10,20 @@ window.addEventListener('message', event => {
 
 const messageParent = function (message) {
     if (window.parent) {
-        window.parent.postMessage({orbeon: true, origin: location.origin, message}, "*")
+        window.parent.postMessage({
+                orbeon: true,
+                childLocation: {
+                    hash: location.hash,
+                    host: location.host,
+                    hostname: location.hostname,
+                    href: location.href,
+                    origin: location.origin,
+                    pathname: location.pathname,
+                    port: location.port,
+                    protocol: location.protocol,
+                    search: location.search || "?project=" + projectId,
+                },
+                message
+            }, "*")
     }
 }

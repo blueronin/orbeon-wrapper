@@ -226,6 +226,7 @@ $(document).ready(function () {
             } else {
                 alert(`Cannot copy the link: ${href} to clipboard in an insecure context.`)
             }
+            messageParent({ shareLink: true, href });
         },
         "mouseout": function () {
             if ($(this).hasClass("on")) {
