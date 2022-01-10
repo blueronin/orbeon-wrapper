@@ -27,8 +27,8 @@ dependencies {
     implementation("com.google.code.gson:gson")
     implementation(files("src/lib/orbeon-embedding.jar"))
     implementation(files("src/lib/slf4j-api-1.7.30.jar"))
+    implementation("mysql:mysql-connector-java")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-    providedRuntime("mysql:mysql-connector-java")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
