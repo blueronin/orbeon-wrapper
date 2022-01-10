@@ -1,9 +1,17 @@
 window.addEventListener('load', function () {
-    if (window.parent) {
-        // If in an iframe, notify parent that we have loaded, they can send us
-        // any auth/cookie data they need to send
-        window.parent.postMessage('orbeonFrameLoaded', '*');
-    }
+    messageParent({
+        childLocation: {
+            hash: location.hash,
+            host: location.host,
+            hostname: location.hostname,
+            href: location.href,
+            origin: location.origin,
+            pathname: location.pathname,
+            port: location.port,
+            protocol: location.protocol,
+            search: location.search || "?project=" + projectId,
+        }
+    })
 });
 
 window.addEventListener('message', event => {
@@ -14,6 +22,6 @@ window.addEventListener('message', event => {
 
 const messageParent = function (message) {
     if (window.parent) {
-        window.parent.postMessage(message, "*")
+        window.parent.postMessage({orbeon: true, origin: location.origin, message}, "*")
     }
 }
