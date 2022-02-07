@@ -8,8 +8,10 @@ plugins {
     kotlin("plugin.spring") version "1.5.20"
 }
 
+val profile = project.properties["profile"] ?: "local"
+
 group = "io.orbeon.wrapper"
-version = "0.0.2-dev"
+version = "0.0.1-$profile"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
@@ -48,3 +50,12 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+tasks.processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+
+    from( "${project.rootDir}/src/main/resources") {
+        filesMatching("application.properties") {
+            expand("profile" to profile)
+        }
+    }
+}
