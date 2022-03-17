@@ -38,7 +38,7 @@ out/
 .DS_Store
 .env
 .env.local*
-application-local.properties
 *.log
 *.log.*
 .jpb
+mysql-data-orbeon/

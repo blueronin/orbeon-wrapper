@@ -1,0 +1,62 @@
+version: '3.9'
+
+networks:
+  orbeon-network:
+    name: orbeon_network
+
+services:
+  orbeon-wrapper:                        #it is just a name, which will be used only in this file.
+    image: orbeon-wrapper             #name of the image after dockerfile executes
+    container_name: orbeon-wrapper    #name of the container created from docker image
+    build:
+      context: .                          #docker file path (. means root directory)
+      dockerfile: Dockerfile              #docker file name
+    ports:
+      - "9090:9090"                       #docker containter port with your os port
+    restart: always
+    networks:
+      - orbeon-network
+    depends_on:
+      - orbeon-db
+#      - orbeon
+    command: bash -c "./docker/run.sh"
+    volumes:
+      - ./:/usr/app
+    environment:
+      ENV: local
+      PROFILE: local
+
+#  orbeon:
+#    build:
+#      context: ./orbeon
+#      dockerfile: Dockerfile
+#    image: orbeon
+#    container_name: orbeon
+#    ports:
+#      - "9091:9090"
+#    restart: always
+#    networks:
+#      - orbeon-network
+#    volumes:
+#      - ./orbeon:/opt
+#    depends_on:
+#      - orbeon-db
+#    environment:
+#      CATALINA_OPTS: "-Xms512M -Xmx1024M"
+
+  orbeon-db:
+    image: mysql:5.7
+    restart: always
+    container_name: orbeon-db
+    ports:
+      - "3308:3306"
+    networks:
+      - orbeon-network
+    environment:
+      MYSQL_ROOT_PASSWORD: test_password
+      MYSQL_DATABASE: orbeon_db
+      MYSQL_USER: test_username
+      MYSQL_PASSWORD: test_password
+    volumes:
+      - ./mysql-data-orbeon:/var/lib/mysql
+      - ./orbeon/sql:/opt/sql
