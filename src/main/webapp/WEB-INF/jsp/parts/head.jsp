@@ -122,7 +122,7 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="<spring:url value="/css/main.css" />"/>
 
-    <script type="text/javascript" src="/orbeon/xforms-server/baseline.js?updates=fr"></script>
+    <script type="text/javascript" src="${orbeonUrl}/orbeon/xforms-server/baseline.js?updates=fr "></script>
 </head>
 <body class="w-full p-2">
 
