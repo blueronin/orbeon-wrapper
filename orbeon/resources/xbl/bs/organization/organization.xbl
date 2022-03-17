@@ -1,0 +1,36 @@
+
+<xbl:xbl xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:xbl="http://www.w3.org/ns/xbl"
+         xmlns:bs="http://www.basestone.io/xbl"
+         xmlns:xxbl="http://orbeon.org/oxf/xml/xbl">
+
+    <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+        <display-name lang="en">Author Controls</display-name>
+    </metadata>
+
+    <xbl:binding id="bs-organization" element="bs|organization" xxbl:mode="lhha binding value">
+        <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="en">Organization</display-name>
+            <icon>
+                <icon-class>fa fa-fw fa-building-o</icon-class>
+            </icon>
+            <template>
+                <bs:organization class="fr-summary fr-search"></bs:organization>
+            </template>
+        </metadata>
+
+        <xbl:template>
+            <xf:input id="id-bs-organization" ref="xxf:binding('bs-organization')">
+                <xf:label>Organization</xf:label>
+                <xf:value/>
+                <xf:hint>Organization/Team name</xf:hint>
+            </xf:input>
+        </xbl:template>
+
+    </xbl:binding>
+</xbl:xbl>

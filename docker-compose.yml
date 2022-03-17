@@ -18,7 +18,7 @@ services:
       - orbeon-network
     depends_on:
       - orbeon-db
-#      - orbeon
+      - orbeon
     command: bash -c "./docker/run.sh"
     volumes:
       - ./:/usr/app
@@ -26,23 +26,25 @@ services:
       ENV: local
       PROFILE: local
 
-#  orbeon:
-#    build:
-#      context: ./orbeon
-#      dockerfile: Dockerfile
-#    image: orbeon
-#    container_name: orbeon
-#    ports:
-#      - "9091:9090"
-#    restart: always
-#    networks:
-#      - orbeon-network
-#    volumes:
-#      - ./orbeon:/opt
-#    depends_on:
-#      - orbeon-db
-#    environment:
-#      CATALINA_OPTS: "-Xms512M -Xmx1024M"
+  orbeon:
+    build:
+      context: ./orbeon
+      dockerfile: Dockerfile
+    image: orbeon
+    container_name: orbeon
+    ports:
+      - "9091:9090"
+    restart: always
+    networks:
+      - orbeon-network
+    volumes:
+      - ./orbeon:/opt/app
+    depends_on:
+      - orbeon-db
+    command: bash -c "/opt/app/run.sh"
+    environment:
+      CATALINA_OPTS: "-Xms512M -Xmx1024M"
+      API_URL: http://web:8000/api/v1
 
   orbeon-db:
     image: mysql:5.7

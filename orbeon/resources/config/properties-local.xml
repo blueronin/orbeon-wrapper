@@ -1,0 +1,97 @@
+<!--
+    This file is an empty template for your own properties-local.xml file. Please follow the instructions here:
+
+    https://doc.orbeon.com/configuration/properties/
+-->
+<properties xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:oxf="http://www.orbeon.com/oxf/processors">
+
+    <property as="xs:anyURI" name="oxf.url-rewriting.service.base-uri" value="http://localhost:9090"/>
+
+    <!-- START Customise UI components -->
+    <property as="xs:boolean" name="oxf.show-version" value="false"/>
+
+    <property as="xs:string" name="oxf.fb.publish.buttons" value=""/>
+    <property as="xs:boolean" name="oxf.fb.menu.permissions" value="false"/>
+
+    <property as="xs:string" name="oxf.fr.summary.buttons.*.*">
+        pdf delete duplicate new
+    </property>
+    <property as="xs:string" name="oxf.fr.summary.buttons.orbeon.builder">
+        delete duplicate new
+    </property>
+    <property as="xs:boolean" name="oxf.fr.summary.show-created-by.*.*" value="true"/>
+    <property as="xs:boolean" name="oxf.fr.summary.show-last-modified-by.*.*" value="true"/>
+
+    <property as="xs:boolean" name="oxf.fr.detail.initial-focus.*.*" value="false"/>
+    <property as="xs:string" name="oxf.fr.detail.buttons.*.*">
+        summary clear wizard-prev wizard-next save-final close
+    </property>
+    <property as="xs:string" name="oxf.fr.detail.buttons.view.*.*" value="edit summary"/>
+    <property as="xs:string" name="oxf.fr.resource.*.*.en.buttons.new" value='&lt;i class="fa fa-plus"/&gt; Complete Form'/>
+    <property as="xs:string" name="oxf.fr.resource.orbeon.builder.en.buttons.new" value='&lt;i class="fa fa-plus"/&gt; Add Form'/>
+    <property as="xs:string" name="oxf.fr.resource.orbeon.builder.en.buttons.save" value='&lt;i class="fa fa-floppy-o"/&gt; Save Draft'/>
+    <!-- END Customise UI components -->
+
+    <!-- START URL overrides -->
+    <property as="xs:string" name="oxf.fr.detail.process.new.*.*">
+        navigate(uri = "/orbeon-wrapper/forms/{fr:app-name()}/{fr:form-name()}/new") <!-- TODO: not working -->
+    </property>
+    <property as="xs:string" name="oxf.fr.detail.process.new.orbeon.builder">
+        navigate(uri = "/orbeon-wrapper/forms/orbeon/builder/new") <!-- TODO: not working -->
+    </property>
+    <property as="xs:string" name="oxf.fr.detail.process.edit.*.*">
+        if ("xxf:get-request-method() = 'GET'") <!-- TODO: not working -->
+        then navigate(uri = "/orbeon-wrapper/forms/{fr:app-name()}/{fr:form-name()}/edit/{fr:document-id()}")
+        else edit
+    </property>
+    <property as="xs:string" name="oxf.fr.detail.process.summary.*.*">
+        navigate(uri = "/orbeon-wrapper/forms/{fr:app-name()}/{fr:form-name()}/summary?form-version={fr:form-version()}")
+    </property>
+    <!-- END URL Overrides -->
+
+    <!-- START Authentication -->
+    <property as="xs:string" name="oxf.fr.authentication.method" value="header"/>
+    <property as="xs:boolean" name="oxf.fr.authentication.header.sticky" value="true"/>
+    <property as="xs:string" name="oxf.fr.authentication.header.credentials" value="orbeon-header"/>
+    <!-- <property as="xs:string" name="oxf.fr.authentication.header.roles" value="admin|project_manager|user|guest"/> -->
+    <!-- END Authentication -->
+
+    <!-- START Persistence Layer properties -->
+    <property as="xs:string" name="oxf.fr.persistence.provider.*.*.*" value="mysql"/>
+    <property as="xs:string" name="oxf.fr.persistence.mysql.datasource" value="mysql" />
+    <!-- END Persistence Layer properties -->
+
+    <!-- START Enable persistence API with auth -->
+    <property as="xs:string" processor-name="oxf:page-flow" name="page-public-methods" value=""/>
+    <property as="xs:string" processor-name="oxf:page-flow" name="service-public-methods" value=""/>
+    <property as="xs:anyURI" processor-name="oxf:page-flow" name="authorizer" value="$API_URL/orbeon-auth/" />
+    <!-- END Enable persistence API with auth -->
+
+    <!-- START Minimize resource bundles and add custom resources -->
+    <property as="xs:boolean" name="oxf.xforms.combine-resources" value="true"/>
+    <property as="xs:boolean" name="oxf.xforms.minimal-resources" value="true"/>
+    <!-- END Minimize resource bundles and add custom resources -->
+
+    <!--
+    <property as="xs:string" name="oxf.fb.permissions.role.always-show">
+        ["admin", "project_manager", "user", "guest"]
+    </property>
+    -->
+    <property as="xs:string" name="oxf.fr.css.custom.uri.*.*">
+        /forms/assets/all.css
+    </property>
+
+    <property as="xs:string" name="oxf.xforms.xbl.fr.currency.prefix" value="£" />
+    <property as="xs:string" name="oxf.xforms.format.input.date" value="[D]/[M]/[Y]" />
+
+    <property as="xs:string" name="oxf.fr.detail.attachment.max-size.*.*" value="15000000"/> <!-- 15MB -->
+    <property as="xs:string" name="oxf.fr.detail.attachment.max-size-aggregate.*.*" value="150000000"/> <!-- 150MB -->
+
+    <property as="xs:string"  name="oxf.xforms.xbl.mapping.bs" value="http://www.basestone.io/xbl"/>
+    <property as="xs:string" name="oxf.fb.toolbox.group.others.uri.*.*">
+        oxf:/xbl/bs/organization/organization.xbl
+        oxf:/xbl/bs/full-name/full-name.xbl
+    </property>
+
+</properties>

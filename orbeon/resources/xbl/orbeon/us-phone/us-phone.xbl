@@ -1,0 +1,166 @@
+<!--
+  Copyright (C) 2010 Orbeon, Inc.
+
+  This program is free software; you can redistribute it and/or modify it under the terms of the
+  GNU Lesser General Public License as published by the Free Software Foundation; either version
+  2.1 of the License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  See the GNU Lesser General Public License for more details.
+
+  The full text of the license is available at http://www.gnu.org/copyleft/lesser.html
+  -->
+<xbl:xbl xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:xbl="http://www.w3.org/ns/xbl"
+         xmlns:xxbl="http://orbeon.org/oxf/xml/xbl">
+
+    <xbl:binding
+        id="fr-us-phone"
+        element="fr|us-phone"
+        xxbl:container="span"
+        xxbl:mode="lhha binding value"
+        xxbl:label-for="input"
+        xxbl:format="
+            for $v in string(.) return
+                if (matches($v, '^\d+$')) then
+                    concat(
+                        '(',
+                        substring($v, 1, 3),
+                        ') ',
+                        substring($v, 4, 3),
+                        if (string-length($v) gt 6) then
+                            '-'
+                        else
+                            '',
+                        substring($v, 7)
+                    )
+                else
+                    $v"
+    >
+
+        <!-- Orbeon Form Builder Component Metadata -->
+        <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="en">Phone Number</display-name>
+            <display-name lang="es">Número de teléfono</display-name>
+            <display-name lang="fi">Puhelinnumero</display-name>
+            <display-name lang="fr">Téléphone</display-name>
+            <display-name lang="ru">Номер телефона</display-name>
+            <display-name lang="de">Telefonnummer</display-name>
+            <display-name lang="it">Numero di telefono</display-name>
+            <display-name lang="nl">Telefoonnummer:</display-name>
+            <display-name lang="pt">número de telefone</display-name>
+            <display-name lang="sv">Telefonnummer</display-name>
+            <icon>
+                <icon-class>fa fa-fw fa-phone</icon-class>
+            </icon>
+            <templates>
+                <!-- Value is valid if it is empty or if it matches a normalized string of 10 digits -->
+                <bind constraint=". = '' or matches(., '^\d{10}$')"/>
+                <view>
+                    <fr:us-phone>
+                        <xf:label ref=""/>
+                        <xf:hint ref=""/>
+                        <xf:help ref=""/>
+                        <xf:alert ref=""/>
+                    </fr:us-phone>
+                </view>
+            </templates>
+            <control-details>
+                <xf:model xmlns="" id="fb-editor-datetime-model">
+
+                    <xf:action event="xforms-model-construct-done" iterate="instance('local')/*">
+                        <xf:var name="c" value="."/>
+                        <xf:setvalue ref="$c" value="instance()/@*[name() = name($c)]"/>
+                    </xf:action>
+
+                    <xf:instance id="local" xxf:exclude-result-prefixes="#all">
+                        <_>
+                            <field-width/>
+                        </_>
+                    </xf:instance>
+                </xf:model>
+                <fr:grid xmlns="" id="fb-editor-datetime-grid">
+                    <xh:tr>
+                        <xh:td colspan="6">
+                            <xf:select1 ref="instance('local')/field-width" appearance="full xxf:horizontal" id="field-width-control">
+                                <xf:label ref="xxf:r('xbl-control-settings.field-width', '|fr-form-resources|')"/>
+                                <xf:item>
+                                    <xf:label ref="xxf:r('xbl-control-settings.default', '|fr-form-resources|')"/>
+                                    <xf:value/>
+                                </xf:item>
+                                <xf:item>
+                                    <xf:label ref="xxf:r('xbl-control-settings.full', '|fr-form-resources|')"/>
+                                    <xf:value>full</xf:value>
+                                </xf:item>
+                                <xf:item>
+                                    <xf:label ref="xxf:r('xbl-control-settings.natural', '|fr-form-resources|')"/>
+                                    <xf:value>natural</xf:value>
+                                </xf:item>
+                            </xf:select1>
+                        </xh:td>
+                    </xh:tr>
+                </fr:grid>
+                <xf:action
+                    id="fb-editor-datetime-action"
+                    event="xforms-value-changed"
+                    observer="field-width-control">
+
+                    <xf:var name="name"      value="name(event('xxf:binding'))"/>
+                    <xf:var name="new-value" value="string(event('xxf:binding'))"/>
+                    <xf:insert
+                        context="instance()"
+                        if="xxf:non-blank($new-value)"
+                        origin="xf:attribute($name, $new-value)"/>
+                    <xf:delete
+                        if="xxf:is-blank($new-value)"
+                        ref="instance()/@*[name() = $name]"/>
+                </xf:action>
+            </control-details>
+        </metadata>
+
+        <xbl:resources>
+            <xbl:style src="/xbl/orbeon/us-phone/us-phone.css"/>
+        </xbl:resources>
+
+        <xbl:template>
+            <xf:var name="binding"
+                    value="xxf:binding('fr-us-phone')"/>
+            <xf:var name="view"
+                    value="xxf:is-control-readonly('fr-us-phone') and property('xxf:readonly-appearance') = 'static'"/>
+
+            <!-- Edit mode -->
+            <xf:group ref="$binding[not($view)]">
+                <xf:var
+                    name="field-width"
+                    value="fr:component-param-value('field-width')"/>
+                <xh:span class="input-append fr-field-width-{$field-width}">
+                    <xf:input
+                        id="input"
+                        xbl:attr="navindex navindex=tabindex"
+                        ref="."
+                        xxf:maxlength="14"
+                        xxf:format="xxf:formatted-value('fr-us-phone')"
+                        xxf:unformat="
+                            for $t in translate(xxf:trim(), '()*-[].#/'': ', '') return
+                                if (matches($t, '^\d+$')) then
+                                    $t
+                                else
+                                    .">
+                        <xf:hint appearance="minimal">(555) 555-5555</xf:hint>
+                    </xf:input>
+                    <xh:span class="add-on">
+                        <xh:i class="fa fa-fw fa-phone"/>
+                    </xh:span>
+                </xh:span>
+            </xf:group>
+            <!-- View mode -->
+            <xf:input ref="$binding[$view]" xxf:format="xxf:formatted-value('fr-us-phone')"/>
+        </xbl:template>
+    </xbl:binding>
+
+</xbl:xbl>

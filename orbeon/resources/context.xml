@@ -1,0 +1,34 @@
+<Context path="/orbeon" reloadable="true">
+    <CookieProcessor sameSiteCookies="strict" /> <!-- strict for dev -->
+
+    <Parameter
+            override="false"
+            name="oxf.resources.priority.0"
+            value="org.orbeon.oxf.resources.FilesystemResourceManagerFactory"/>
+
+    <Parameter
+            override="false"
+            name="oxf.resources.priority.0.oxf.resources.filesystem.sandbox-directory"
+            value="$ORBEON_RESOURCES"/>
+
+    <Resource
+    name="jdbc/mysql"
+    driverClassName="com.mysql.cj.jdbc.Driver"
+
+    auth="Container"
+    type="javax.sql.DataSource"
+
+    initialSize="3"
+    maxTotal="10"
+    maxIdle="10"
+    maxWaitMillis="30000"
+
+    poolPreparedStatements="true"
+
+    testOnBorrow="true"
+    validationQuery="select 1"
+
+    username="orbeon"
+    password="orbeon"
+    url="jdbc:mysql://orbeon-db:3306/orbeon?useUnicode=true&amp;characterEncoding=UTF8"/>
+</Context>

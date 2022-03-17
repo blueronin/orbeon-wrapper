@@ -1,0 +1,274 @@
+div.mask, .yui-skin-sam .mask {
+    top: 5vh;
+    height: unset !important;
+    width: unset !important;
+    background-color: unset;
+    opacity: unset;
+}
+
+div.orbeon.orbeon-portlet-div {
+    background-color: #F9F9F9;
+    border: 0;
+}
+
+.orbeon .navbar {
+    display: none;
+}
+
+.orbeon .navbar-inverse .navbar-inner {
+    display: none;
+}
+
+.orbeon h1,
+.orbeon h2,
+.orbeon h3,
+.orbeon h4,
+.orbeon h5,
+.orbeon h6 {
+    font-size: revert !important;
+}
+
+.orbeon *:not(.fa, .xforms-help) {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.orbeon *:not(.btn *), .orbeon .fr-summary-table-div tbody td a {
+    color: #747F8E;
+}
+
+.orbeon .fr-summary-table-div tbody tr:hover span,
+.orbeon .fr-summary-table-div tbody tr:hover a {
+    color: #1f2733;
+}
+
+.orbeon .fr-summary-table-div tbody tr:hover {
+    background-color: #EAEAEA;
+}
+
+.orbeon .table-bordered {
+    border: 1px solid #EAEAEA;
+}
+
+/* START BUTTONS */
+.orbeon button,
+.orbeon .btn,
+.orbeon .xforms-trigger-appearance-xxforms-primary .btn,
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn,
+.orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool .xforms-trigger button {
+    background-image: none;
+    padding: 5px;
+    line-height: 1.5;
+    font-size: 12px;
+    border-radius: 3px;
+    box-shadow: none;
+    text-shadow: none;
+    border: solid 1px #ccc;
+    font-weight: 400;
+    color: #333;
+    background-color: #fff;
+    height: fit-content;
+}
+
+.orbeon .orbeon-portlet-body .btn-primary,
+.orbeon .orbeon-portlet-body .btn.ladda-button {
+    background-color: #35C2E1;
+    border: solid 1px #35C2E1;
+    color: #ffffff;
+}
+
+.orbeon .orbeon-portlet-body .btn-inverse,
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn,
+.btn-inverse {
+    background-color: #fafafa;
+    color:  #333333;
+}
+
+.orbeon .btn-danger i.fa,
+.orbeon .btn-warning i.fa,
+.orbeon .btn-primary i.fa,
+.orbeon .btn-inverse i.fa,
+.orbeon .xforms-trigger-appearance-xxforms-danger i.fa,
+.orbeon .xforms-trigger-appearance-xxforms-warning i.fa,
+.orbeon .xforms-trigger-appearance-xxforms-primary i.fa,
+.orbeon .xforms-trigger-appearance-xxforms-inverse i.fa {
+    color: #333333;
+}
+
+.orbeon .btn:hover,
+.orbeon .btn:focus,
+.orbeon .xforms-trigger-appearance-xxforms-primary .btn:hover,
+.orbeon .xforms-trigger-appearance-xxforms-primary .btn:focus,
+.orbeon .xforms-trigger-appearance-xxforms-primary .btn:active,
+.orbeon .xforms-trigger-appearance-xxforms-primary .btn.active,
+.orbeon .xforms-trigger-appearance-xxforms-primary .btn.disabled,
+.orbeon .xforms-trigger-appearance-xxforms-primary .btn[disabled],
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn:hover,
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn:focus,
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn:active,
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn.active,
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn.disabled,
+.orbeon .xforms-trigger-appearance-xxforms-inverse .btn[disabled] {
+    color: #333;
+    background-color: #e6e6e6;
+}
+
+.orbeon .orbeon-portlet-body .btn-primary:hover,
+.orbeon .orbeon-portlet-body .btn.ladda-button:hover,
+.orbeon .orbeon-portlet-body .btn-primary:focus,
+.orbeon .orbeon-portlet-body .btn.ladda-button:focus {
+    background-color: #1fb3d3;
+}
+
+/* END BUTTONS */
+
+.orbeon .container,
+.orbeon .container .row,
+.orbeon .container .row > .span12 {
+    width: 100%;
+}
+
+.orbeon .row {
+    margin: auto 0;
+}
+
+.orbeon .container .row > .span12 {
+    margin-left: 0;
+}
+
+.orbeon .container {
+    max-width: 100%;
+    width: 100%;
+}
+
+.orbeon .xforms-field,
+.orbeon .xforms-output.xforms-output-appearance-minimal output[role=textbox],
+.orbeon .xforms-output.xforms-static output,
+.orbeon .xforms-input input,
+.orbeon .fr-summary-search .fr-summary-search-free-input input,
+.orbeon .xbl-component input,
+.orbeon .xbl-component textarea,
+.orbeon .xbl-component select {
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 2px;
+    border: 1px solid #CED2D6;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.orbeon .uneditable-input:focus,
+.orbeon .xforms-input input:focus,
+.orbeon .fr-summary-search .fr-summary-search-free-input input:focus,
+.orbeon .xbl-component input:focus,
+.orbeon .xbl-component textarea:focus,
+.orbeon .xbl-component select:focus {
+    border-color: #1fb3d3;
+    box-shadow: none;
+}
+
+.orbeon .xforms-field,
+.orbeon .xforms-output.xforms-output-appearance-minimal output[role=textbox],
+.orbeon .xforms-output.xforms-static output,
+.orbeon .fr-summary-table-div tr,
+.orbeon input:not(input[type=checkbox], input[type=radio]),
+.orbeon select {
+    height: 36px;
+}
+
+.orbeon .fr-summary-table-div tr th > span {
+    font-weight: bold;
+}
+
+.orbeon .fr-summary-table-div tr td > span {
+    vertical-align: sub;
+}
+
+.orbeon .input-prepend .add-on:first-child,
+.orbeon .input-prepend .btn:first-child {
+    -webkit-border-radius: 2px 0 0 2px;
+    -moz-border-radius: 2px 0 0 2px;
+    border-radius: 2px 0 0 2px;
+}
+
+.orbeon .input-prepend .add-on,
+.orbeon .input-append .add-on {
+    height: inherit;
+    background-color: transparent;
+}
+
+.orbeon .input-prepend .add-on > span,
+.orbeon .input-append .add-on > span {
+    vertical-align: sub;
+}
+
+.orbeon .xbl-fr-section .fr-section-title {
+    background-color: #EAEAEA7A;
+    background-image: none;
+    color: #555555;
+}
+
+.orbeon .alert {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.orbeon .fb-toolbox .fb-toolbox-inside .fb-tools .fb-tool button {
+    margin: 0.3em auto;
+}
+
+.orbeon form {
+    margin: 0;
+}
+
+.orbeon #o0fr-view {
+    margin-bottom: 0;
+}
+
+.orbeon .fb-toolbox .fb-toolbox-inside .fr-orbeon-version {
+    color: #747F8E;
+}
+
+.orbeon .yui-dialog .yui-panel {
+    border-width: 0;
+}
+
+.orbeon .yui-dialog .yui-panel .hd,
+.orbeon .yui-dialog .yui-panel .bd,
+.orbeon .yui-dialog .yui-panel .ft {
+    border-width: 0;
+}
+
+.orbeon .yui-dialog {
+    border-radius: 2px;
+}
+
+.orbeon .yui-dialog .yui-panel .hd {
+    background-color: #EAEAEA;
+    padding: 10px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.orbeon .yui-dialog .yui-panel .hd.xxforms-dialog-head {
+    background-color: #EAEAEA;
+    background-image: none;
+}
+
+.orbeon .yui-dialog .yui-panel .bd {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.orbeon .fb-test-dialog .xxforms-dialog-body .fb-test-iframe {
+    padding: 10px;
+}
+
+.orbeon .xforms-dialog {
+    margin-right: 0;
+}
+
+.orbeon .yui-panel-container {
+    border: 1px solid lightgray;
+}

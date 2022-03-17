@@ -1,0 +1,36 @@
+
+<xbl:xbl xmlns:xh="http://www.w3.org/1999/xhtml"
+         xmlns:xf="http://www.w3.org/2002/xforms"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:ev="http://www.w3.org/2001/xml-events"
+         xmlns:xxf="http://orbeon.org/oxf/xml/xforms"
+         xmlns:fr="http://orbeon.org/oxf/xml/form-runner"
+         xmlns:xbl="http://www.w3.org/ns/xbl"
+         xmlns:bs="http://www.basestone.io/xbl"
+         xmlns:xxbl="http://orbeon.org/oxf/xml/xbl">
+
+    <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+        <display-name lang="en">Author Controls</display-name>
+    </metadata>
+
+    <xbl:binding id="bs-full-name" element="bs|full-name" xxbl:mode="lhha binding value">
+        <metadata xmlns="http://orbeon.org/oxf/xml/form-builder">
+            <display-name lang="en">Full Name</display-name>
+            <icon>
+                <icon-class>fa fa-fw fa-user</icon-class>
+            </icon>
+            <template>
+                <bs:full-name class="fr-summary fr-search"></bs:full-name>
+            </template>
+        </metadata>
+
+        <xbl:template>
+            <xf:input id="id-bs-full-name" ref="xxf:binding('bs-full-name')">
+                <xf:label>Full Name</xf:label>
+                <xf:value/>
+                <xf:hint>Sam Smith</xf:hint>
+            </xf:input>
+        </xbl:template>
+
+    </xbl:binding>
+</xbl:xbl>
