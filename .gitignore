@@ -42,3 +42,4 @@ out/
 *.log.*
 .jpb
 mysql-data-orbeon/
+setup-scripts/

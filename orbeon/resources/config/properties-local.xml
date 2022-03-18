@@ -6,7 +6,7 @@
 <properties xmlns:xs="http://www.w3.org/2001/XMLSchema"
             xmlns:oxf="http://www.orbeon.com/oxf/processors">
 
-    <property as="xs:anyURI" name="oxf.url-rewriting.service.base-uri" value="http://localhost:9090"/>
+    <property as="xs:anyURI" name="oxf.url-rewriting.service.base-uri" value="http://localhost:9090/orbeon"/>
 
     <!-- START Customise UI components -->
     <property as="xs:boolean" name="oxf.show-version" value="false"/>
