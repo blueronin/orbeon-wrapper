@@ -5,6 +5,17 @@ networks:
     name: orbeon_network
 
 services:
+  nginx:
+    container_name: nginx-proxy
+    image: nginx
+    ports:
+      - "4569:80"
+    networks:
+      - orbeon-network
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./docker/nginx/logs:/var/log/nginx
+
   orbeon-wrapper:                        #it is just a name, which will be used only in this file.
     image: orbeon-wrapper             #name of the image after dockerfile executes
     container_name: orbeon-wrapper    #name of the container created from docker image
@@ -19,6 +30,7 @@ services:
     depends_on:
       - orbeon-db
       - orbeon
+      - nginx
     command: bash -c "./docker/run.sh"
     volumes:
       - ./:/usr/app
@@ -41,6 +53,7 @@ services:
       - ./orbeon:/opt/app
     depends_on:
       - orbeon-db
+      - nginx
     command: bash -c "/opt/app/run.sh"
     environment:
       CATALINA_OPTS: "-Xms512M -Xmx1024M"
